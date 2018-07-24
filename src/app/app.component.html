@@ -6,12 +6,20 @@
   </div>
 
   <div class="row">
+    <h2 class="title-for-search">{{ titleForSearch }}</h2>
+    <input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">
+  </div>
+
+  <div class="row">
     <h2 class="title-before-mews">{{ textBeforeNews }}</h2>
   </div>
 
   <div class="row">
     <ul class="news-list">
-      <li *ngFor="let newsItem of itemNewsArray" class="news">
+
+      <div style="visibility: hidden;"></div>
+
+      <li *ngFor="let newsItem of getArray()" class="news">
         <h3 class="news__header">
           {{newsItem.newsTitle}}
         </h3>

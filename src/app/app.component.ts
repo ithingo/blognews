@@ -15,8 +15,9 @@ interface News {
 })
 export class AppComponent {
   title = 'All news list';
+  titleForSearch = 'Type to search';
   textBeforeNews = 'What is new at the moment:';
-  itemNewsArray: News[] = [
+  _itemNewsArray: News[] = [
     {
       'newsTitle': 'Breaking news: Hillary - President!',
       'imageLink': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Hillary_Clinton_Testimony_to_House_Select_Committee_on_Benghazi_%281%29.png/200px-Hillary_Clinton_Testimony_to_House_Select_Committee_on_Benghazi_%281%29.png',
@@ -53,4 +54,62 @@ export class AppComponent {
       'content': 'I lost all my stickers, so I remember nothing',
     },
   ];
+
+  // Array filtered by input text's key words
+  _filteredArray: Array<News> = [];
+
+  // Property in template: filtered array or default
+  // newsArray: News[] = this._filteredArray.length !== 0 ? this._filteredArray : this._itemNewsArray;
+  // Method invoked on 'oninput' event for input field
+
+  searchNews(event: any) {
+    // console.log(event.target.value);
+    const keyword: string = event.target.value;
+    const keywords = keyword.split(' ');
+    console.log(keyword);
+
+    // const foundedNews: News[] = [];
+    // for (let news: News in this._itemNewsArray) {
+    this._itemNewsArray.forEach(news => {
+      // if (this.filterByKeywords(news, keywords)) {
+
+      // console.log(this.filterByKeywords(news, keywords));
+
+        // this._filteredArray.push(news);
+        // console.log(this._filteredArray);
+      // }
+      // const chosenNew = this.filterByKeywords(news, keywords);
+      // console.log('chosen:');
+      // console.log(chosenNew);
+      // this._filteredArray.push();
+      this._filteredArray.push(this.filterByKeywords(news, keywords));
+    });
+    console.log("filtered array");
+    console.log(this._filteredArray);
+  }
+
+  filterByKeywords(news: News, keywords: string[]): News|null {
+    // for (let key: string in keywords) {
+    // const foundedItems: News[] = [];
+    let isFounded = false;
+    keywords.forEach(key => {
+      if (news.newsTitle.includes(key) || news.content.includes(key)) {
+        console.log(news);
+        // foundedItems.push(news);
+        isFounded = true;
+      }
+
+    });
+    // console.log('filtered array:');
+    // console.log(foundedItems);
+    // return null;
+    if (isFounded) {
+      return news;
+    }
+  }
+
+  // Get default array or filtered by keywords
+  getArray(): Array<News> {
+    return this._filteredArray.length !== 0 ? this._filteredArray : this._itemNewsArray;
+  }
 }
