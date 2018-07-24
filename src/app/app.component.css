@@ -18,7 +18,7 @@
 
 }
 
-.news__header {
+.news__subject {
 
 }
 
@@ -27,7 +27,34 @@
   color: dimgray;
 }
 
-.news__image {
-  max-width: 200px;
-  height: auto;
+.news__author {
+
+}
+
+.author {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.author__photo-cropper {
+  display: flex;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.author__photo {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.author__name {
+  padding: 0 0 0 10px;
 }
