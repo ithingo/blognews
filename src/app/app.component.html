@@ -1,13 +1,27 @@
-<h1>
-  {{ title }}
-</h1>
-<h2>{{ textBeforeNews }}</h2>
+<div class="container">
+  <div class="row">
+    <h1 class="main-title">
+      {{ title }}
+    </h1>
+  </div>
 
-<br>
+  <div class="row">
+    <h2 class="title-before-mews">{{ textBeforeNews }}</h2>
+  </div>
 
-<ul>
-  <li *ngFor="let newsItem of itemNewsArray">
-    {{newsItem}}
-  </li>
-</ul>
+  <div class="row">
+    <ul class="news-list">
+      <li *ngFor="let newsItem of itemNewsArray" class="news">
+        <h3 class="news__header">
+          {{newsItem.newsTitle}}
+        </h3>
 
+        <main class="news__content">
+          {{newsItem.content}}
+        </main>
+
+        <img src="{{newsItem.imageLink}}" alt="" class="news__image">
+      </li>
+    </ul>
+  </div>
+</div>
