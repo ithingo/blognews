@@ -108,13 +108,14 @@ export class AppComponent {
     this._filteredArray = this._filteredArray.filter(function( element ) {
       return element !== undefined;
     });
-
-    console.log(this.selectedOption);
   }
 
   filterByKeywords(news: News, keywords: string[]): News {
     let isFounded = false;
     keywords.forEach(key => {
+
+      // there key and news properties are compared in lowercase mode => error (finds some but not all comparings)
+
       if (news.subject.toLowerCase().includes(key.toLowerCase())
         || news.content.toLowerCase().includes(key.toLowerCase())) {
         isFounded = true;

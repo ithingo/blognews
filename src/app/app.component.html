@@ -11,9 +11,9 @@
     <div class="row">
       <form name="searchForm">
         <label for="optionsSelect"> Filter by: </label>
-        <p> {{selectedOption}} </p>
+        <p> {{selectedOption}} </p> <!-- there I get entire object instead of object key -->
         <select id="optionsSelect" name="optionsToFilter" [(ngModel)]="selectedOption">
-          <option *ngFor="let selectOption of selectOptions" value="{{selectOption.key}}">{{selectOption.value}}</option>
+          <option *ngFor="let selectOption of selectOptions" [value]="selectOption.key">{{selectOption.value}}</option>
         </select>
 
         <input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">
