@@ -27,6 +27,9 @@ export class AppComponent {
   title = 'All news list';
   titleForSearch = 'Type to search';
   textBeforeNews = 'What is new at the moment:';
+
+  selectedOption = null;
+
   selectOptions: SelectionProperties[] = [
     {
       key: 'all',
@@ -105,6 +108,8 @@ export class AppComponent {
     this._filteredArray = this._filteredArray.filter(function( element ) {
       return element !== undefined;
     });
+
+    console.log(this.selectedOption);
   }
 
   filterByKeywords(news: News, keywords: string[]): News {

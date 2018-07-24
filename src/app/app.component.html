@@ -10,8 +10,9 @@
 
     <div class="row">
       <form name="searchForm">
-        <label for="optionsSelect"> Filter by: </label><br>
-        <select id="optionsSelect" name="singleSelect" ng-model="data.singleSelect">
+        <label for="optionsSelect"> Filter by: </label>
+        <p> {{selectedOption}} </p>
+        <select id="optionsSelect" name="optionsToFilter" [(ngModel)]="selectedOption">
           <option *ngFor="let selectOption of selectOptions" value="{{selectOption.key}}">{{selectOption.value}}</option>
         </select>
 
