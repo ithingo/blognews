@@ -7,7 +7,17 @@
 
   <div class="row">
     <h2 class="title-for-search">{{ titleForSearch }}</h2>
-    <input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">
+
+    <div class="row">
+      <form name="searchForm">
+        <label for="optionsSelect"> Filter by: </label><br>
+        <select id="optionsSelect" name="singleSelect" ng-model="data.singleSelect">
+          <option *ngFor="let selectOption of selectOptions" value="{{selectOption.key}}">{{selectOption.value}}</option>
+        </select>
+
+        <input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">
+      </form>
+    </div>
   </div>
 
   <div class="row">
