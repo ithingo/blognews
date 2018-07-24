@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'All news list';
+  textBeforeNews = 'What is new at the moment:';
+  itemNewsArray: Array<string> = [
+    'Hillary Clinton became the president of independent California Republic',
+    'Kim Jong Un was awarded as the main peace-maker',
+    'Mr Mask send a thousandth car into space'
+  ];
 }
