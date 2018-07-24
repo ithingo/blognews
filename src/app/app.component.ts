@@ -57,52 +57,29 @@ export class AppComponent {
 
   // Array filtered by input text's key words
   _filteredArray: Array<News> = [];
-
-  // Property in template: filtered array or default
-  // newsArray: News[] = this._filteredArray.length !== 0 ? this._filteredArray : this._itemNewsArray;
   // Method invoked on 'oninput' event for input field
-
   searchNews(event: any) {
-    // console.log(event.target.value);
     const keyword: string = event.target.value;
     const keywords = keyword.split(' ');
-    console.log(keyword);
+    this._filteredArray = [];
 
-    // const foundedNews: News[] = [];
-    // for (let news: News in this._itemNewsArray) {
     this._itemNewsArray.forEach(news => {
-      // if (this.filterByKeywords(news, keywords)) {
-
-      // console.log(this.filterByKeywords(news, keywords));
-
-        // this._filteredArray.push(news);
-        // console.log(this._filteredArray);
-      // }
-      // const chosenNew = this.filterByKeywords(news, keywords);
-      // console.log('chosen:');
-      // console.log(chosenNew);
       // this._filteredArray.push();
       this._filteredArray.push(this.filterByKeywords(news, keywords));
     });
-    console.log("filtered array");
-    console.log(this._filteredArray);
+    this._filteredArray = this._filteredArray.filter(function( element ) {
+      return element !== undefined;
+    });
   }
 
-  filterByKeywords(news: News, keywords: string[]): News|null {
-    // for (let key: string in keywords) {
-    // const foundedItems: News[] = [];
+  filterByKeywords(news: News, keywords: string[]): News {
     let isFounded = false;
     keywords.forEach(key => {
       if (news.newsTitle.includes(key) || news.content.includes(key)) {
-        console.log(news);
-        // foundedItems.push(news);
         isFounded = true;
       }
 
     });
-    // console.log('filtered array:');
-    // console.log(foundedItems);
-    // return null;
     if (isFounded) {
       return news;
     }
