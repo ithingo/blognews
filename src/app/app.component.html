@@ -10,8 +10,7 @@
 
     <div class="row">
       <form name="searchForm">
-        <app-search-selection></app-search-selection>
-
+        <app-search-selection (selection)="tempPrintEvent($event)"></app-search-selection>
         <input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">
       </form>
     </div>

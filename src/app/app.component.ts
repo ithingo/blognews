@@ -67,6 +67,9 @@ export class AppComponent {
   searchNews(event: any) {
     const keyword: string = event.target.value;
     const keywords = keyword.split(' ');
+
+    // const selectedOption =
+
     this._filteredArray = [];
 
     this._itemNewsArray.forEach(news => {
@@ -102,5 +105,10 @@ export class AppComponent {
   // Get default array or filtered by keywords
   getArray(): Array<News> {
     return this._filteredArray.length !== 0 ? this._filteredArray : this._itemNewsArray;
+  }
+
+  tempPrintEvent(event) {
+    console.log("->>");
+    console.log(event);
   }
 }

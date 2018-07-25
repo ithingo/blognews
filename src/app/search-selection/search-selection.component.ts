@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SelectionProperties } from './selection-properties';
 
 @Component({
@@ -33,6 +33,9 @@ export class SearchSelectionComponent implements OnInit {
 
   selectedOption = null;
 
+  @Output()
+  selection = new EventEmitter<SelectionProperties>();
+
   constructor() { }
 
   ngOnInit() {
@@ -41,6 +44,7 @@ export class SearchSelectionComponent implements OnInit {
   printSelectedOption() {
     console.log(this.selectedOption);
     console.log(typeof this.selectedOption);
-  }
 
+    this.selection.emit(this.selectedOption);
+  }
 }

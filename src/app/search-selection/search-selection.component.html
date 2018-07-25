@@ -3,6 +3,3 @@
 <select id="optionsSelect" name="optionsToFilter" [(ngModel)]="selectedOption" (ngModelChange)="printSelectedOption()">
   <option *ngFor="let selection of selectOptions" [ngValue]="selection">{{selection.value}}</option>
 </select>
-
-<!--for test-->
-<!--<p>{{selectedOption.key}}</p>-->
