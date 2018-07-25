@@ -1,17 +1,5 @@
 import { Component } from '@angular/core';
-
-// Temporary interface, later - separated component
-interface Person {
-  imageUrl: string;
-  fullName: string;
-}
-
-interface News {
-  subject: string;
-  content: string;
-  person: Person;
-  // [hashtag: string]: string;
-}
+import { News } from './news/news';
 
 interface SelectionProperties {
   key: string;
