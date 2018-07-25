@@ -1,0 +1,5 @@
+<label for="optionsSelect"> Filter by: </label>
+
+<select id="optionsSelect" name="optionsToFilter">
+  <option *ngFor="let selectOption of selectOptions" value="{{selectOption.key}}">{{selectOption.value}}</option>
+</select>

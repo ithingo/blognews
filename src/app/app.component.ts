@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { News } from './news/news';
 
-interface SelectionProperties {
-  key: string;
-  value: string;
-}
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,30 +11,6 @@ export class AppComponent {
   titleForSearch = 'Type to search';
   textBeforeNews = 'What is new at the moment:';
 
-  selectedOption = null;
-
-  selectOptions: SelectionProperties[] = [
-    {
-      key: 'all',
-      value: 'Entire posts',
-    },
-    {
-      key: 'subject',
-      value: 'News subject',
-    },
-    {
-      key: 'content',
-      value: 'News content',
-    },
-    {
-      key: 'author',
-      value: 'Author name',
-    },
-    {
-      key: 'tags',
-      value: 'Tags',
-    },
-  ];
   _itemNewsArray: News[] = [
     {
       subject: 'I am leading!',
