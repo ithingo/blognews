@@ -31,7 +31,7 @@ export class SearchSelectionComponent implements OnInit {
     },
   ];
 
-  selectedOption = null;
+  selectedOption: SelectionProperties = null;
 
   @Output()
   selection = new EventEmitter<SelectionProperties>();
@@ -39,11 +39,16 @@ export class SearchSelectionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.selectedOption = {
+      key: 'all',
+      value: 'Entire posts',
+    };
+    // console.log(this.selectedOption);
   }
 
   printSelectedOption() {
-    console.log(this.selectedOption);
-    console.log(typeof this.selectedOption);
+    // console.log(this.selectedOption);
+    // console.log(typeof this.selectedOption);
 
     this.selection.emit(this.selectedOption);
   }

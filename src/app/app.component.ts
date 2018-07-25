@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { News } from './news/news';
+import { SelectionProperties } from './search-selection/selection-properties';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,8 @@ export class AppComponent {
   title = 'All news list';
   titleForSearch = 'Type to search';
   textBeforeNews = 'What is new at the moment:';
+
+  _optionToFilter: SelectionProperties = null;
 
   _itemNewsArray: News[] = [
     {
@@ -68,34 +71,54 @@ export class AppComponent {
     const keyword: string = event.target.value;
     const keywords = keyword.split(' ');
 
-    // const selectedOption =
+    const selectedOptionKey = this._optionToFilter.key;
 
     this._filteredArray = [];
 
     this._itemNewsArray.forEach(news => {
       // this._filteredArray.push();
-      this._filteredArray.push(this.filterByKeywords(news, keywords));
+      this._filteredArray.push(this.filterByKeywords(news, keywords, selectedOptionKey));
     });
     this._filteredArray = this._filteredArray.filter(function( element ) {
       return element !== undefined;
     });
   }
 
-  filterByKeywords(news: News, keywords: string[]): News {
+  filterByKeywords(news: News, keywords: string[], selectedOptionKey: string): News {
     let isFounded = false;
+
+    const checkBySelectedOption = (currNews: News, inputKey: string, optionKey: string): boolean => {
+      const filters = {
+        'all': () => {
+          if (news.subject.includes(inputKey) || news.content.includes(inputKey) || news.person.fullName.includes(inputKey)) {
+            return true;
+          }
+        },
+        'subject': () => {
+          if (news.subject.includes(inputKey)) {
+            console.log(inputKey);
+            return true;
+          }
+        },
+        'content': () => {
+          if (news.content.includes(inputKey)) {
+            return true;
+          }
+        },
+        'author': () => {
+          if (news.person.fullName.includes(inputKey)) {
+            return true;
+          }
+        },
+        // 'tags':  () => {
+        //
+        // },
+      };
+      return filters[optionKey]();
+    };
+
     keywords.forEach(key => {
-
-      // there key and news properties are compared in lowercase mode => error (finds some but not all comparings)
-
-      // if (news.subject.toLowerCase().includes(key.toLowerCase())
-      //   || news.content.toLowerCase().includes(key.toLowerCase())) {
-      //   isFounded = true;
-      // }
-
-      if (news.subject.includes(key) || news.content.includes(key) || news.person.fullName.includes(key)) {
-        isFounded = true;
-      }
-
+      isFounded = checkBySelectedOption(news, key, selectedOptionKey);
     });
     if (isFounded) {
       return news;
@@ -107,8 +130,7 @@ export class AppComponent {
     return this._filteredArray.length !== 0 ? this._filteredArray : this._itemNewsArray;
   }
 
-  tempPrintEvent(event) {
-    console.log("->>");
-    console.log(event);
+  handleFilterOption(event) {
+    this._optionToFilter = event;
   }
 }
