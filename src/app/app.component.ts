@@ -91,6 +91,15 @@ export class AppComponent {
         'fullName': 'Jon Snow',
       }
     },
+    {
+      subject: 'I am tired',
+      content: `I am tired, I leave my boring kingdom.... I want more: I want to rule the See, like Poseidon, or the Heavens, like Zeus.
+        I hate all these shadows in this dark place. Al right, I made a decision... But I should borrow my Fluffy with me....`,
+      person: {
+        'imageUrl': 'https://ohmy.disney.com/wp-content/uploads/2014/05/Reasons-We-Cant-Help-but-Love-Hades-Fiery.png',
+        'fullName': 'Hades',
+      }
+    },
   ];
 
   // Array filtered by input text's key words
@@ -116,8 +125,12 @@ export class AppComponent {
 
       // there key and news properties are compared in lowercase mode => error (finds some but not all comparings)
 
-      if (news.subject.toLowerCase().includes(key.toLowerCase())
-        || news.content.toLowerCase().includes(key.toLowerCase())) {
+      // if (news.subject.toLowerCase().includes(key.toLowerCase())
+      //   || news.content.toLowerCase().includes(key.toLowerCase())) {
+      //   isFounded = true;
+      // }
+
+      if (news.subject.includes(key) || news.content.includes(key) || news.person.fullName.includes(key)) {
         isFounded = true;
       }
 
