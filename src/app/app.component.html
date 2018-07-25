@@ -28,21 +28,7 @@
   <div class="row">
     <ul class="news-list" *ngFor="let newsItem of getArray()">
       <li class="news">
-        <h3 class="news__subject">
-          {{newsItem.subject}}
-        </h3>
-
-        <main class="news__content">
-          {{newsItem.content}}
-        </main>
-
-        <div class="news__author author">
-          <div class="author__photo-cropper">
-            <img src="{{newsItem.person.imageUrl}}" alt="" class="author__photo">
-          </div>
-
-          <p class="author__name">{{newsItem.person.fullName}}</p>
-        </div>
+        <app-news [iteratedNews]="newsItem"></app-news>
       </li>
     </ul>
   </div>

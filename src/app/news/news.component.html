@@ -1,3 +1,15 @@
-<p>
-  news works!
-</p>
+<h3 class="news__subject">
+  {{iteratedNews.subject}}
+</h3>
+
+<main class="news__content">
+  {{iteratedNews.content}}
+</main>
+
+<div class="news__author author">
+  <div class="author__photo-cropper">
+    <img src="{{iteratedNews.person.imageUrl}}" alt="" class="author__photo">
+  </div>
+
+  <p class="author__name">{{iteratedNews.person.fullName}}</p>
+</div>
