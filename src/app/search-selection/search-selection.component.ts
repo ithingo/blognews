@@ -31,9 +31,16 @@ export class SearchSelectionComponent implements OnInit {
     },
   ];
 
+  selectedOption = null;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  printSelectedOption() {
+    console.log(this.selectedOption);
+    console.log(typeof this.selectedOption);
   }
 
 }

@@ -1,5 +1,8 @@
 <label for="optionsSelect"> Filter by: </label>
 
-<select id="optionsSelect" name="optionsToFilter">
-  <option *ngFor="let selectOption of selectOptions" value="{{selectOption.key}}">{{selectOption.value}}</option>
+<select id="optionsSelect" name="optionsToFilter" [(ngModel)]="selectedOption" (ngModelChange)="printSelectedOption()">
+  <option *ngFor="let selection of selectOptions" [ngValue]="selection">{{selection.value}}</option>
 </select>
+
+<!--for test-->
+<!--<p>{{selectedOption.key}}</p>-->
