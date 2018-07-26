@@ -20,7 +20,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       // temp for tracing in debug mode
-      {enableTracing: true},
+      // {enableTracing: true},
     ),
   ],
   exports: [
