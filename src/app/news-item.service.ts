@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
-import { News } from './news/news-item/news';
-import { NEWSARRAY } from './mock-news-list';
+import { NewsType } from './news/news-type';
+import { NEWSARRAY } from './mock-data';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class NewsItemService {
 
   constructor() { }
 
-  getNews(): Observable<News[]> {
-    return of(NEWSARRAY);   // real http -> HttpClient.get<News[]>
+  getNews(): Observable<NewsType[]> {
+    return of(NEWSARRAY);   // real http -> HttpClient.get<NewsType[]>
   }
 }

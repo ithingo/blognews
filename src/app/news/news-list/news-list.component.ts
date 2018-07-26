@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { News } from '../news-item/news';
+import { NewsType } from '../news-type';
 import { SelectionProperties } from '../search-selection/selection-properties';
 
 import { NewsItemService } from '../../news-item.service';
@@ -16,10 +16,10 @@ export class NewsListComponent implements OnInit {
 
   _optionToFilter: SelectionProperties = null;
 
-  _itemNewsArray: News[];
+  _itemNewsArray: NewsType[];
 
   // Array filtered by input text's key words
-  _filteredArray: Array<News> = [];
+  _filteredArray: Array<NewsType> = [];
 
   constructor(private _newsService: NewsItemService) { }
 
@@ -51,10 +51,10 @@ export class NewsListComponent implements OnInit {
     });
   }
 
-  filterByKeywords(news: News, keywords: string[], selectedOptionKey: string): News {
+  filterByKeywords(news: NewsType, keywords: string[], selectedOptionKey: string): NewsType {
     let isFounded = false;
 
-    const checkBySelectedOption = (currNews: News, inputKey: string, optionKey: string): boolean => {
+    const checkBySelectedOption = (currNews: NewsType, inputKey: string, optionKey: string): boolean => {
       const filters = {
         'all': () => {
           if (news.subject.includes(inputKey) || news.content.includes(inputKey) || news.person.fullName.includes(inputKey)) {
@@ -94,7 +94,7 @@ export class NewsListComponent implements OnInit {
   }
 
   // Get default array or filtered by keywords
-  getArray(): Array<News> {
+  getArray(): Array<NewsType> {
     return this._filteredArray.length !== 0 ? this._filteredArray : this._itemNewsArray;
   }
 

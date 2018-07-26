@@ -15,11 +15,11 @@ export class SearchSelectionComponent implements OnInit {
     },
     {
       key: 'subject',
-      value: 'News subject',
+      value: 'NewsType subject',
     },
     {
       key: 'content',
-      value: 'News content',
+      value: 'NewsType content',
     },
     {
       key: 'author',
