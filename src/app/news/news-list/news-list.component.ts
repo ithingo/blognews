@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { News } from '../news-item/news';
-import { SelectionProperties } from '../../search-selection/selection-properties';
+import { SelectionProperties } from '../search-selection/selection-properties';
 
 import { NewsItemService } from '../../news-item.service';
 
 @Component({
   // selector: 'app-news-item-list',
-  // routed components don't need a selector ???
+  // routed components don't need a selector ??
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.css']
 })

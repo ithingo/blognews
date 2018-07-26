@@ -7,6 +7,7 @@ import { NewsItemComponent } from './news-item/news-item.component';
 
 import { NewsItemService } from '../news-item.service';
 import { NewsRoutingModule } from './news-routing.module';
+import { SearchSelectionComponent } from './search-selection/search-selection.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { NewsRoutingModule } from './news-routing.module';
   ],
   declarations: [
     NewsListComponent,
-    NewsItemComponent
+    NewsItemComponent,
+    SearchSelectionComponent,
   ],
   providers: [ NewsItemService ]
 })
