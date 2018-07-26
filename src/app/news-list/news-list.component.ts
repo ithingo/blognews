@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { News } from '../news/news';
 import { SelectionProperties } from '../search-selection/selection-properties';
 
-import { NEWSARRAY } from '../mock-news-lis'; // move all temp data as mock to separate file
+import { NewsService } from '../news.service';
 
 @Component({
   selector: 'app-news-list',
@@ -15,14 +15,19 @@ export class NewsListComponent implements OnInit {
 
   _optionToFilter: SelectionProperties = null;
 
-  _itemNewsArray: News[] = NEWSARRAY;
+  _itemNewsArray: News[];
 
   // Array filtered by input text's key words
   _filteredArray: Array<News> = [];
 
-  constructor() { }
+  constructor(private newsService: NewsService) { }
 
   ngOnInit() {
+    this.retrieveNews();
+  }
+
+  retrieveNews(): void {
+    this._itemNewsArray = this.newsService.getNews(); // get data array from service, yay!!
   }
 
   // Method invoked on 'oninput' event for input field
@@ -73,6 +78,7 @@ export class NewsListComponent implements OnInit {
         //
         // },
       };
+
       return filters[optionKey]();
     };
 
