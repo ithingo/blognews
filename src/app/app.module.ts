@@ -14,11 +14,11 @@ import { NewsListComponent } from './news-list/news-list.component';
 const appRoutes: Routes = [
   {
     path: 'profile',
-    component: UserProfileComponent
+    component: UserProfileComponent,
   },
   {
     path: 'all-feeds',
-    component: AppComponent
+    component: NewsListComponent,
   },
   {
     path: '',
@@ -50,6 +50,6 @@ const appRoutes: Routes = [
     FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
