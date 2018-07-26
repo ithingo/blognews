@@ -1,4 +1,4 @@
-import {News} from './news/news';
+import {News} from './news-module/news/news';
 
 export const NEWSARRAY: News[] = [
   {

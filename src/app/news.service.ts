@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
-import { News } from './news/news';
+import { News } from './news-module/news/news';
 import { NEWSARRAY } from './mock-news-lis';
 
 @Injectable({
