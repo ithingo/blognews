@@ -5,12 +5,14 @@ import { FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NewsComponent } from './news/news.component';
 import { SearchSelectionComponent } from './search-selection/search-selection.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewsComponent,
-    SearchSelectionComponent
+    SearchSelectionComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
