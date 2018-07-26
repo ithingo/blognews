@@ -8,6 +8,7 @@ import { NewsComponent } from './news/news.component';
 import { SearchSelectionComponent } from './search-selection/search-selection.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NewsListComponent } from './news-list/news-list.component';
 
 
 const appRoutes: Routes = [
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     NewsComponent,
     SearchSelectionComponent,
     UserProfileComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NewsListComponent
   ],
   imports: [
     RouterModule.forRoot(
