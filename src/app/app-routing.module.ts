@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { NewsListComponent } from './news/news-list/news-list.component';
 
 const appRoutes: Routes = [
   {
@@ -11,12 +10,8 @@ const appRoutes: Routes = [
     component: UserProfileComponent,
   },
   {
-    path: 'all-feeds',
-    component: NewsListComponent,
-  },
-  {
     path: '',
-    redirectTo: 'all-feeds',
+    redirectTo: 'feeds',
     pathMatch: 'full',
   },
   {

@@ -6,11 +6,13 @@ import { NewsListComponent } from './news-list/news-list.component';
 import { NewsItemComponent } from './news-item/news-item.component';
 
 import { NewsItemService } from '../news-item.service';
+import { NewsRoutingModule } from './news-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    NewsRoutingModule,
   ],
   declarations: [
     NewsListComponent,
@@ -18,4 +20,4 @@ import { NewsItemService } from '../news-item.service';
   ],
   providers: [ NewsItemService ]
 })
-export class HeroesModule {}
+export class NewsModule {}
