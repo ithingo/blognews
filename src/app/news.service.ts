@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Observable, of } from 'rxjs';
+
 import { News } from './news/news';
 import { NEWSARRAY } from './mock-news-lis';
 
@@ -10,7 +12,7 @@ export class NewsService {
 
   constructor() { }
 
-  getNews(): News[] {
-    return NEWSARRAY;
+  getNews(): Observable<News[]> {
+    return of(NEWSARRAY);   // real http -> HttpClient.get<News[]>
   }
 }

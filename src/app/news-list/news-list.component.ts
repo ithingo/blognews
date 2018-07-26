@@ -20,14 +20,16 @@ export class NewsListComponent implements OnInit {
   // Array filtered by input text's key words
   _filteredArray: Array<News> = [];
 
-  constructor(private newsService: NewsService) { }
+  constructor(private _newsService: NewsService) { }
 
   ngOnInit() {
     this.retrieveNews();
   }
 
   retrieveNews(): void {
-    this._itemNewsArray = this.newsService.getNews(); // get data array from service, yay!!
+    // this._itemNewsArray = this.newsService.getNews(); // get data array from service, yay!!
+    this._newsService.getNews()
+      .subscribe(newsArray => this._itemNewsArray = newsArray);
   }
 
   // Method invoked on 'oninput' event for input field
