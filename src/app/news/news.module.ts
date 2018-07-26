@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { NewsListComponent } from './news-list/news-list.component';
-import { NewsComponent } from './news/news.component';
+import { NewsItemComponent } from './news-item/news-item.component';
 
-import { NewsService } from '../news.service';
+import { NewsItemService } from '../news-item.service';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { NewsService } from '../news.service';
   ],
   declarations: [
     NewsListComponent,
-    NewsComponent
+    NewsItemComponent
   ],
-  providers: [ NewsService ]
+  providers: [ NewsItemService ]
 })
 export class HeroesModule {}

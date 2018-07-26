@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-news',
-  templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css']
+  templateUrl: './news-item.component.html',
+  styleUrls: ['./news-item.component.css']
 })
-export class NewsComponent implements OnInit {
+export class NewsItemComponent implements OnInit {
 
   @Input()
   iteratedNews: any;

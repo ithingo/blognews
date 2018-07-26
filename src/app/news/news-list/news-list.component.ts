@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { News } from '../news/news';
+import { News } from '../news-item/news';
 import { SelectionProperties } from '../../search-selection/selection-properties';
 
-import { NewsService } from '../../news.service';
+import { NewsItemService } from '../../news-item.service';
 
 @Component({
-  // selector: 'app-news-list',
+  // selector: 'app-news-item-list',
   // routed components don't need a selector ???
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.css']
@@ -21,7 +21,7 @@ export class NewsListComponent implements OnInit {
   // Array filtered by input text's key words
   _filteredArray: Array<News> = [];
 
-  constructor(private _newsService: NewsService) { }
+  constructor(private _newsService: NewsItemService) { }
 
   ngOnInit() {
     this.retrieveNews();
