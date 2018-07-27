@@ -7,7 +7,7 @@ import { NewsItemService } from '../../news-item.service';
 import { UserType } from '../user-type';
 import { UserService } from '../../user.service';
 import { Observable } from 'rxjs';
-import {NewsType} from '../../news/news-type';
+import { NewsType } from '../../news/news-type';
 
 @Component({
   selector: 'app-user-profile',
@@ -31,7 +31,10 @@ export class UserProfileComponent implements OnInit {
   retrieveUser() {
     const userObservable = this._route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-        this._userService.getUserById(1)) // GET ID WITH PARAMS FROM ROUTER!!!
+        this._userService.getUserById(
+          +(params.get('id')) // get id value as int
+        )
+      )
     );
     userObservable.subscribe(user => this._user = user);
   }
