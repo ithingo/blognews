@@ -16,6 +16,7 @@ import { NewsType } from '../../news/news-type';
 })
 export class UserProfileComponent implements OnInit {
   private _user: UserType;
+  private _activeUser : UserType;
 
   constructor(
     private _route: ActivatedRoute,
@@ -26,6 +27,9 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.retrieveUser();
+
+    // temp -> active user is Hillary
+    this._activeUser.id = 1;
   }
 
   retrieveUser() {
@@ -60,5 +64,9 @@ export class UserProfileComponent implements OnInit {
 
   gotoNewsList() {
     this._router.navigate(['feeds']);
+  }
+
+  getActiveUserId(): number {
+    return this._activeUser.id;
   }
 }
