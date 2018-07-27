@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
-// import { NewsItemService } from '../../news-item.service';
+import { NewsItemService } from '../../news-item.service';
+import { UserType } from '../user-type';
 import { UserService } from '../../user.service';
 import { Observable } from 'rxjs';
+import {NewsType} from '../../news/news-type';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,29 +15,42 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-
-  // user$: Observable<any>; // AT THAT POINT USE *ANY* TYPE, LATER - USER TYPE
-  user: any;
+  private _user: UserType;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    // private newsService: NewsItemService,
-    private userService: UserService,
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _newsService: NewsItemService,
+    private _userService: UserService,
   ) { }
 
   ngOnInit() {
-    this.getUser();
+    this.retrieveUser();
   }
 
-  getUser() {
-    const userObservable = this.route.paramMap.pipe(
-      // display news, later add user model, service for it and retrieve user data by id
-      // switchMap((params: ParamMap) => this.newsService.getNews())
-      switchMap((params: ParamMap) => this.userService.getUserById(2))
+  retrieveUser() {
+    const userObservable = this._route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this._userService.getUserById(1)) // GET ID WITH PARAMS FROM ROUTER!!!
     );
+    userObservable.subscribe(user => this._user = user);
+  }
 
-    userObservable.subscribe(user => this.user = user);
-    console.log(this.user);
+  getUserName(): string {
+    return this._user.fullName;
+  }
+
+  getUserPhoto(): string {
+    return this._user.photo;
+  }
+
+  getUserPosts(): NewsType[]|null {
+    let result: NewsType[] = [];
+    this._newsService.getNews().subscribe(newsArray => result = newsArray);
+
+    if (result.length) {
+      return result.filter(news => news.userId == this._user.id)
+    }
+    return null;
   }
 }

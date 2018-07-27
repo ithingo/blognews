@@ -5,5 +5,6 @@ export interface NewsType {
     imageUrl: string;
     fullName: string;
   };
+  userId: number;
   // [hashtag: string]: string;
 }

@@ -53,7 +53,8 @@ export const NEWSARRAY: NewsType[] = [
     person: {
       imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Hillary_Clinton_Testimony_to_House_Select_Committee_on_Benghazi_%281%29.png/200px-Hillary_Clinton_Testimony_to_House_Select_Committee_on_Benghazi_%281%29.png',
       fullName: 'Hillary Clinton',
-    }
+    },
+    userId: 1,
   },
   {
     subject: 'Make America Great Forever!',
@@ -62,7 +63,8 @@ export const NEWSARRAY: NewsType[] = [
     person: {
       imageUrl: 'https://ly.usembassy.gov/wp-content/uploads/sites/246/16114538_1227645557304882_4439457132240667293_n-1.jpg',
       fullName: 'Donald J. Trump',
-    }
+    },
+    userId: 2,
   },
   {
     subject: 'Lord of the Light warnings',
@@ -71,7 +73,8 @@ export const NEWSARRAY: NewsType[] = [
     person: {
       imageUrl: 'https://www.telegraph.co.uk/content/dam/tv/2016/04/25/melisandre_trans_NvBQzQNjv4BqutubNGxeqbD0m2XylzINLiOoem_3qpp9C-iKHR23jxY.jpg?imwidth=1400',
       fullName: 'Melisandre',
-    }
+    },
+    userId: 3,
   },
   {
     subject: 'Winter is coming',
@@ -81,7 +84,8 @@ export const NEWSARRAY: NewsType[] = [
     person: {
       imageUrl: 'https://pmctvline2.files.wordpress.com/2016/02/game-of-thrones-jon-snow.jpg',
       fullName: 'Jon Snow',
-    }
+    },
+    userId: 4,
   },
   {
     subject: 'I am tired',
@@ -90,6 +94,7 @@ export const NEWSARRAY: NewsType[] = [
     person: {
       imageUrl: 'https://ohmy.disney.com/wp-content/uploads/2014/05/Reasons-We-Cant-Help-but-Love-Hades-Fiery.png',
       fullName: 'Hades',
-    }
+    },
+    userId: 5,
   },
 ];

@@ -1,3 +1,16 @@
-<p>
-  user-profile works!
-</p>
+<main class="user-profile">
+  <h3>{{ getUserName()}}</h3>
+
+  <div class="user-profile__photo-wrapper">
+    <img src="{{ getUserPhoto() }}" alt="" class="user-profile__photo">
+  </div>
+</main>
+
+<ul class="user__posts" *ngFor="let post of getUserPosts()">
+  <li class="user-post">
+    <h4 class="user-post__subject">{{ post.subject }}</h4>
+
+    <main class="user-post__content">{{ post.content }}</main>
+  </li>
+</ul>
+
