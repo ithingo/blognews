@@ -6,11 +6,13 @@
   </div>
 </main>
 
-<ul class="user__posts" *ngFor="let post of getUserPosts()">
-  <li class="user-post">
-    <h4 class="user-post__subject">{{ post.subject }}</h4>
+<div class="user-profile-wrapper" *ngIf="getUserPosts()">
+  <ul class="user__posts" *ngFor="let post of getUserPosts()">
+    <li class="user-post">
+      <h4 class="user-post__subject">{{ post.subject }}</h4>
 
-    <main class="user-post__content">{{ post.content }}</main>
-  </li>
-</ul>
+      <main class="user-post__content">{{ post.content }}</main>
+    </li>
+  </ul>
+</div>
 
