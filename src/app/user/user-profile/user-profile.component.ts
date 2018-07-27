@@ -57,4 +57,8 @@ export class UserProfileComponent implements OnInit {
     }
     return null;
   }
+
+  gotoNewsList() {
+    this._router.navigate(['feeds']);
+  }
 }
