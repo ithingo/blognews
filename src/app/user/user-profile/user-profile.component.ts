@@ -46,7 +46,8 @@ export class UserProfileComponent implements OnInit {
 
   getUserPosts(): NewsType[]|null {
     let result: NewsType[] = [];
-    this._newsService.getNews().subscribe(newsArray => result = newsArray);
+    this._newsService.getNews()
+      .subscribe(newsArray => result = newsArray);
 
     if (result.length) {
       return result.filter(news => news.userId == this._user.id)

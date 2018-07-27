@@ -5,8 +5,6 @@ import { SelectionProperties } from '../search-selection/selection-properties';
 import { NewsItemService } from '../../news-item.service';
 
 @Component({
-  // selector: 'app-news-item-list',
-  // routed components don't need a selector ??
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.css']
 })
@@ -18,7 +16,6 @@ export class NewsListComponent implements OnInit {
 
   _itemNewsArray: NewsType[];
 
-  // Array filtered by input text's key words
   _filteredArray: Array<NewsType> = [];
 
   constructor(private _newsService: NewsItemService) { }
@@ -28,7 +25,6 @@ export class NewsListComponent implements OnInit {
   }
 
   retrieveNews(): void {
-    // this._itemNewsArray = this.newsService.getNews(); // get data array from service, yay!!
     this._newsService.getNews()
       .subscribe(newsArray => this._itemNewsArray = newsArray);
   }
