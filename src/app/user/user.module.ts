@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EditProfileWindowComponent } from './edit-profile-window/edit-profile-window.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserService } from '../user.service';
+import {EditProfileWindowService} from '../edit-profile-window.service';
 
 @NgModule({
   imports: [
@@ -14,7 +16,11 @@ import { UserService } from '../user.service';
   ],
   declarations: [
     UserProfileComponent,
+    EditProfileWindowComponent,
   ],
-  providers: [ UserService ],
+  providers: [
+    UserService,
+    EditProfileWindowService,
+  ],
 })
 export class UserModule {}

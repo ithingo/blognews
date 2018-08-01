@@ -7,6 +7,10 @@
 </main>
 
 <div class="user-profile-wrapper" *ngIf="getUserPosts()">
+  <button (click)="openModal('edit-profile-modal')">Edit profile</button>
+
+  <app-edit-profile-window id="edit-profile-modal"></app-edit-profile-window>
+
   <ul class="user__posts" *ngFor="let post of getUserPosts()">
     <li class="user-post">
       <h4 class="user-post__subject">{{ post.subject }}</h4>
