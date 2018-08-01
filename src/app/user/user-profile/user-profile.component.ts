@@ -8,7 +8,6 @@ import { UserType } from '../user-type';
 import { UserService } from '../../user.service';
 import { Observable } from 'rxjs';
 import { NewsType } from '../../news/news-type';
-import { EditProfileWindowService } from '../../edit-profile-window.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,7 +23,6 @@ export class UserProfileComponent implements OnInit {
     private _router: Router,
     private _newsService: NewsItemService,
     private _userService: UserService,
-    private _editModalService: EditProfileWindowService,
   ) { }
 
   ngOnInit() {
@@ -70,10 +68,5 @@ export class UserProfileComponent implements OnInit {
 
   getActiveUserId(): number {
     return this._activeUser.id;
-  }
-
-  // Open modal window to edit user profile
-  openModal(id: string) {
-    this._editModalService.open(id);
   }
 }

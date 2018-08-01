@@ -4,7 +4,6 @@ import { EventEmitter } from 'events';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
-import { EditProfileWindowService } from '../../edit-profile-window.service';
 import { UserType } from '../user-type';
 
 @Component({
