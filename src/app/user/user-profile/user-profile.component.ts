@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
     this.retrieveUser();
 
     // temp -> active user is Hillary
-    this._activeUser.id = 1;
+    // this._activeUser.id = 1;
   }
 
   retrieveUser() {
