@@ -1,53 +1,62 @@
-<div class="dialog">
-  <h2 class="edit-profile-header">Edit profile</h2>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Edit profile</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
-  <ng-content></ng-content>
-  <!--<p class="edit-profile_first-name">First Name:-->
+  <div class="modal-body">
+    <!--<p class="edit-profile_first-name">First Name:-->
     <!--<input type="text" [(ngModel)]="user_first_name"> {{user_first_name}}-->
-  <!--</p>-->
+    <!--</p>-->
 
 
-  <!--<p class="edit-profile_second-name">Second Name:</p>-->
-  <!--<input type="text" [(ngModel)]="user_second_name">-->
+    <!--<p class="edit-profile_second-name">Second Name:</p>-->
+    <!--<input type="text" [(ngModel)]="user_second_name">-->
 
-  <!--<p class="edit-profile_email">Email:</p>-->
-  <!--<input type="email" [(ngModel)]="user_email">-->
+    <!--<p class="edit-profile_email">Email:</p>-->
+    <!--<input type="email" [(ngModel)]="user_email">-->
 
-  <!--<p class="edit-profile__password">Password:</p>-->
-  <!--<input type="password" [(ngModel)]="user_password">-->
+    <!--<p class="edit-profile__password">Password:</p>-->
+    <!--<input type="password" [(ngModel)]="user_password">-->
 
-  <!--<p class="edit-profile__password">Password Confirmation:</p>-->
-  <!--<input type="password" [(ngModel)]="user_password_confirmation">-->
+    <!--<p class="edit-profile__password">Password Confirmation:</p>-->
+    <!--<input type="password" [(ngModel)]="user_password_confirmation">-->
 
-  <!--<button (click)="closeModal('edit-profile-modal');">Save</button>-->
+    <!--<button (click)="closeModal('edit-profile-modal');">Save</button>-->
 
 
-  <!-- FOR TEMP MOCK DATA -->
-  <p class="edit-profile_first-name">First Name:
-    <input type="text" [(ngModel)]="user_id"> {{user_id}}
-  </p>
+    <!-- FOR TEMP MOCK DATA -->
+    <!--<p class="edit-profile_first-name">First Name:-->
+      <!--<input type="text" [(ngModel)]="user_id"> {{user_id}}-->
+    <!--</p>-->
 
-  <p class="edit-profile__password">Password Confirmation:
-    <input type="password" [(ngModel)]="user_name"> {{user_name}}
-  </p>
+    <!--<p class="edit-profile__password">Password Confirmation:-->
+      <!--<input type="password" [(ngModel)]="user_name"> {{user_name}}-->
+    <!--</p>-->
 
-  <p class="edit-profile__password">Image URL:
-    <input type="password" [(ngModel)]="user_photo"> {{user_photo}}
-  </p>
+    <!--<p class="edit-profile__password">Image URL:-->
+      <!--<input type="password" [(ngModel)]="user_photo"> {{user_photo}}-->
+    <!--</p>-->
 
-  <p class="edit-profile_second-name">Second Name:
-    <input type="text" [(ngModel)]="user_fullName"> {{user_fullName}}
-  </p>
+    <!--<p class="edit-profile_second-name">Second Name:-->
+      <!--<input type="text" [(ngModel)]="user_fullName"> {{user_fullName}}-->
+    <!--</p>-->
 
-  <p class="edit-profile_email">Email:
-    <input type="email" [(ngModel)]="user_email"> {{user_email}}
-  </p>
+    <!--<p class="edit-profile_email">Email:-->
+      <!--<input type="email" [(ngModel)]="user_email"> {{user_email}}-->
+    <!--</p>-->
 
-  <p class="edit-profile__password">Password:
-    <input type="password" [(ngModel)]="user_password"> {{user_password}}
-  </p>
+    <!--<p class="edit-profile__password">Password:-->
+      <!--<input type="password" [(ngModel)]="user_password"> {{user_password}}-->
+    <!--</p>-->
+  </div>
 
-  <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn">X</button>
-</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
 
-<div *ngIf="visible" class="overlay" (click)="close()"></div>
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="open(content)">Edit profile</button>
+
