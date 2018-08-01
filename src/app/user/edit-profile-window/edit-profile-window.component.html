@@ -1,6 +1,7 @@
-<h2 class="edit-profile-header">Edit profile</h2>
+<div class="dialog">
+  <h2 class="edit-profile-header">Edit profile</h2>
 
-<div class="edit-profile" [(ngModel)]="user">
+  <ng-content></ng-content>
   <!--<p class="edit-profile_first-name">First Name:-->
     <!--<input type="text" [(ngModel)]="user_first_name"> {{user_first_name}}-->
   <!--</p>-->
@@ -46,5 +47,7 @@
     <input type="password" [(ngModel)]="user_password"> {{user_password}}
   </p>
 
-  <button (click)="closeModal('edit-profile-modal');">Save</button>
+  <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn">X</button>
 </div>
+
+<div *ngIf="visible" class="overlay" (click)="close()"></div>

@@ -6,19 +6,16 @@
   </div>
 </main>
 
-<div class="user-profile-wrapper" *ngIf="getUserPosts()">
-  <button (click)="openModal('edit-profile-modal')">Edit profile</button>
+  <div class="user-profile-wrapper" *ngIf="getUserPosts()">
 
-  <app-edit-profile-window id="edit-profile-modal"></app-edit-profile-window>
+    <ul class="user__posts" *ngFor="let post of getUserPosts()">
+      <li class="user-post">
+        <h4 class="user-post__subject">{{ post.subject }}</h4>
 
-  <ul class="user__posts" *ngFor="let post of getUserPosts()">
-    <li class="user-post">
-      <h4 class="user-post__subject">{{ post.subject }}</h4>
-
-      <main class="user-post__content">{{ post.content }}</main>
-    </li>
-  </ul>
-</div>
+        <main class="user-post__content">{{ post.content }}</main>
+      </li>
+    </ul>
+  </div>
 
 <nav class="navigation">
   <ul>
@@ -27,3 +24,8 @@
     </li>
   </ul>
 </nav>
+
+
+<button (click)="showDialog = !showDialog">Edit profile</button>
+
+<app-edit-profile-window [(visible)]="showDialog"></app-edit-profile-window>
