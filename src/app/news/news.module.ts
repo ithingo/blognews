@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NewsListComponent } from './news-list/news-list.component';
 import { NewsItemComponent } from './news-item/news-item.component';
 
-import { NewsItemService } from '../news-item.service';
+import { NewsItemService } from '../_services/news-item.service';
 import { NewsRoutingModule } from './news-routing.module';
 import { SearchSelectionComponent } from './search-selection/search-selection.component';
 

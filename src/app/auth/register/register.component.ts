@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../_services/auth.service';
 
 import { ConfirmPasswordValidationDirective } from '../confirm-password-validation.directive';
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewsType } from '../news-type';
 import { SelectionProperties } from '../search-selection/selection-properties';
 
-import { NewsItemService } from '../../news-item.service';
+import { NewsItemService } from '../../_services/news-item.service';
 
 @Component({
   templateUrl: './news-list.component.html',

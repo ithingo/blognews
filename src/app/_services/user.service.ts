@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
-import { UserType } from './user/user-type';
-import { USERARRAY } from './mock-data';
+import { UserType } from '../user/user-type';
+import { USERARRAY } from '../mock-data';
 
 @Injectable({
   providedIn: 'root'

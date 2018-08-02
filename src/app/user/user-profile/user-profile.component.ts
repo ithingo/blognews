@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
-import { NewsItemService } from '../../news-item.service';
+import { NewsItemService } from '../../_services/news-item.service';
 import { UserType } from '../user-type';
-import { UserService } from '../../user.service';
+import { UserService } from '../../_services/user.service';
 import { Observable } from 'rxjs';
 import { NewsType } from '../../news/news-type';
 

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
-import { NewsType } from './news/news-type';
-import { NEWSARRAY } from './mock-data';
+import { NewsType } from '../news/news-type';
+import { NEWSARRAY } from '../mock-data';
 
 @Injectable({
   providedIn: 'root'
