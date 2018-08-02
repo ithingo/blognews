@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { NewsModule } from './news/news.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { UserModule } from './user/user.module';
     NgbModule.forRoot(),
     BrowserModule,
     FormsModule,
+    AuthModule,
     NewsModule,
     UserModule,
     AppRoutingModule,
