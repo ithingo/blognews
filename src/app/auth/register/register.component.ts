@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../auth.service';
+
+import { ConfirmPasswordValidationDirective } from '../confirm-password-validation.directive';
 
 @Component({
   selector: 'app-register',
@@ -18,31 +20,33 @@ export class RegisterComponent implements OnInit {
     private _authService: AuthService,
     private _registerComponentRoute: Router,
   ) {
-    this.registerForm = this._formBuilder.group({
-      first_name: [
-        '',
-        Validators.required,
-      ],
-      second_name: [
-        '',
-        Validators.required,
-      ],
-      email: [
-        '',
-        [
+    this.registerForm = this._formBuilder.group(
+      {
+        first_name: [
+          '',
           Validators.required,
-          Validators.email,
+        ],
+        second_name: [
+          '',
+          Validators.required,
+        ],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.email,
+          ]
+        ],
+        password: [
+          '',
+          Validators.required,
+        ],
+        password_confirmation: [
+          '',
+          Validators.required,
         ]
-      ],
-      password: [
-        '',
-        Validators.required,
-      ],
-      password_confirmation: [
-        '',
-        Validators.required,
-      ]
-    });
+      },
+    );
   }
 
   ngOnInit() {
@@ -57,7 +61,7 @@ export class RegisterComponent implements OnInit {
 
     if (this.registerForm.valid) {
       this._authService.sendToken(this.registerForm.value.email);  // temp save email as a token instead of token retrieved from server
-      this._registerComponentRoute.navigate(["login"]);
+      this._registerComponentRoute.navigate(['login']);
     } else {
       return;
     }

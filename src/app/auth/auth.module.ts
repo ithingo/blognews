@@ -9,6 +9,8 @@ import { AuthRoutingModule } from './auth-routing.module';
 
 import { AuthService } from '../auth.service';
 
+import { ConfirmPasswordValidationDirective } from './confirm-password-validation.directive';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { AuthService } from '../auth.service';
   declarations: [
     LoginComponent,
     RegisterComponent,
+    ConfirmPasswordValidationDirective,
   ],
   providers: [ AuthService ],
 })
