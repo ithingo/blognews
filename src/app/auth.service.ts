@@ -1,19 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  helper = new JwtHelperService();
 
-  constructor(private _authRoute: Router) { }
+  constructor(private _authRoute: Router) {
+
+  }
 
   sendToken(token: string) {
-    localStorage.setItem("logged-in-user", token)
+    localStorage.setItem("access_token", token);
   }
 
   getToken() {
-    return localStorage.getItem("logged-in-user")
+    const token = localStorage.getItem("access_token");
+    return this.helper.decodeToken(token);
+  }
+
+  getExpirationData() {
+    const token = localStorage.getItem("access_token");
+    return this.helper.getTokenExpirationDate(token);
+  }
+
+  isTokenExpired() {
+    const token = localStorage.getItem("access_token");
+    return this.helper.isTokenExpired(token);
   }
 
   isLoggednIn() {
@@ -21,7 +36,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("logged-in-user");
+    localStorage.removeItem("access_token");
     this._authRoute.navigate(["login"]);
   }
 }

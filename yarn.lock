@@ -175,6 +175,12 @@
   dependencies:
     tslib "^1.9.0"
 
+"@auth0/angular-jwt@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@auth0/angular-jwt/-/angular-jwt-2.0.0.tgz#c0b2861824a24fb62d9d2e1fdb03a326e8a1e203"
+  dependencies:
+    url "^0.11.0"
+
 "@ng-bootstrap/ng-bootstrap@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-2.2.1.tgz#8836b5de3ac154ded099e4b668a616b01d631e84"
