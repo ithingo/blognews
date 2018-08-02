@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 
 import { AuthService } from '../_services/auth.service';
+import { AuthGuard } from '../_services/auth.guard';
 
 import { ConfirmPasswordValidationDirective } from './confirm-password-validation.directive';
 

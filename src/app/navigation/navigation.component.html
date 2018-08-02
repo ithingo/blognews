@@ -1,0 +1,6 @@
+<div class="auth-toolbar">
+  <button routerLink="/">Home</button>
+  <button *ngIf="!auth.isLoggednIn()" routerLink="/register">Sign up</button>
+  <button *ngIf="!auth.isLoggednIn()" routerLink="/login">Login</button>
+  <button *ngIf="auth.isLoggednIn()" (click)="auth.logout()">Logout</button>
+</div>

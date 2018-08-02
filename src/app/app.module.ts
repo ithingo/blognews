@@ -16,6 +16,8 @@ import { NewsModule } from './news/news.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 
+import { NavigationComponent } from './navigation/navigation.component';
+
 export function getToken() {
   return localStorage.getItem('access_token');
 }
@@ -24,6 +26,7 @@ export function getToken() {
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    NavigationComponent,
   ],
   imports: [
     NgbModule.forRoot(),

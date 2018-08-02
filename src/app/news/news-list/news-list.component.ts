@@ -18,7 +18,19 @@ export class NewsListComponent implements OnInit {
 
   _filteredArray: Array<NewsType> = [];
 
-  constructor(private _newsService: NewsItemService) { }
+  constructor(
+    private _newsService: NewsItemService,
+  ) { }
+
+
+  // this function should not be there!!
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // getToken() {
+  //   return 'some-token.................';
+  // }
+
+
 
   ngOnInit() {
     this.retrieveNews();
@@ -27,6 +39,9 @@ export class NewsListComponent implements OnInit {
   retrieveNews(): void {
     this._newsService.getNews()
       .subscribe(newsArray => this._itemNewsArray = newsArray);
+
+    // const apiRoot = "http://127.0.0.1:8000/api/v1/posts.json?key="+ this.getToken() +"&";
+    // this._newsService.ping(apiRoot);
   }
 
   // Method invoked on 'oninput' event for input field
