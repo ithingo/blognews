@@ -8,8 +8,10 @@
 
 <div class="news__author author">
   <div class="author__photo-cropper">
-    <img src="{{iteratedNews.person.imageUrl}}" alt="" class="author__photo">
+    <img src="{{iteratedNews.author.photo}}" alt="" class="author__photo">
   </div>
 
-  <a [routerLink]="['/profile', iteratedNews.userId]" routerLinkActive="author__name_active" class="author__name">{{iteratedNews.person.fullName}}</a>
+  <a [routerLink]="['/profile', iteratedNews.author.id]" routerLinkActive="author__name_active" class="author__name">
+  	{{iteratedNews.author.first_name + ' ' + iteratedNews.author.second_name}}
+  </a>
 </div>
