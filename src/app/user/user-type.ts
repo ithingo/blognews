@@ -1,9 +1,9 @@
 export class UserType {
   id: number;
-  username: string;
+  first_name: string;
+  second_name: string;
   email: string;
   password: string;
   photo: string;
-  fullName: string;
-  // posts: referense-to-news
+  posts: any[];
 }

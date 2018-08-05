@@ -1,14 +1,13 @@
 <main class="user-profile">
-  <h3>{{ getUserName()}}</h3>
+  <h3>{{ userNameFull }}</h3>
 
   <div class="user-profile__photo-wrapper">
-    <img src="{{ getUserPhoto() }}" alt="" class="user-profile__photo">
+    <img src="{{ userPhoto }}" alt="" class="user-profile__photo">
   </div>
 </main>
 
-  <div class="user-profile-wrapper" *ngIf="getUserPosts()">
-
-    <ul class="user__posts" *ngFor="let post of getUserPosts()">
+  <div class="user-profile-wrapper" *ngIf="userPosts">
+    <ul class="user__posts" *ngFor="let post of userPosts">
       <li class="user-post">
         <h4 class="user-post__subject">{{ post.subject }}</h4>
 

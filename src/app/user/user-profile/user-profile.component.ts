@@ -14,8 +14,10 @@ import { NewsType } from '../../news/news-type';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  private _user: UserType;
-  private _activeUser: UserType;
+  userNameFull: string;
+  userPosts: any[];
+  userPhoto: string;
+  private _userId: any;
 
   constructor(
     private _route: ActivatedRoute,
@@ -26,9 +28,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.retrieveUser();
-
-    // temp -> active user is Hillary
-    // this._activeUser.id = 1;
+    this.retrieveUserPosts();
   }
 
   retrieveUser() {
@@ -39,33 +39,20 @@ export class UserProfileComponent implements OnInit {
         )
       )
     );
-    userObservable.subscribe(user => this._user = user);
+
+    userObservable.subscribe(user => {
+      this.userNameFull = `${user.first_name} ${user.second_name}`;
+      this.userPhoto = user.photo;
+      this._userId = user.id;
+    });
   }
 
-  getUserName(): string {
-    return this._user.fullName;
-  }
-
-  getUserPhoto(): string {
-    return this._user.photo;
-  }
-
-  getUserPosts(): NewsType[]|null {
-    let result: NewsType[] = [];
+  retrieveUserPosts() {
     this._getNewsListService.getNews()
-      .subscribe(newsArray => result = newsArray);
-
-    if (result.length) {
-      return result.filter(news => news.userId === this._user.id);
-    }
-    return null;
+      .subscribe(newsArray => this.userPosts = newsArray);
   }
-
+  
   gotoNewsList() {
     this._router.navigate(['feeds']);
-  }
-
-  getActiveUserId(): number {
-    return this._activeUser.id;
   }
 }
