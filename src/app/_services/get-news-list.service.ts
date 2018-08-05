@@ -10,19 +10,17 @@ import { NewsType } from '../news/news-type';
 })
 export class GetNewsListService {
 
-  // host: string = 'http://127.0.0.1:8000';
+  host: string = 'http://127.0.0.1:8000';
 
   constructor(public http: HttpClient) { }
 
   getNews(): Observable<NewsType[]> {
-    // const apiRoot = `${this.host}/api/v1/posts.json`;
-
-    // test json-server
-    const apiRoot: string = 'http://localhost:3000/news';
+    const apiRoot = `${this.host}/api/v1/posts/`;
+    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InRlc3RAdGVzdC5ydSIsImV4cCI6MTUzMzQ1MDk3NSwiZW1haWwiOiJ0ZXN0QHRlc3QucnUifQ.7D77tK72RjT7OWlwJWv9IOzeoHshwaXHfx7FwxT8utU';
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    // headers.append('Authorization', `JWT ${-GET_USER_TOKEN_}`);
+    headers.append('Authorization', `JWT ${token}`);
 
     return this.http
       .get<NewsType[]>(apiRoot, {headers: headers})
