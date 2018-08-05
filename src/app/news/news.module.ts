@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NewsListComponent } from './news-list/news-list.component';
 import { NewsItemComponent } from './news-item/news-item.component';
 
-import { NewsItemService } from '../_services/news-item.service';
+import { GetNewsListService } from '../_services/get-news-list.service';
 import { NewsRoutingModule } from './news-routing.module';
 import { SearchSelectionComponent } from './search-selection/search-selection.component';
 
@@ -24,7 +24,8 @@ import { OnlyLoggedInGuard } from '../_guards/only-logged-in.guard';
     SearchSelectionComponent,
   ],
   providers: [
-    NewsItemService,
+    GetNewsListService,
+
     AlwaysAuthGuard,
     OnlyLoggedInGuard,
   ]

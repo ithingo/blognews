@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewsType } from '../news-type';
 import { SelectionProperties } from '../search-selection/selection-properties';
 
-import { NewsItemService } from '../../_services/news-item.service';
+import { GetNewsListService } from '../../_services/get-news-list.service';
 
 @Component({
   templateUrl: './news-list.component.html',
@@ -19,29 +19,16 @@ export class NewsListComponent implements OnInit {
   _filteredArray: Array<NewsType> = [];
 
   constructor(
-    private _newsService: NewsItemService,
+    private _getNewsListService: GetNewsListService,
   ) { }
-
-
-  // this function should not be there!!
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // getToken() {
-  //   return 'some-token.................';
-  // }
-
-
 
   ngOnInit() {
     this.retrieveNews();
   }
 
   retrieveNews(): void {
-    this._newsService.getNews()
+    this._getNewsListService.getNews()
       .subscribe(newsArray => this._itemNewsArray = newsArray);
-
-    // const apiRoot = "http://127.0.0.1:8000/api/v1/posts.json?key="+ this.getToken() +"&";
-    // this._newsService.ping(apiRoot);
   }
 
   // Method invoked on 'oninput' event for input field
@@ -54,7 +41,6 @@ export class NewsListComponent implements OnInit {
     this._filteredArray = [];
 
     this._itemNewsArray.forEach(news => {
-      // this._filteredArray.push();
       this._filteredArray.push(this.filterByKeywords(news, keywords, selectedOptionKey));
     });
     this._filteredArray = this._filteredArray.filter(function( element ) {

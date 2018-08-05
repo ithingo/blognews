@@ -1,4 +1,4 @@
-export interface NewsType {
+export class NewsType {
   subject: string;
   content: string;
   person: {

@@ -16,14 +16,15 @@ export class OnlyLoggedInGuard implements CanActivate {
   canActivate(
   	next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this._authService.isLoggednIn()) {
-      return true;
-    } else {
-      this._router.navigate(
-      	['login'],
-      	{queryParams: {returnUrl: state.url}}
-			);
-      return false;
-    }
+   //  if (this._authService.isLoggednIn()) {
+   //    return true;
+   //  } else {
+   //    this._router.navigate(
+   //    	['login'],
+   //    	{queryParams: {returnUrl: state.url}}
+			// );
+   //    return false;
+   //  }
+    return true;
   }
 }

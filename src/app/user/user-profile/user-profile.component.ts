@@ -3,10 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
-import { NewsItemService } from '../../_services/news-item.service';
+import { GetNewsListService } from '../../_services/get-news-list.service';
 import { UserType } from '../user-type';
 import { UserService } from '../../_services/user.service';
-import { Observable } from 'rxjs';
 import { NewsType } from '../../news/news-type';
 
 @Component({
@@ -16,12 +15,12 @@ import { NewsType } from '../../news/news-type';
 })
 export class UserProfileComponent implements OnInit {
   private _user: UserType;
-  private _activeUser : UserType;
+  private _activeUser: UserType;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _newsService: NewsItemService,
+    private _getNewsListService: GetNewsListService,
     private _userService: UserService,
   ) { }
 
@@ -53,11 +52,11 @@ export class UserProfileComponent implements OnInit {
 
   getUserPosts(): NewsType[]|null {
     let result: NewsType[] = [];
-    this._newsService.getNews()
+    this._getNewsListService.getNews()
       .subscribe(newsArray => result = newsArray);
 
     if (result.length) {
-      return result.filter(news => news.userId == this._user.id)
+      return result.filter(news => news.userId === this._user.id);
     }
     return null;
   }
