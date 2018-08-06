@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { UserType } from '../../user/user-type';
 import { AuthService } from '../../_services/auth.service';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
+    private _userService: UserService,
     private _loginComponentRoute: Router,
   ) {
     this.loginForm = this._formBuilder.group({
@@ -51,11 +53,21 @@ export class LoginComponent implements OnInit {
       }
 
       this._authService.login(user)
-        .subscribe(data => console.log(data));
+        .subscribe(data => {
+          const token = data['token'];
 
-      this._loginComponentRoute.navigate(["/"]);
-    } else {
-      return;
+          console.log({'login-component': {'data': data, 'token': token}});
+
+          console.log(data);
+          console.log(token);
+
+          // this._userService.setLoggedIn(token);
+        });
+        // .subscribe(data => console.log(data));
+
+      // this._loginComponentRoute.navigate(["/"]);
+    // } else {
+    //   return;
     }
   }
 }

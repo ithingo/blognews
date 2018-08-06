@@ -55,4 +55,8 @@ export class UserProfileComponent implements OnInit {
   gotoNewsList() {
     this._router.navigate(['feeds']);
   }
+
+  isCurrnetUserLogged(): boolean {
+    return this._userService.isLoggedIn();
+  }
 }

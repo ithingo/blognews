@@ -24,4 +24,6 @@
   </ul>
 </nav>
 
-<app-edit-profile-window></app-edit-profile-window>
+<div class="edit-wrapper" *ngIf="isCurrnetUserLogged()">
+  <app-edit-profile-window></app-edit-profile-window>
+</div>
