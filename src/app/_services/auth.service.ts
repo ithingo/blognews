@@ -1,42 +1,48 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  helper = new JwtHelperService();
 
-  constructor(private _authRoute: Router) {
+  public headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json',
+    // 'Authorization': `JWT ${this.token}`, !!!!!!!!!!!!!!!!
+    'X-CSRFToken': this.cookieservice.get('csrftoken')
+  });
 
+  constructor(
+    private _authRoute: Router,
+    private http: HttpClient,
+    private cookieservice: CookieService,
+  ) { }
+
+  login(user): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/v1/api-login-user';
+
+    console.log(document.cookie['csrftoken']);
+
+    return this.http.post(
+      url,
+      user,
+      { headers: this.headers }
+    );
   }
 
-  sendToken(token: string) {
-    localStorage.setItem("access_token", token);
-  }
+  // logout(user): 
 
-  getToken() {
-    const token = localStorage.getItem("access_token");
-    return this.helper.decodeToken(token);
-  }
-
-  getExpirationData() {
-    const token = localStorage.getItem("access_token");
-    return this.helper.getTokenExpirationDate(token);
-  }
-
-  isTokenExpired() {
-    const token = localStorage.getItem("access_token");
-    return this.helper.isTokenExpired(token);
-  }
-
-  isLoggednIn() {
-    return this.getToken() !== null;
-  }
-
-  logout() {
-    localStorage.removeItem("access_token");
-    this._authRoute.navigate(["login"]);
+  register(user): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/v1/api-register-user';
+    
+    return this.http.post(
+      url,
+      user,
+      { headers: this.headers },
+    );
   }
 }

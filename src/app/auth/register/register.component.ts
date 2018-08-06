@@ -37,6 +37,10 @@ export class RegisterComponent implements OnInit {
             Validators.email,
           ]
         ],
+        photo: [
+          '',
+          Validators.required,
+        ],
         password: [
           '',
           Validators.required,
@@ -60,8 +64,23 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
     if (this.registerForm.valid) {
-      this._authService.sendToken(this.registerForm.value.email);  // temp save email as a token instead of token retrieved from server
-      this._registerComponentRoute.navigate(['login']);
+      console.log(this.registerForm.value);
+
+      const user: any = {
+        'email': this.registerForm.value['email'],
+        'password': this.registerForm.value['password'],
+        'first_name': this.registerForm.value['first_name'],
+        'second_name': this.registerForm.value['second_name'],
+        'photo': this.registerForm.value['photo'],
+      }
+
+      // user.email = this.loginForm.value['email'];
+      // user.password = this.loginForm.value['password'];
+
+      this._authService.register(user)
+        .subscribe(data => console.log(data));
+
+      this._registerComponentRoute.navigate(["login"]);
     } else {
       return;
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { UserType } from '../../user/user-type';
 import { AuthService } from '../../_services/auth.service';
 
 @Component({
@@ -44,7 +45,17 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     if (this.loginForm.valid) {
-      this._authService.sendToken(this.loginForm.value.email);  // temp save email as a token instead of token retrieved from server
+      const user: any = {
+        'email': this.loginForm.value['email'],
+        'password': this.loginForm.value['password'],
+      }
+
+      // user.email = this.loginForm.value['email'];
+      // user.password = this.loginForm.value['password'];
+
+      this._authService.login(user)
+        .subscribe(data => console.log(data));
+
       this._loginComponentRoute.navigate(["/"]);
     } else {
       return;

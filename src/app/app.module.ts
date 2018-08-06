@@ -7,6 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
+import { CookieService } from 'ngx-cookie-service';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -49,7 +51,7 @@ export function getToken() {
 
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [ CookieService ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule { }
