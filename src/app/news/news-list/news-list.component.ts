@@ -28,7 +28,11 @@ export class NewsListComponent implements OnInit {
 
   retrieveNews(): void {
     this._getNewsListService.getNews()
-      .subscribe(newsArray => this._itemNewsArray = newsArray);
+      .subscribe(newsArray => {this._itemNewsArray = newsArray
+
+        console.log(newsArray);
+
+      });
   }
 
   // Method invoked on 'oninput' event for input field

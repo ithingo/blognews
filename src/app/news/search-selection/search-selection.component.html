@@ -1,6 +1,7 @@
 <label for="optionsSelect"> Filter by: </label>
 
 <!-- Later add default option onInit -->
-<select id="optionsSelect" name="optionsToFilter" [(ngModel)]="selectedOption" (ngModelChange)="printSelectedOption()">
+<select  id="optionsSelect" name="optionsToFilter" [(ngModel)]="selectedOption" (ngModelChange)="printSelectedOption()">
+  <option [ngValue]="0">default</option>
   <option *ngFor="let selection of selectOptions" [ngValue]="selection">{{selection.value}}</option>
 </select>

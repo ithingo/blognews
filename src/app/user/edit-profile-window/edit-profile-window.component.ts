@@ -5,6 +5,7 @@ import { EventEmitter } from 'events';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserType } from '../user-type';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-edit-profile-window',
@@ -42,7 +43,10 @@ export class EditProfileWindowComponent implements OnInit {
   // private user_name: string;
   // private user_photo: string;
 
-  constructor(private _modalService: NgbModal) {
+  constructor(
+    private _modalService: NgbModal,
+    private _userService: UserService,
+  ) {
     // // for temp mock data
     // this.user_id = this.user.id;
     // this.user_fullName = this.user.fullName;
@@ -52,9 +56,13 @@ export class EditProfileWindowComponent implements OnInit {
     // this.user_photo = this.user.photo;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   open(content) {
+    this._userService.getCurrentUser()
+      .subscribe(data => console.log({'current user ->': data}))
+
     this._modalService.open(content, { centered: true }).result
       .then(
         result => this.closeResult = `Closed with: ${result}`,

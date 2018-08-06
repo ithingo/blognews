@@ -12,6 +12,8 @@ export class UserService {
   host = 'http://127.0.0.1:8000';
   coockieName  = 'curr_user_token';
 
+  private _currentUserId: number;
+
   constructor(
     public http: HttpClient,
     private cookieservice: CookieService,
@@ -37,9 +39,16 @@ export class UserService {
 
   }
 
+  setCurrentUserId(user_id: number) {
+    this._currentUserId = user_id;
+  }
+
+  getCurrentUserId(): number {
+    return this._currentUserId;
+  }
+
   getUserById(user_id: number): Observable<UserType> {
     const url = `${this.host}/api/v1/users/${user_id}`;
-    // const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InRlc3RAdGVzdC5ydSIsImV4cCI6MTUzMzQ1MDk3NSwiZW1haWwiOiJ0ZXN0QHRlc3QucnUifQ.7D77tK72RjT7OWlwJWv9IOzeoHshwaXHfx7FwxT8utU';
     const token = this.getToken();
 
     console.log({'get-user-by-id': token});
@@ -52,19 +61,25 @@ export class UserService {
       .get<UserType>(url, { headers: headers })
   }
 
-  getCurrentUser(): Observable<UserType> {
-    const url = `${this.host}/api/v1/`; // ??????????????????????????????????????????????????????????????????????
-    const token = this.getToken();
-
-    console.log({'get-current-user': token});
-
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', `JWT ${token}`);
-
-    return this.http
-      .get<UserType>(url, { headers: headers })
-  }
+  // getCurrentUser(): Observable<any> {
+  //   const url = `${this.host}/api/v1/api-token-auth/`;
+  //   const token = this.getToken();
+  //
+  //   console.log({'get-current-user': token});
+  //
+  //   const headers = new HttpHeaders();
+  //   headers.append('Content-Type', 'application/json');
+  //   headers.append('Authorization', `JWT ${token}`);
+  //
+  //   // return this.http
+  //   //   .get<UserType>(url, { headers: headers })
+  //   return this.http
+  //     .post(
+  //       url,
+  //       {"token": token},
+  //       { headers: headers }
+  //       );
+  // }
 
   isLoggedIn(): boolean {
     const cookieExists: boolean = this.cookieservice.check(this.coockieName);

@@ -22,13 +22,12 @@ export class AuthService {
 
     console.log('inside-login-in-auth');
 
-    let httpParams = new HttpParams()
-      .append("email", user.email)
-      .append("password", user.password)
-
     return this.http.post(
       url,
-      { httpParams },
+      JSON.stringify({
+        "email": user.email,
+        "password": user.password
+      }),
       { headers: this.headers }
     );
   }

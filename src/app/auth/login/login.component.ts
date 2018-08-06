@@ -54,20 +54,18 @@ export class LoginComponent implements OnInit {
 
       this._authService.login(user)
         .subscribe(data => {
-          const token = data['token'];
-
-          console.log({'login-component': {'data': data, 'token': token}});
+          const token = data.get('token');
+          const id = data.get('id');
 
           console.log(data);
-          console.log(token);
 
-          // this._userService.setLoggedIn(token);
+          this._userService.setLoggedIn(token);
+          this._userService.setCurrentUserId(id);
         });
-        // .subscribe(data => console.log(data));
 
-      // this._loginComponentRoute.navigate(["/"]);
-    // } else {
-    //   return;
+      this._loginComponentRoute.navigate(["/"]);
+    } else {
+      return;
     }
   }
 }
