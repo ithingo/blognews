@@ -50,9 +50,6 @@ export class LoginComponent implements OnInit {
         'password': this.loginForm.value['password'],
       }
 
-      // user.email = this.loginForm.value['email'];
-      // user.password = this.loginForm.value['password'];
-
       this._authService.login(user)
         .subscribe(data => console.log(data));
 
