@@ -8,6 +8,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditProfileWindowComponent } from './edit-profile-window/edit-profile-window.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserService } from '../../_services/user.service';
+import { ActionPostsComponent, ActionPostsContent } from './action-posts/action-posts.component';
 
 @NgModule({
   imports: [
@@ -16,9 +17,14 @@ import { UserService } from '../../_services/user.service';
     FormsModule,
     UserRoutingModule,
   ],
+  entryComponents: [
+    ActionPostsContent,
+  ],
   declarations: [
     UserProfileComponent,
     EditProfileWindowComponent,
+    ActionPostsContent,
+    ActionPostsComponent,
   ],
   providers: [
     UserService,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, OnChanges } from '@angular/core';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -6,8 +6,9 @@ import { switchMap } from 'rxjs/operators';
 import { GetNewsListService } from '../../../_services/get-news-list.service';
 import { UserType } from '../../../models/user-type';
 import { UserService } from '../../../_services/user.service';
-import { AuthService } from '../../../_services/auth.service'
+import { AuthService } from '../../../_services/auth.service';
 import { NewsType } from '../../../models/news-type';
+import { ChangeNewsService } from '../../../_services/change-news.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,17 +21,37 @@ export class UserProfileComponent implements OnInit {
   userPhoto: string;
   private _userId: any;
 
+  editShow: boolean; // trigger flag to open modal window
+
+  // @ViewChild('addPost')
+  // addButton: ElementRef;
+  //
+  // @ViewChild('deletePost')
+  // deleteButton: ElementRef;
+  //
+  //
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _getNewsListService: GetNewsListService,
     private _userService: UserService,
     private _authService: AuthService,
+    private _changeNewsService: ChangeNewsService,
   ) { }
 
   ngOnInit() {
     this.retrieveUser();
     this.retrieveUserPosts();
+
+
+  }
+
+  ngOnChanges(changes: any) {
+    // this._changeNewsService.postAdd$
+    //   .subscribe(
+    //     resolve => this.retrieveUserPosts()
+    //   )
   }
 
   retrieveUser() {
@@ -74,6 +95,7 @@ export class UserProfileComponent implements OnInit {
     this._authService.logout();
   }
 
+  // LATER CREATE A SERVICE AND UPDATE DATA JUST IN THE MOMENT AFTER MODAL CLOSING
   handleUserChanged(event) {
     if(event) {
       console.log(event);
@@ -88,5 +110,20 @@ export class UserProfileComponent implements OnInit {
       // this.retrieveUserPosts();
       this._router.navigate([`profile/${this._userId}`]);
     }
+  }
+
+  editPost(post: NewsType) {
+    this._changeNewsService.setPostToEdit(post);
+    this.editShow = true;
+
+    // this._changeNewsService.postEdit$
+    //   .subscribe(
+    //     result => this.actionPostModal.nativeElement.show(result)
+    //   );
+  }
+
+  deletePost(news: NewsType) {
+    // this._changeNewsService.postDelete$
+    // this.show = true;
   }
 }
