@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { NewsType } from '../news/news-type';
+import { NewsType } from '../models/news-type';
 
 import { UserService } from './user.service';
 

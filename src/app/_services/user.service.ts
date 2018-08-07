@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
-import { UserType } from '../user/user-type';
+import { UserType } from '../models/user-type';
 
 @Injectable({
   providedIn: 'root'

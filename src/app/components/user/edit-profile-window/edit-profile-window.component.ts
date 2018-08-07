@@ -5,8 +5,8 @@ import { EventEmitter } from '@angular/core';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
-import { UserType } from '../user-type';
-import { UserService } from '../../_services/user.service';
+import { UserType } from '../../../models/user-type';
+import { UserService } from '../../../_services/user.service';
 
 @Component({
   selector: 'app-edit-profile-window',

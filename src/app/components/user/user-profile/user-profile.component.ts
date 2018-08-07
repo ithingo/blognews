@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
-import { GetNewsListService } from '../../_services/get-news-list.service';
-import { UserType } from '../user-type';
-import { UserService } from '../../_services/user.service';
-import { AuthService } from '../../_services/auth.service'
-import { NewsType } from '../../news/news-type';
+import { GetNewsListService } from '../../../_services/get-news-list.service';
+import { UserType } from '../../../models/user-type';
+import { UserService } from '../../../_services/user.service';
+import { AuthService } from '../../../_services/auth.service'
+import { NewsType } from '../../../models/news-type';
 
 @Component({
   selector: 'app-user-profile',

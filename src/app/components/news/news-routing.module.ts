@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NewsListComponent } from './news-list/news-list.component';
 
-import { AlwaysAuthGuard } from '../_guards/always-auth.guard';
-import { OnlyLoggedInGuard } from '../_guards/only-logged-in.guard';
+import { AlwaysAuthGuard } from '../../_guards/always-auth.guard';
+import { OnlyLoggedInGuard } from '../../_guards/only-logged-in.guard';
 
 const newsRoutes: Routes = [
   {

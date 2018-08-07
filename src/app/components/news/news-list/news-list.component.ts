@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsType } from '../news-type';
+import { NewsType } from '../../../models/news-type';
 import { SelectionProperties } from '../search-selection/selection-properties';
 
-import { GetNewsListService } from '../../_services/get-news-list.service';
+import { GetNewsListService } from '../../../_services/get-news-list.service';
 
 @Component({
   templateUrl: './news-list.component.html',

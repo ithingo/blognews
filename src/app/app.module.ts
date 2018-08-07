@@ -12,13 +12,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
-import { NewsModule } from './news/news.module';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+import { NewsModule } from './components/news/news.module';
+import { UserModule } from './components/user/user.module';
+import { AuthModule } from './components/auth/auth.module';
 
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 export function getToken() {
   return localStorage.getItem('access_token');
