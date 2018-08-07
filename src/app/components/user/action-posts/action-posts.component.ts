@@ -1,49 +1,10 @@
-import { Component, OnInit, ViewChild, Input, TemplateRef, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, Input, TemplateRef, OnChanges, SimpleChanges } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ChangeNewsService } from '../../../_services/change-news.service';
 import { UserService } from '../../../_services/user.service';
 import { NewsType } from '../../../models/news-type';
-
-@Component({
-  selector: 'ngbd-modal-content',
-  template: `
-    <ng-template #actionPost let-c="close" let-d="dismiss">
-      <div class="modal-header">
-        <h4 class="modal-title">Edit post</h4>
-        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <p class="modal-subject">Subject:
-          <input type="text" [(ngModel)]="post.subject">
-        </p>
-
-        <p class="modal-content">Content:
-          <input type="text" [(ngModel)]="post.content">
-        </p>
-
-        <!--<p class="modal_tags">Tags:-->
-        <!--<input type="email" [(ngModel)]="post.tags"> ???????? -->
-        <!--</p>-->
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
-      </div>
-    </ng-template>
-  `,
-})
-export class ActionPostsContent {
-  post: NewsType;
-  // @Input()
-  // show: boolean;
-
-  constructor(public activeModal: NgbActiveModal) { }
-}
 
 @Component({
   selector: 'app-update-posts-window',
@@ -61,9 +22,19 @@ export class ActionPostsContent {
     ])
   ],
 })
-export class ActionPostsComponent implements AfterViewInit {
-  post: NewsType;
+export class ActionPostsComponent implements OnChanges {
+  postData: any;
+
   closeResult: string;
+
+  @Input()
+  show: boolean;
+
+  @Input()
+  post: NewsType;
+
+  @ViewChild('editPost')
+  modalRef: TemplateRef<any>;
 
   constructor(
     private _changeNewsService: ChangeNewsService,
@@ -71,41 +42,23 @@ export class ActionPostsComponent implements AfterViewInit {
     private _userService: UserService,
   ) { }
 
-  ngAfterViewInit(){
-    setTimeout(() => {
-      this.open();
-    });
-  }
-
-  open() {
-    this._changeNewsService.postEdit$
-      .subscribe(
-        res => this.post = this._changeNewsService.postToEdit
-      );
-
-    const modalRef = this._modalService.open(ActionPostsContent, { centered: true });
-    modalRef.componentInstance.post = this.post; // initialize "inner component"
-
-    modalRef
-    .result
-      .then(
-        result => {
-          this.closeResult = `Closed with: ${result}`;
-          //.....
-          console.log(this.post);
-          console.log(modalRef.componentInstance.post);
-        },
-        reason => this.closeResult = `Dismissed ${this.getDismissReason(reason)}`
-      );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['show'] && changes['show'].currentValue) {
+      this.open(this.modalRef);
+      this.postData.subject = changes['post'].currentValue.subject;
+    this.postData.content = this.post.content;
     }
+  }
+
+  open(content) {
+    // this.postData.subject = this.post.subject;
+    // this.postData.content = this.post.content;
+    // this.postData.tags = this.post.tags;
+
+    this._modalService.open(content, { centered: true }).result
+      .then(
+        res => this.closeResult = 'Success',
+        reason => this.closeResult = 'Closed some reasoon'
+     )
   }
 }

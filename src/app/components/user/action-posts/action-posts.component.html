@@ -1,27 +1,27 @@
-<!--<ng-template #actionPost let-c="close" let-d="dismiss">-->
-  <!--<div class="modal-header">-->
-    <!--<h4 class="modal-title">{{post_action}} post</h4>-->
-    <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">-->
-      <!--<span aria-hidden="true">&times;</span>-->
-    <!--</button>-->
-  <!--</div>-->
+<ng-template #editPost let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Edit post</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
-  <!--<div class="modal-body">-->
-    <!--<p class="modal-subject">Subject:-->
-      <!--<input type="text" [(ngModel)]="post.subject">-->
-    <!--</p>-->
+  <div class="modal-body">
+    <p class="modal-subject">Subject:
+      <input type="text" [(ngModel)]="postData.subject">
+    </p>
 
-    <!--<p class="modal-content">Content:-->
-      <!--<input type="text" [(ngModel)]="post.content">-->
-    <!--</p>-->
+    <p class="modal-content">Content:
+      <input type="text" [(ngModel)]="postData.content">
+    </p>
 
-    <!--&lt;!&ndash;<p class="modal_tags">Tags:&ndash;&gt;-->
-      <!--&lt;!&ndash;<input type="email" [(ngModel)]="post.tags"> ???????? &ndash;&gt;-->
-    <!--&lt;!&ndash;</p>&ndash;&gt;-->
-  <!--</div>-->
+   <!--  <p class="modal_tags">
+      <input type="email" [(ngModel)]="post.tags">
+    </p> -->
+  </div>
 
-  <!--<div class="modal-footer">-->
-    <!--<button type="button" class="btn btn-secondary" (click)="c('Close click')">{{post_action}}</button>-->
-  <!--</div>-->
-<!--</ng-template>-->
-<button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Update</button>
+  </div>
+</ng-template>
+<!-- <button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button> -->

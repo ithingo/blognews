@@ -37,7 +37,7 @@
 </nav>
 
 <div class="edit-posts-wrapper" *ngIf="isCurrnetUserLogged()">
-  <app-update-posts-window></app-update-posts-window>
+  <app-update-posts-window [show]='editShow' [post]='post'></app-update-posts-window>
 </div>
 
 <div class="edit-profile-wrapper" *ngIf="isCurrnetUserLogged()">
