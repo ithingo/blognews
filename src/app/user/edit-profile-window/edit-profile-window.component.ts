@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, Output, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { EventEmitter } from 'events';
+
+import { EventEmitter } from '@angular/core';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
@@ -26,25 +27,16 @@ import { UserService } from '../../_services/user.service';
 export class EditProfileWindowComponent implements OnInit {
   closeResult: string;
 
-  private user: UserType;  // there should be user after retreaving via service from cookies
+  private _user: UserType;
+  userDataCopy: any;
 
-  user_first_name: string;
-  user_second_name: string;
-  user_email: string;
-  user_photo: string;
+  @Output()
+  userChanged: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private _modalService: NgbModal,
     private _userService: UserService,
-  ) {
-    // // for temp mock data
-    // this.user_id = this.user.id;
-    // this.user_fullName = this.user.fullName;
-    // this.user_email = this.user.email;
-    // this.user_password = this.user.password;
-    // this.user_name = this.user.username;
-    // this.user_photo = this.user.photo;
-  }
+  ) { }
 
   ngOnInit() {
   }
@@ -54,13 +46,25 @@ export class EditProfileWindowComponent implements OnInit {
 
     this._userService.getUserById(
       +(this._userService.getCurrentUserId())
-    )
-      .subscribe(data => console.log({'current user ->': data}))
+    ).subscribe(data => {
+      this._user = data;
+      this.userDataCopy = {
+        'email': this._user.email,
+        'first_name': this._user.first_name,
+        'second_name': this._user.second_name,
+        'photo': this._user.photo,
+      };
+    });
 
     this._modalService.open(content, { centered: true }).result
       .then(
-        result => this.closeResult = `Closed with: ${result}`,
-        reason => this.closeResult = `Dismissed ${this.getDismissReason(reason)}`
+        result => {
+            this.closeResult = `Closed with: ${result}`;
+            this._userService.updateUserData(this._user, this.userDataCopy);
+            this.userChanged.emit(true);
+          },
+            reason => this.closeResult = `Dismissed ${this.getDismissReason(reason)}`
+
       );
   }
 

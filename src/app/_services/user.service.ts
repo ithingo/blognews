@@ -48,6 +48,10 @@ export class UserService {
   }
 
   getUserById(user_id: number): Observable<UserType> {
+    console.log({'1-id': this._currentUserId});
+    console.log({'2-id': user_id});
+
+
     const url = `${this.host}/api/v1/users/${user_id}/`;
     const token = this.getToken();
 
@@ -58,7 +62,7 @@ export class UserService {
     headers.append('Authorization', `JWT ${token}`);
 
     return this.http
-      .get<UserType>(url, { headers: headers })
+      .get<UserType>(url, { headers: headers });
   }
 
   // getCurrentUser(): Observable<any> {
@@ -88,5 +92,33 @@ export class UserService {
 
   clearCookies() {
     this.cookieservice.delete(this.coockieName);
+  }
+
+  updateUserData(user: UserType, updatedData: any) {
+
+    const url = `${this.host}/api/v1/users/${user.id}/`;
+    const token = this.getToken();
+
+    console.log({'update-user-data': token});
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `JWT ${token}`);
+
+    this.http
+      .patch(
+        url,
+        {
+          'email': updatedData.email,
+          'first_name': updatedData.first_name,
+          'second_name': updatedData.second_name,
+          'photo': updatedData.photo,
+        },
+        { headers: headers }
+      ).subscribe(data => console.log(data));
+
+
+
+    // this.getUserById(user.id).subscribe(data => console.log(data))
   }
 }

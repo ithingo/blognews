@@ -1,13 +1,6 @@
 <div class="container">
   <!-- <app-navigation></app-navigation> -->
-
-  <div class="row">
-    <h1 class="main-title">
-      {{ title }}
-    </h1>
-  </div>
-
-  <button class="user-profile-link"  [routerLink]="['profile/1']"> <!-- temp uri -->
+  <button class="user-profile-link" (click)="goToUserProfile()">
     <span class="user-icon-link fas fa-user"></span>
   </button>
 

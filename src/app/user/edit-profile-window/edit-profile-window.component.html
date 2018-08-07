@@ -8,28 +8,24 @@
 
   <div class="modal-body">
     <p class="edit-profile_first-name">First Name:
-      <input type="text" [(ngModel)]="user_first_name"> {{user_first_name}}
+      <input type="text" [(ngModel)]="userDataCopy.first_name">
     </p>
 
     <p class="edit-profile_second-name">Second Name:
-      <input type="text" [(ngModel)]="user_second_name"> {{user_second_name}}
+      <input type="text" [(ngModel)]="userDataCopy.second_name">
     </p>
 
     <p class="edit-profile_email">Email:
-      <input type="email" [(ngModel)]="user_email"> {{user_email}}
+      <input type="email" [(ngModel)]="userDataCopy.email">
     </p>
 
-    <p class="edit-profile__password">Password:
-      <input type="password" [(ngModel)]="user_password"> {{user_password}}
-    </p>
-
-    <p class="edit-profile__password">Password Confirmation:
-      <input type="password" [(ngModel)]="user_password_confirmation"> {{user_password_confirmation}}
+    <p class="edit-profile_second-name">Photo:
+      <input type="text" [(ngModel)]="userDataCopy.photo">
     </p>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Save</button>
   </div>
 </ng-template>
 

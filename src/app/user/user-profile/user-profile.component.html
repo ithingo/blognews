@@ -29,5 +29,5 @@
 </nav>
 
 <div class="edit-wrapper" *ngIf="isCurrnetUserLogged()">
-  <app-edit-profile-window></app-edit-profile-window>
+  <app-edit-profile-window (userChanged)="handleUserChanged($event)"></app-edit-profile-window>
 </div>

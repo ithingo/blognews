@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   retrieveUser() {
-    const userObservable = this._route.paramMap.pipe(
+    let user$ = this._route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         this._userService.getUserById(
           +(params.get('id')) // get id value as int
@@ -42,11 +42,19 @@ export class UserProfileComponent implements OnInit {
       )
     );
 
-    userObservable.subscribe(user => {
-      this.userNameFull = `${user.first_name} ${user.second_name}`;
-      this.userPhoto = user.photo;
-      this._userId = user.id;
-    });
+    // if the user is current user
+    // if(!user$) {
+    //   user$ = this._userService.getUserById(this._userService.getCurrentUserId())
+    // }
+
+    user$
+      .subscribe(
+        user => {
+          this.userNameFull = `${user.first_name} ${user.second_name}`;
+          this.userPhoto = user.photo;
+          this._userId = user.id;
+        }
+      );
   }
 
   retrieveUserPosts() {
@@ -64,5 +72,21 @@ export class UserProfileComponent implements OnInit {
 
   logOut() {
     this._authService.logout();
+  }
+
+  handleUserChanged(event) {
+    if(event) {
+      console.log(event);
+      // this._userService.getUserById(this._userService.getCurrentUserId())
+      //   .subscribe(
+      //     user => {
+      //       this.userNameFull = `${user.first_name} ${user.second_name}`;
+      //       this.userPhoto = user.photo;
+      //       this._userId = user.id;
+      //     }
+      //   )
+      // this.retrieveUserPosts();
+      this._router.navigate([`profile/${this._userId}`]);
+    }
   }
 }
