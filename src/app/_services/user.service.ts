@@ -48,7 +48,7 @@ export class UserService {
   }
 
   getUserById(user_id: number): Observable<UserType> {
-    const url = `${this.host}/api/v1/users/${user_id}`;
+    const url = `${this.host}/api/v1/users/${user_id}/`;
     const token = this.getToken();
 
     console.log({'get-user-by-id': token});
@@ -84,5 +84,9 @@ export class UserService {
   isLoggedIn(): boolean {
     const cookieExists: boolean = this.cookieservice.check(this.coockieName);
     return cookieExists;
+  }
+
+  clearCookies() {
+    this.cookieservice.delete(this.coockieName);
   }
 }

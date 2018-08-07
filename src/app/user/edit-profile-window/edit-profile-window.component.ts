@@ -28,20 +28,10 @@ export class EditProfileWindowComponent implements OnInit {
 
   private user: UserType;  // there should be user after retreaving via service from cookies
 
-  // private user_first_name: string;
-  // private user_second_name: string;
-  // private user_email: string;
-  // private user_password: string;
-  // private user_password_confirmation: string;
-
-
-  // for temp mock data, real field are upset
-  // private user_id: number;
-  // private user_fullName: string;
-  // private user_email: string;
-  // private user_password: string;
-  // private user_name: string;
-  // private user_photo: string;
+  user_first_name: string;
+  user_second_name: string;
+  user_email: string;
+  user_photo: string;
 
   constructor(
     private _modalService: NgbModal,
@@ -60,7 +50,11 @@ export class EditProfileWindowComponent implements OnInit {
   }
 
   open(content) {
-    this._userService.getCurrentUser()
+    console.log(this._userService.getCurrentUserId());
+
+    this._userService.getUserById(
+      +(this._userService.getCurrentUserId())
+    )
       .subscribe(data => console.log({'current user ->': data}))
 
     this._modalService.open(content, { centered: true }).result

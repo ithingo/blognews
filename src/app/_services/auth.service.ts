@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { UserService } from './user.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +17,11 @@ export class AuthService {
   constructor(
     private _authRoute: Router,
     private http: HttpClient,
+    private _userService: UserService,
   ) { }
 
   login(user): Observable<any> {
-    const url = 'http://127.0.0.1:8000/api/v1/api-login-user';
+    const url = 'http://127.0.0.1:8000/api/v1/api-login-user/';
 
     console.log('inside-login-in-auth');
 
@@ -32,12 +35,13 @@ export class AuthService {
     );
   }
 
-  // logout(user) {
-
-  // }
+  logout() {
+    this._userService.clearCookies();
+    this._authRoute.navigate(['login'])
+  }
 
   register(user): Observable<any> {
-    const url = 'http://127.0.0.1:8000/api/v1/api-register-user';
+    const url = 'http://127.0.0.1:8000/api/v1/api-register-user/';
     
     console.log('inside-register-auth');
 

@@ -6,12 +6,13 @@ import { switchMap } from 'rxjs/operators';
 import { GetNewsListService } from '../../_services/get-news-list.service';
 import { UserType } from '../user-type';
 import { UserService } from '../../_services/user.service';
+import { AuthService } from '../../_services/auth.service'
 import { NewsType } from '../../news/news-type';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
   userNameFull: string;
@@ -24,6 +25,7 @@ export class UserProfileComponent implements OnInit {
     private _router: Router,
     private _getNewsListService: GetNewsListService,
     private _userService: UserService,
+    private _authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -58,5 +60,9 @@ export class UserProfileComponent implements OnInit {
 
   isCurrnetUserLogged(): boolean {
     return this._userService.isLoggedIn();
+  }
+
+  logOut() {
+    this._authService.logout();
   }
 }
