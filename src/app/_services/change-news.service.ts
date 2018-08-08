@@ -1,37 +1,97 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { NewsType } from '../models/news-type';
+import { UserService } from './user.service';
+import { NewsType }  from '../models/news-type';
+import { UserType }  from '../models/user-type';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChangeNewsService {
+export class ChangeNewsService implements OnInit {
+  private data: any[] = [];
+  private currentUserId: any;
 
-  public postAdd$ = new Subject();
-  public postEdit$ = new Subject();
-  public postDelete$ = new Subject();
+  host = 'http://127.0.0.1:8000';
 
-  public postToEdit;
+  constructor(
+    private http: HttpClient,
+    private _userService: UserService,
+  ) {}
 
-  constructor() {
-    this.postToEdit = new NewsType();
+  ngOnInit() {}
+
+  public save(data: any, isNew?: boolean) {
+    const token = this._userService.getToken();
+
+    console.log({'edit-service-save': token});
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `JWT ${token}`);
+
+    console.log(data);
+
+    let url = '';
+    let response$: Observable<NewsType>;
+
+    if(isNew) {
+      url = `${this.host}/api/v1/posts/`;
+      response$ = this.http
+        .post<any>(
+          url,
+          {
+            'subject': data.postSubject,
+            'content': data.postContent,
+            // 'tags': data.tags,
+            'user_id': this.currentUserId,
+          },
+          { headers: headers }
+        )
+    } else {
+      const post_id = data.id;
+      url = `${this.host}/api/v1/posts/${post_id}`;
+      response$ = this.http
+        .patch<any>(
+          url,
+          {
+            'id': post_id,
+            'subject': data.subject,
+            'content': data.content,
+            // 'tags': data.tags,
+            'user_id': this.currentUserId,
+          },
+          { headers: headers }
+        )
+    }
+
+    response$
+      .subscribe(
+        (data) => {console.log(data);},  //?
+        (err) => {console.log(err)}     //?
+      );
   }
 
-  notifyPostAdding() {
-    this.postAdd$.next();
-  }
+  public remove(data: any) {
+    const post_id = data.id;
+    const url = `${this.host}/api/v1/posts/${post_id}`;
+    const token = this._userService.getToken();
 
-  notifyPostEditing() {
-    this.postEdit$.next();
-  }
+    console.log({'edit-service-remove': token});
 
-  notifyPostDeleting() {
-    this.postDelete$.next();
-  }
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `JWT ${token}`);
 
-  setPostToEdit(post: NewsType) {
-    this.postToEdit = post;
-    this.notifyPostEditing();
+    return this.http
+      .delete<any>(
+        url,
+        { headers: headers }
+      )
+      .subscribe(resp => {
+        this.data = resp;
+      });
   }
 }
