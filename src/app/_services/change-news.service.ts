@@ -1,11 +1,10 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { UserService } from './user.service';
 import { NewsType }  from '../models/news-type';
 import { UserType }  from '../models/user-type';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +48,7 @@ export class ChangeNewsService implements OnInit {
             'user_id': this.currentUserId,
           },
           { headers: headers }
-        )
+        );
     } else {
       const post_id = data.id;
       url = `${this.host}/api/v1/posts/${post_id}`;
@@ -64,13 +63,13 @@ export class ChangeNewsService implements OnInit {
             'user_id': this.currentUserId,
           },
           { headers: headers }
-        )
+        );
     }
 
     response$
       .subscribe(
         (data) => {console.log(data);},  //?
-        (err) => {console.log(err)}     //?
+        (err) => {console.log(err);}     //?
       );
   }
 

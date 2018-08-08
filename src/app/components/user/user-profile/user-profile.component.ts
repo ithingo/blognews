@@ -113,7 +113,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   editPost(post: NewsType) {
-    this._changeNewsService.setPostToEdit(post);
+    // this._changeNewsService.setPostToEdit(post);
     this.editShow = true;
 
     // this._changeNewsService.postEdit$

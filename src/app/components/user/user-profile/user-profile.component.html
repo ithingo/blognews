@@ -12,7 +12,20 @@
 
   <div class="user-profile-wrapper" *ngIf="userPosts">
     <ul class="user__posts" *ngFor="let post of userPosts">
-      <li class="user-post">
+      <li class="user-post" *ngIf="isCurrnetUserLogged()">
+        <h4 class="user-post__subject">{{ post.subject }}</h4>
+        <main class="user-post__content">{{ post.content }}</main>
+
+        <div class="d-flex w-100 justify-content-between">
+          <button #addPost class="" (click)="editPost(post)">
+            <i title="Edit" class="fas fa-edit" aria-hidden="true"></i>
+          </button>
+          <button #deletePost class="" (click)="deletePost(post)">
+            <i title="Delete" class="fas fa-trash-alt" aria-hidden="true"></i>
+          </button>
+        </div>
+      </li>
+      <li class="user-post" *ngIf="!isCurrnetUserLogged()"> <!-- current user is not logged -->
         <h4 class="user-post__subject">{{ post.subject }}</h4>
         <main class="user-post__content">{{ post.content }}</main>
 
