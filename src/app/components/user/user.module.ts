@@ -8,7 +8,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditProfileWindowComponent } from './edit-profile-window/edit-profile-window.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserService } from '../../_services/user.service';
-import { ActionPostsComponent } from './action-posts/action-posts.component';
 
 @NgModule({
   imports: [
@@ -20,7 +19,6 @@ import { ActionPostsComponent } from './action-posts/action-posts.component';
   declarations: [
     UserProfileComponent,
     EditProfileWindowComponent,
-    ActionPostsComponent,
   ],
   providers: [
     UserService,
