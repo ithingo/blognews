@@ -101,10 +101,6 @@ export class UserProfileComponent implements OnInit {
     return this._userService.isLoggedIn();
   }
 
-  logOut() {
-    this._authService.logout();
-  }
-
   handleUserChanged(event) {
     if(event) {
       location.reload();

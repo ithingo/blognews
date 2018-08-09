@@ -91,7 +91,8 @@ export class UserService {
   }
 
   clearCookies() {
-    this.cookieservice.delete(this.coockieName);
+    // this.cookieservice.delete(this.coockieName);
+    this.cookieservice.deleteAll();
   }
 
   updateUserData(user: UserType, updatedData: any) {
