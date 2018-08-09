@@ -37,6 +37,7 @@ export class UserProfileComponent implements OnInit {
   postSubject: string;
   postContent: string;
   postPhoto: string;
+  postTags: string;
 
   addedPostPhoto: string;
 
@@ -123,6 +124,7 @@ export class UserProfileComponent implements OnInit {
     this.postSubject = this.selectedItem.subject;
     this.postContent = this.selectedItem.content;
     this.postPhoto = this.selectedItem.photo;
+    this.postTags = this.selectedItem.tags;
 
     this.initEditForm();
 
@@ -148,6 +150,7 @@ export class UserProfileComponent implements OnInit {
         subject: this.postSubject,
         content: this.postContent,
         photo: this.postPhoto,
+        tags: this.postTags
       }
 
       if(this.addedPostPhoto) {
@@ -171,17 +174,27 @@ export class UserProfileComponent implements OnInit {
         subject: this.addForm.value['subject'],
         content: this.addForm.value['content'],
         photo: "",
+        tags: this.addForm.value['tags']
       }
 
-      // if(this.addedPostPhoto) {
-        data.photo = this.addedPostPhoto;
+      data.photo = this.addedPostPhoto;
       console.log({'photo': data.photo});
-      // }
 
       this._changeNewsService.save(data, creationFlag);  //second param is to determine - create new or update
 
-      // location.reload();
+      location.reload();
     }
+  }
+
+  getTags(): string[] {
+    return this._changeNewsService.tags;
+  }
+
+  setTagToPost(tag: any, editFlag: boolean) {
+    if(editFlag) {
+      this.editForm.value['tags'] += ` ${tag}`;
+    }
+    this.addForm.value['tags'] += ` ${tag}`;
   }
 
   cancelEdition() {
@@ -204,10 +217,9 @@ export class UserProfileComponent implements OnInit {
           '',
           Validators.required,
         ],
-        // tags: [
-        //   '',
-        //   Validators.required,
-        // ],
+        tags: [
+          '',
+        ],
       },
     );
   }
@@ -223,10 +235,9 @@ export class UserProfileComponent implements OnInit {
           '',
           Validators.required,
         ],
-        // tags: [
-        //   '',
-        //   Validators.required,
-        // ],
+        tags: [
+          '',
+        ],
       },
     );
   }

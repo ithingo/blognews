@@ -1,6 +1,10 @@
-<h3 class="news__subject">
+<div class="news_tags">
+  {{iteratedNews.tags}}
+</div>
+
+<h5 class="news__subject">
   {{iteratedNews.subject | uppercase}}
-</h3>
+</h5>
 
 <main class="news__content">
   {{iteratedNews.content}}

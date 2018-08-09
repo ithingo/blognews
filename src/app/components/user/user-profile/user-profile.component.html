@@ -7,7 +7,7 @@
 </main>
 
 <ngb-accordion #acc="ngbAccordion" >
-  <ngb-panel title="Simple">
+  <ngb-panel title="New post">
     <ng-template ngbPanelContent>
       <div [formGroup]="addForm" class="edit-post-form">
         <div class="form-group">
@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
           <label>Content</label>
-          <input type="textarea" formControlName="content" class="form-control"
+          <input type="text" formControlName="content" class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && add_form.content.errors }" />
           <div *ngIf="submitted && add_form.content.errors" class="invalid-feedback">
             <div *ngIf="add_form.content.errors.required">Empty content field</div>
@@ -33,6 +33,19 @@
           <div *ngIf="editSubmitted && !addedPostPhoto" class="invalid-feedback">
             Empty subject field
           </div>
+        </div>
+        <div class="form-group">
+          <label>Tags</label>
+          <input type="text" formControlName="tags" class="form-control" />
+        </div>
+
+        <div class="form-group" *ngIf="getTags()">
+          <p class="header">Available tags</p>
+          <ul class="all-tags row" *ngFor="let tag of getTags()">
+            <li class="single-tag">
+              <button (click)="setTagToPost(tag)">{{tag}}</button>
+            </li>
+          </ul>
         </div>
 
         <div class="buttons-wrapper" *ngIf="isCurrnetUserLogged()">
@@ -97,6 +110,10 @@
             <div *ngIf="editSubmitted && !postPhoto" class="invalid-feedback">
               Empty subject field
             </div>
+          </div>
+          <div class="form-group">
+            <label>Tags</label>
+            <input type="text" formControlName="tags" class="form-control" />
           </div>
 
           <button class="" (click)="saveChangedPost()">

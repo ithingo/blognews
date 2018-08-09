@@ -7,5 +7,5 @@ export class NewsType {
   userId: number;
   photo: string;
   author: UserType;
-  // [hashtag: string]: string;
+  tags: string;
 }

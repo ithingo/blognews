@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class ChangeNewsService implements OnInit {
   private data: any[] = [];
+  public tags: any[] = [];
   private currentUserId: any;
 
   host = 'http://127.0.0.1:8000';
@@ -26,7 +27,7 @@ export class ChangeNewsService implements OnInit {
   public save(data: any, isNew?: boolean) {
     // this._userService.getCurrentUser()
     //   .subscribe(data => this.currentUserId = data.id);
-    this.currentUserId = this._userService.getCurrentUserId()
+    this.currentUserId = this._userService.getCurrentUserId();
 
     const token = this._userService.getToken();
 
