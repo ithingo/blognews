@@ -44,16 +44,15 @@ export class EditProfileWindowComponent implements OnInit {
   open(content) {
     console.log(this._userService.getCurrentUserId());
 
-    this._userService.getUserById(
-      +(this._userService.getCurrentUserId())
-    ).subscribe(data => {
-      this._user = data;
-      this.userDataCopy = {
-        'email': this._user.email,
-        'first_name': this._user.first_name,
-        'second_name': this._user.second_name,
-        'photo': this._user.photo,
-      };
+    this._userService.getCurrentUser()
+      .subscribe(data => {
+        this._user = data;
+        this.userDataCopy = {
+          'email': this._user.email,
+          'first_name': this._user.first_name,
+          'second_name': this._user.second_name,
+          'photo': this._user.photo,
+        };
     });
 
     this._modalService.open(content, { centered: true }).result

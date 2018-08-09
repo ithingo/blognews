@@ -55,16 +55,9 @@ export class LoginComponent implements OnInit {
       this._authService.login(user)
         .subscribe(data => {
           const token = data['token'];
-          const id = data['id'];
-
-          console.log({'data': data});
-          console.log(id);
-
           this._userService.setLoggedIn(token);
-          this._userService.setCurrentUserId(id);
+          this._loginComponentRoute.navigate(["/"]);
         });
-
-      this._loginComponentRoute.navigate(["/"]);
     } else {
       return;
     }

@@ -24,7 +24,8 @@ export class ChangeNewsService implements OnInit {
   }
 
   public save(data: any, isNew?: boolean) {
-    this.currentUserId = this._userService.getCurrentUserId();
+    this._userService.getCurrentUser()
+      .subscribe(data => this.currentUserId = data.id);
 
     const token = this._userService.getToken();
 
@@ -79,8 +80,9 @@ export class ChangeNewsService implements OnInit {
   }
 
   public remove(data: any) {
-    this.currentUserId = this._userService.getCurrentUserId();
-    
+    this._userService.getCurrentUser()
+      .subscribe(data => this.currentUserId = data.id);
+
     const post_id = data.id;
     const url = `${this.host}/api/v1/posts/${post_id}/`;
     const token = this._userService.getToken();

@@ -20,13 +20,9 @@ export class UserService {
   ) { }
 
   getToken(): string|void {
-    // if(this.isLoggedIn()) {
-      const token = this.cookieservice.get(this.coockieName);
-
-      console.log({'get-token': token});
-
-      return token;
-    // }
+    const token = this.cookieservice.get(this.coockieName);
+    console.log({'get-token': token});
+    return token;
   }
 
   setLoggedIn(token) {
@@ -65,25 +61,25 @@ export class UserService {
       .get<UserType>(url, { headers: headers });
   }
 
-  // getCurrentUser(): Observable<any> {
-  //   const url = `${this.host}/api/v1/api-token-auth/`;
-  //   const token = this.getToken();
-  //
-  //   console.log({'get-current-user': token});
-  //
-  //   const headers = new HttpHeaders();
-  //   headers.append('Content-Type', 'application/json');
-  //   headers.append('Authorization', `JWT ${token}`);
-  //
-  //   // return this.http
-  //   //   .get<UserType>(url, { headers: headers })
-  //   return this.http
-  //     .post(
-  //       url,
-  //       {"token": token},
-  //       { headers: headers }
-  //       );
-  // }
+  getCurrentUser(): Observable<any> {
+    const url = `${this.host}/api/v1/api-token-verify/`;
+    const token = this.getToken();
+  
+    console.log({'get-current-user': token});
+  
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `JWT ${token}`);
+
+    return this.http
+      .post<UserType>(
+        url,
+      {
+        'token': token
+      },
+      { headers: headers }
+    );
+  }
 
   isLoggedIn(): boolean {
     const cookieExists: boolean = this.cookieservice.check(this.coockieName);
@@ -91,7 +87,6 @@ export class UserService {
   }
 
   clearCookies() {
-    // this.cookieservice.delete(this.coockieName);
     this.cookieservice.deleteAll();
   }
 
