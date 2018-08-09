@@ -21,10 +21,10 @@
           <main class="user-post__content">{{ post.content }}</main>
 
           <div class="d-flex w-100 justify-content-between" *ngIf="isCurrnetUserLogged()">
-            <button #addPost class="" (click)="editPost(i, post)">
+            <button class="" (click)="editPost(i, post)">
               <i title="Edit" class="fas fa-edit" aria-hidden="true"></i>
             </button>
-            <button #deletePost class="" (click)="deletePost(post)">
+            <button class="" (click)="deletePost(post)">
               <i title="Delete" class="fas fa-trash-alt" aria-hidden="true"></i>
             </button>
           </div>
