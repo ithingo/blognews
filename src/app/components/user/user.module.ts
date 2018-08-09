@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,8 +13,9 @@ import { UserService } from '../../_services/user.service';
   imports: [
     CommonModule,
     NgbModule,
-    FormsModule,
     UserRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     UserProfileComponent,

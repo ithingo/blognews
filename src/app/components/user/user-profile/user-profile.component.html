@@ -11,31 +11,50 @@
 </main>
 
   <div class="user-profile-wrapper" *ngIf="userPosts">
-    <ul class="user__posts" *ngFor="let post of userPosts">
-      <li class="user-post" *ngIf="isCurrnetUserLogged()">
-        <h4 class="user-post__subject">{{ post.subject }}</h4>
-        <main class="user-post__content">{{ post.content }}</main>
+    <ul class="user__posts list-group">
+      <li class="user-post"
+                            [ngClass]="{'active': selectedItem == post}"
+                            *ngFor="let post of userPosts; let i = index" id="{{i}}">
 
-        <div class="d-flex w-100 justify-content-between">
-          <button #addPost class="" (click)="editPost(post)">
-            <i title="Edit" class="fas fa-edit" aria-hidden="true"></i>
-          </button>
-          <button #deletePost class="" (click)="deletePost(post)">
-            <i title="Delete" class="fas fa-trash-alt" aria-hidden="true"></i>
-          </button>
+        <div class="plain-post" *ngIf="!((selectedPostId == i) && isEdit)">
+          <h4 class="user-post__subject">{{ post.subject }}</h4>
+          <main class="user-post__content">{{ post.content }}</main>
+
+          <div class="d-flex w-100 justify-content-between" *ngIf="isCurrnetUserLogged()">
+            <button #addPost class="" (click)="editPost(i, post)">
+              <i title="Edit" class="fas fa-edit" aria-hidden="true"></i>
+            </button>
+            <button #deletePost class="" (click)="deletePost(post)">
+              <i title="Delete" class="fas fa-trash-alt" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
-      </li>
-      <li class="user-post" *ngIf="!isCurrnetUserLogged()"> <!-- current user is not logged -->
-        <h4 class="user-post__subject">{{ post.subject }}</h4>
-        <main class="user-post__content">{{ post.content }}</main>
 
-        <div class="d-flex w-100 justify-content-between">
-          <button #addPost class="" (click)="editPost(post)">
-            <i title="Edit" class="fas fa-edit" aria-hidden="true"></i>
-          </button>
-          <button #deletePost class="" (click)="deletePost(post)">
-            <i title="Delete" class="fas fa-trash-alt" aria-hidden="true"></i>
-          </button>
+        <div class="edit-wrapper" *ngIf="selectedPostId == i && isEdit">
+          <div [formGroup]="editForm" class="edit-post-form">
+            <div class="form-group">
+              <label>Subject</label>
+              <input type="text" formControlName="subject" class="form-control"
+                      [(ngModel)]="postSubject"
+                      [ngClass]="{ 'is-invalid': submitted && form.subject.errors }" />
+              <div *ngIf="submitted && form.subject.errors" class="invalid-feedback">
+                <div *ngIf="form.subject.errors.required">Empty subject field</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Content</label>
+              <input type="textarea" formControlName="content" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && form.content.errors }"
+                      [(ngModel)]="postContent" />
+              <div *ngIf="submitted && form.content.errors" class="invalid-feedback">
+                <div *ngIf="form.content.errors.required">Empty content field</div>
+              </div>
+            </div>
+
+            <button #savePostBtn class="" (click)="savePost()">
+              <i title="Save" class="fas fa-check" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
       </li>
     </ul>

@@ -1,4 +1,5 @@
 export class NewsType {
+	id: number;
   subject: string;
   content: string;
   person: {

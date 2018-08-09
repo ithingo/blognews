@@ -20,7 +20,9 @@ export class ChangeNewsService implements OnInit {
     private _userService: UserService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.currentUserId = this._userService.getCurrentUserId();
+  }
 
   public save(data: any, isNew?: boolean) {
     const token = this._userService.getToken();
@@ -42,8 +44,8 @@ export class ChangeNewsService implements OnInit {
         .post<any>(
           url,
           {
-            'subject': data.postSubject,
-            'content': data.postContent,
+            'subject': data.subject,
+            'content': data.subject,
             // 'tags': data.tags,
             'user_id': this.currentUserId,
           },
@@ -51,7 +53,8 @@ export class ChangeNewsService implements OnInit {
         );
     } else {
       const post_id = data.id;
-      url = `${this.host}/api/v1/posts/${post_id}`;
+      console.log({'id': post_id});
+      url = `${this.host}/api/v1/posts/${post_id}/`;
       response$ = this.http
         .patch<any>(
           url,
@@ -75,7 +78,7 @@ export class ChangeNewsService implements OnInit {
 
   public remove(data: any) {
     const post_id = data.id;
-    const url = `${this.host}/api/v1/posts/${post_id}`;
+    const url = `${this.host}/api/v1/posts/${post_id}/`;
     const token = this._userService.getToken();
 
     console.log({'edit-service-remove': token});

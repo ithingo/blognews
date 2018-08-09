@@ -1,7 +1,9 @@
-import { Component, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+
+import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 
 import { GetNewsListService } from '../../../_services/get-news-list.service';
 import { UserType } from '../../../models/user-type';
@@ -21,15 +23,14 @@ export class UserProfileComponent implements OnInit {
   userPhoto: string;
   private _userId: any;
 
-  editShow: boolean; // trigger flag to open modal window
+  selectedItem: NewsType;
+  editForm: FormGroup;
+  submitted = false;
+  isEdit: boolean = false;
+  selectedPostId: number;
 
-  // @ViewChild('addPost')
-  // addButton: ElementRef;
-  //
-  // @ViewChild('deletePost')
-  // deleteButton: ElementRef;
-  //
-  //
+  postSubject: string;
+  postContent: string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -38,21 +39,19 @@ export class UserProfileComponent implements OnInit {
     private _userService: UserService,
     private _authService: AuthService,
     private _changeNewsService: ChangeNewsService,
+    private _formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
     this.retrieveUser();
     this.retrieveUserPosts();
-
-
   }
 
-  ngOnChanges(changes: any) {
-    // this._changeNewsService.postAdd$
-    //   .subscribe(
-    //     resolve => this.retrieveUserPosts()
-    //   )
+  get form() {
+    return this.editForm.controls;
   }
+
+  ngOnChanges(changes: any) {  }
 
   retrieveUser() {
     let user$ = this._route.paramMap.pipe(
@@ -95,35 +94,67 @@ export class UserProfileComponent implements OnInit {
     this._authService.logout();
   }
 
-  // LATER CREATE A SERVICE AND UPDATE DATA JUST IN THE MOMENT AFTER MODAL CLOSING
   handleUserChanged(event) {
     if(event) {
-      console.log(event);
-      // this._userService.getUserById(this._userService.getCurrentUserId())
-      //   .subscribe(
-      //     user => {
-      //       this.userNameFull = `${user.first_name} ${user.second_name}`;
-      //       this.userPhoto = user.photo;
-      //       this._userId = user.id;
-      //     }
-      //   )
-      // this.retrieveUserPosts();
-      this._router.navigate([`profile/${this._userId}`]);
+      location.reload();
     }
   }
 
-  editPost(post: NewsType) {
-    // this._changeNewsService.setPostToEdit(post);
-    this.editShow = true;
+  editPost(index: number, post: NewsType) {
+    this.selectedItem = post;
 
-    // this._changeNewsService.postEdit$
-    //   .subscribe(
-    //     result => this.actionPostModal.nativeElement.show(result)
-    //   );
+    this.selectedPostId = index;
+
+    this.postSubject = this.selectedItem.subject;
+    this.postContent = this.selectedItem.content;
+
+    this.initForm();
+
+    this.isEdit = true;
   }
 
-  deletePost(news: NewsType) {
-    // this._changeNewsService.postDelete$
-    // this.show = true;
+  deletePost(post: NewsType) {
+    const data = {
+      id: post.id,
+    }
+    this._changeNewsService.remove(data);
+
+    location.reload();
+  }
+
+  savePost() {
+    this.submitted = true;
+
+    if(this.editForm.valid){
+      const data = {
+        id: this.selectedItem.id,
+        subject: this.postSubject,
+        content: this.postContent,
+      }
+      this._changeNewsService.save(data, false);  //second param is to determine - create new or update
+
+      this.isEdit = false;
+
+      location.reload();
+    }
+  }
+
+  private initForm() {
+    this.editForm = this._formBuilder.group(
+      {
+        subject: [
+          '',
+          Validators.required,
+        ],
+        content: [
+          '',
+          Validators.required,
+        ],
+        // tags: [
+        //   '',
+        //   Validators.required,
+        // ],
+      },
+    );
   }
 }
