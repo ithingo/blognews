@@ -45,16 +45,15 @@ export class AuthService {
     
     console.log('inside-register-auth');
 
-    let httpParams = new HttpParams()
-      .append("email", user.email)
-      .append("password", user.password)
-      .append("first_name", user.first_name)
-      .append("second_name", user.second_name)
-      .append("photo", user.photo)
-
     return this.http.post(
       url,
-      { httpParams },
+      JSON.stringify({
+        "email": user.email,
+        "password": user.password,
+        "first_name": user.first_name,
+        "second_name": user.second_name,
+        "photo": user.photo
+      }),
       { headers: this.headers }
     );
   }

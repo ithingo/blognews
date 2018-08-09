@@ -9,18 +9,18 @@ import { AuthRoutingModule } from './auth-routing.module';
 
 import { AuthService } from '../../_services/auth.service';
 
-import { ConfirmPasswordValidationDirective } from './confirm-password-validation.directive';
+import {FileUploadModule} from '../file-uploader/file-uploader.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    FileUploadModule,
     ReactiveFormsModule,
     AuthRoutingModule,
   ],
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ConfirmPasswordValidationDirective,
   ],
   providers: [ AuthService ],
 })

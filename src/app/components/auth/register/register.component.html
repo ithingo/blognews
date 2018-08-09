@@ -14,11 +14,8 @@
     </div>
   </div>
   <div class="form-group">
-    <label>Photo URL</label>
-    <input type="text" formControlName="photo" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.photo.errors }" />
-    <div *ngIf="submitted && form.second_name.errors" class="invalid-feedback">
-      <div *ngIf="form.second_name.errors.required">Photo is required</div>
-    </div>
+    <label>Photo</label>
+    <app-file-uploader allowedTypes="image/*" (imageUploaded)="handleImageUploaded($event)"></app-file-uploader>
   </div>
   <div class="form-group">
     <label>Email</label>

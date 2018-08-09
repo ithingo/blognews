@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../_services/auth.service';
 
-import { ConfirmPasswordValidationDirective } from '../confirm-password-validation.directive';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,6 +12,8 @@ import { ConfirmPasswordValidationDirective } from '../confirm-password-validati
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
+
+  userPhoto: any = null;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -37,10 +37,6 @@ export class RegisterComponent implements OnInit {
             Validators.email,
           ]
         ],
-        photo: [
-          '',
-          Validators.required,
-        ],
         password: [
           '',
           Validators.required,
@@ -60,6 +56,11 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+  handleImageUploaded($event) {
+    console.log($event);
+    this.userPhoto = $event;
+  }
+
   register() {
     this.submitted = true;
 
@@ -71,11 +72,11 @@ export class RegisterComponent implements OnInit {
         'password': this.registerForm.value['password'],
         'first_name': this.registerForm.value['first_name'],
         'second_name': this.registerForm.value['second_name'],
-        'photo': this.registerForm.value['photo'],
+        'photo': "",
       }
-
-      // user.email = this.loginForm.value['email'];
-      // user.password = this.loginForm.value['password'];
+      if(this.userPhoto) {
+        user.photo = this.userPhoto;
+      }
 
       this._authService.register(user)
         .subscribe(data => console.log(data));
