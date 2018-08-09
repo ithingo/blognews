@@ -50,6 +50,7 @@ export class ChangeNewsService implements OnInit {
           {
             'subject': data.subject,
             'content': data.subject,
+            'photo': data.photo,
             // 'tags': data.tags,
             'user_id': this.currentUserId,
           },
@@ -66,6 +67,7 @@ export class ChangeNewsService implements OnInit {
             'id': post_id,
             'subject': data.subject,
             'content': data.content,
+            'photo': data.photo,
             // 'tags': data.tags,
             'user_id': this.currentUserId,
           },

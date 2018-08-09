@@ -1,4 +1,4 @@
-import {NgModule, Component, Output, ElementRef, forwardRef, EventEmitter} from '@angular/core';
+import {NgModule, Component, Output, ElementRef, forwardRef, EventEmitter, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import {OnInit} from '@angular/core';
@@ -19,10 +19,14 @@ import {OnInit} from '@angular/core';
   styleUrls: ['./file-uploader.component.css']
 })
 export class FileUploaderComponent {
-  private _image: any = null;
 
   @Output()
   imageUploaded: EventEmitter<any> = new EventEmitter();
+
+  @Input()
+  postPhoto: any = null;
+
+  private _image: any = this.postPhoto;
 
   changeListener($event): void {
     this.readThis($event.target);

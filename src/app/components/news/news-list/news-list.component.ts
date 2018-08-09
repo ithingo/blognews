@@ -59,7 +59,10 @@ export class NewsListComponent implements OnInit {
     const checkBySelectedOption = (currNews: NewsType, inputKey: string, optionKey: string): boolean => {
       const filters = {
         'all': () => {
-          if (news.subject.includes(inputKey) || news.content.includes(inputKey) || news.person.fullName.includes(inputKey)) {
+          if (news.subject.includes(inputKey)
+            || news.content.includes(inputKey)
+            || news.author.first_name.includes(inputKey)
+            || news.author.second_name.includes(inputKey)) {
             return true;
           }
         },
@@ -75,7 +78,7 @@ export class NewsListComponent implements OnInit {
           }
         },
         'author': () => {
-          if (news.person.fullName.includes(inputKey)) {
+          if (news.author.first_name.includes(inputKey) || news.author.second_name.includes(inputKey)) {
             return true;
           }
         },

@@ -26,6 +26,14 @@
             <div *ngIf="add_form.content.errors.required">Empty content field</div>
           </div>
         </div>
+        <div class="form-group">
+          <label>Photo</label>
+          <app-file-uploader allowedTypes="image/*" (imageUploaded)="handleImageUploaded($event)"
+                             [ngClass]="{ 'is-invalid': editSubmitted && edit_form.subject.errors }"></app-file-uploader>
+          <div *ngIf="editSubmitted && !addedPostPhoto" class="invalid-feedback">
+            Empty subject field
+          </div>
+        </div>
 
         <div class="buttons-wrapper" *ngIf="isCurrnetUserLogged()">
           <button class="" (click)="createNewPost()">
@@ -49,6 +57,8 @@
       <div class="plain-post" *ngIf="!((selectedPostId == i) && isEdit)">
         <h4 class="user-post__subject">{{ post.subject }}</h4>
         <main class="user-post__content">{{ post.content }}</main>
+
+        <img src="{{ post.photo }}" alt="Here should be image">
 
         <div class="buttons-wrapper" *ngIf="isCurrnetUserLogged()">
           <button class="" (click)="editPost(i, post)">
@@ -78,6 +88,14 @@
                     [(ngModel)]="postContent" />
             <div *ngIf="editSubmitted && edit_form.content.errors" class="invalid-feedback">
               <div *ngIf="edit_form.content.errors.required">Empty content field</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Photo</label>
+            <app-file-uploader allowedTypes="image/*" (imageUploaded)="handleImageUploaded($event)"
+                               [ngClass]="{ 'is-invalid': editSubmitted && edit_form.subject.errors }" [postPhoto]="postPhoto"></app-file-uploader>
+            <div *ngIf="editSubmitted && !postPhoto" class="invalid-feedback">
+              Empty subject field
             </div>
           </div>
 

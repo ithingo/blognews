@@ -36,6 +36,9 @@ export class UserProfileComponent implements OnInit {
 
   postSubject: string;
   postContent: string;
+  postPhoto: string;
+
+  addedPostPhoto: string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -103,8 +106,13 @@ export class UserProfileComponent implements OnInit {
 
   handleUserChanged(event) {
     if(event) {
-      // location.reload();
+      location.reload();
     }
+  }
+
+  handleImageUploaded($event) {
+    console.log($event);
+    this.addedPostPhoto = $event;
   }
 
   editPost(index: number, post: NewsType) {
@@ -114,6 +122,7 @@ export class UserProfileComponent implements OnInit {
 
     this.postSubject = this.selectedItem.subject;
     this.postContent = this.selectedItem.content;
+    this.postPhoto = this.selectedItem.photo;
 
     this.initEditForm();
 
@@ -138,7 +147,13 @@ export class UserProfileComponent implements OnInit {
         id: this.selectedItem.id,
         subject: this.postSubject,
         content: this.postContent,
+        photo: this.postPhoto,
       }
+
+      if(this.addedPostPhoto) {
+        data.photo = this.addedPostPhoto;
+      }
+
       this._changeNewsService.save(data, editionFlag);  //second param is to determine - create new or update
 
       this.isEdit = false;
@@ -155,10 +170,17 @@ export class UserProfileComponent implements OnInit {
       const data = {
         subject: this.addForm.value['subject'],
         content: this.addForm.value['content'],
+        photo: "",
       }
+
+      // if(this.addedPostPhoto) {
+        data.photo = this.addedPostPhoto;
+      console.log({'photo': data.photo});
+      // }
+
       this._changeNewsService.save(data, creationFlag);  //second param is to determine - create new or update
 
-      location.reload();
+      // location.reload();
     }
   }
 
