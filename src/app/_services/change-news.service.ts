@@ -21,10 +21,11 @@ export class ChangeNewsService implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.currentUserId = this._userService.getCurrentUserId();
   }
 
   public save(data: any, isNew?: boolean) {
+    this.currentUserId = this._userService.getCurrentUserId();
+
     const token = this._userService.getToken();
 
     console.log({'edit-service-save': token});
@@ -40,6 +41,7 @@ export class ChangeNewsService implements OnInit {
 
     if(isNew) {
       url = `${this.host}/api/v1/posts/`;
+      console.log('creation', this.currentUserId)
       response$ = this.http
         .post<any>(
           url,
@@ -77,6 +79,8 @@ export class ChangeNewsService implements OnInit {
   }
 
   public remove(data: any) {
+    this.currentUserId = this._userService.getCurrentUserId();
+    
     const post_id = data.id;
     const url = `${this.host}/api/v1/posts/${post_id}/`;
     const token = this._userService.getToken();

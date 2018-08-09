@@ -24,8 +24,13 @@ export class UserProfileComponent implements OnInit {
   private _userId: any;
 
   selectedItem: NewsType;
+
+  addForm: FormGroup;
   editForm: FormGroup;
-  submitted = false;
+
+  editSubmitted = false;
+  addSubmitted = false;
+
   isEdit: boolean = false;
   selectedPostId: number;
 
@@ -45,9 +50,15 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.retrieveUser();
     this.retrieveUserPosts();
+
+    this.initAddForm();
   }
 
-  get form() {
+  get add_form() {
+    return this.addForm.controls;
+  }
+
+  get edit_form() {
     return this.editForm.controls;
   }
 
@@ -108,7 +119,7 @@ export class UserProfileComponent implements OnInit {
     this.postSubject = this.selectedItem.subject;
     this.postContent = this.selectedItem.content;
 
-    this.initForm();
+    this.initEditForm();
 
     this.isEdit = true;
   }
@@ -122,16 +133,17 @@ export class UserProfileComponent implements OnInit {
     location.reload();
   }
 
-  savePost() {
-    this.submitted = true;
-
+  saveChangedPost() {
+    const editionFlag = false;
+    this.editSubmitted = true;
+    
     if(this.editForm.valid){
       const data = {
         id: this.selectedItem.id,
         subject: this.postSubject,
         content: this.postContent,
       }
-      this._changeNewsService.save(data, false);  //second param is to determine - create new or update
+      this._changeNewsService.save(data, editionFlag);  //second param is to determine - create new or update
 
       this.isEdit = false;
 
@@ -139,8 +151,51 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  private initForm() {
+  createNewPost() {
+    const creationFlag = true;
+    this.addSubmitted = true;
+
+    if(this.addForm.valid){
+      const data = {
+        subject: this.addForm.value['subject'],
+        content: this.addForm.value['content'],
+      }
+      this._changeNewsService.save(data, creationFlag);  //second param is to determine - create new or update
+
+      location.reload();
+    }
+  }
+
+  cancelEdition() {
+    this.editSubmitted = false;
+    this.isEdit = false;
+  }
+
+  cancelCreation() {
+    this.addSubmitted = false;
+  }
+
+  private initEditForm() {
     this.editForm = this._formBuilder.group(
+      {
+        subject: [
+          '',
+          Validators.required,
+        ],
+        content: [
+          '',
+          Validators.required,
+        ],
+        // tags: [
+        //   '',
+        //   Validators.required,
+        // ],
+      },
+    );
+  }
+
+  private initAddForm(){
+    this.addForm = this._formBuilder.group(
       {
         subject: [
           '',

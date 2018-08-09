@@ -10,55 +10,92 @@
   </div>
 </main>
 
-  <div class="user-profile-wrapper" *ngIf="userPosts">
-    <ul class="user__posts list-group">
-      <li class="user-post"
-                            [ngClass]="{'active': selectedItem == post}"
-                            *ngFor="let post of userPosts; let i = index" id="{{i}}">
-
-        <div class="plain-post" *ngIf="!((selectedPostId == i) && isEdit)">
-          <h4 class="user-post__subject">{{ post.subject }}</h4>
-          <main class="user-post__content">{{ post.content }}</main>
-
-          <div class="d-flex w-100 justify-content-between" *ngIf="isCurrnetUserLogged()">
-            <button class="" (click)="editPost(i, post)">
-              <i title="Edit" class="fas fa-edit" aria-hidden="true"></i>
-            </button>
-            <button class="" (click)="deletePost(post)">
-              <i title="Delete" class="fas fa-trash-alt" aria-hidden="true"></i>
-            </button>
+<ngb-accordion #acc="ngbAccordion" >
+  <ngb-panel title="Simple">
+    <ng-template ngbPanelContent>
+      <div [formGroup]="addForm" class="edit-post-form">
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" formControlName="subject" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && add_form.subject.errors }" />
+          <div *ngIf="submitted && add_form.subject.errors" class="invalid-feedback">
+            <div *ngIf="add_form.subject.errors.required">Empty subject field</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Content</label>
+          <input type="textarea" formControlName="content" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && add_form.content.errors }" />
+          <div *ngIf="submitted && add_form.content.errors" class="invalid-feedback">
+            <div *ngIf="add_form.content.errors.required">Empty content field</div>
           </div>
         </div>
 
-        <div class="edit-wrapper" *ngIf="selectedPostId == i && isEdit">
-          <div [formGroup]="editForm" class="edit-post-form">
-            <div class="form-group">
-              <label>Subject</label>
-              <input type="text" formControlName="subject" class="form-control"
-                      [(ngModel)]="postSubject"
-                      [ngClass]="{ 'is-invalid': submitted && form.subject.errors }" />
-              <div *ngIf="submitted && form.subject.errors" class="invalid-feedback">
-                <div *ngIf="form.subject.errors.required">Empty subject field</div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Content</label>
-              <input type="textarea" formControlName="content" class="form-control"
-                      [ngClass]="{ 'is-invalid': submitted && form.content.errors }"
-                      [(ngModel)]="postContent" />
-              <div *ngIf="submitted && form.content.errors" class="invalid-feedback">
-                <div *ngIf="form.content.errors.required">Empty content field</div>
-              </div>
-            </div>
-
-            <button #savePostBtn class="" (click)="savePost()">
-              <i title="Save" class="fas fa-check" aria-hidden="true"></i>
-            </button>
-          </div>
+        <div class="buttons-wrapper" *ngIf="isCurrnetUserLogged()">
+          <button class="" (click)="createNewPost()">
+            <i title="Save" class="fas fa-check" aria-hidden="true"></i>
+          </button>
+          <button class="" (click)="cancelCreation()">
+            <i title="Save" class="fas fa-times" aria-hidden="true"></i>
+          </button>
         </div>
-      </li>
-    </ul>
-  </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+<div class="user-profile-wrapper" *ngIf="userPosts">
+  <ul class="user__posts list-group">
+    <li class="user-post"
+                          [ngClass]="{'active': selectedItem == post}"
+                          *ngFor="let post of userPosts; let i = index" id="{{i}}">
+
+      <div class="plain-post" *ngIf="!((selectedPostId == i) && isEdit)">
+        <h4 class="user-post__subject">{{ post.subject }}</h4>
+        <main class="user-post__content">{{ post.content }}</main>
+
+        <div class="buttons-wrapper" *ngIf="isCurrnetUserLogged()">
+          <button class="" (click)="editPost(i, post)">
+            <i title="Edit" class="fas fa-edit" aria-hidden="true"></i>
+          </button>
+          <button class="" (click)="deletePost(post)">
+            <i title="Delete" class="fas fa-trash-alt" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="edit-wrapper" *ngIf="selectedPostId == i && isEdit">
+        <div [formGroup]="editForm" class="edit-post-form">
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" formControlName="subject" class="form-control"
+                    [(ngModel)]="postSubject"
+                    [ngClass]="{ 'is-invalid': editSubmitted && edit_form.subject.errors }" />
+            <div *ngIf="editSubmitted && edit_form.subject.errors" class="invalid-feedback">
+              <div *ngIf="edit_form.subject.errors.required">Empty subject field</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Content</label>
+            <input type="textarea" formControlName="content" class="form-control"
+                    [ngClass]="{ 'is-invalid': editSubmitted && edit_form.content.errors }"
+                    [(ngModel)]="postContent" />
+            <div *ngIf="editSubmitted && edit_form.content.errors" class="invalid-feedback">
+              <div *ngIf="edit_form.content.errors.required">Empty content field</div>
+            </div>
+          </div>
+
+          <button class="" (click)="saveChangedPost()">
+            <i title="Save" class="fas fa-check" aria-hidden="true"></i>
+          </button>
+          <button class="" (click)="cancelEdition()">
+            <i title="Save" class="fas fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
 
 <nav class="navigation">
   <ul>
