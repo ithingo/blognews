@@ -29,6 +29,7 @@ export function getToken() {
     AppComponent,
     PageNotFoundComponent,
     NavigationComponent,
+
   ],
   imports: [
     NgbModule.forRoot(),

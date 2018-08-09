@@ -46,8 +46,8 @@ export class UserService {
   }
 
   getUserById(user_id: number): Observable<UserType> {
-    console.log({'1-id': this._currentUser.id});
-    console.log({'2-id': user_id});
+    // console.log({'1-id': this._currentUser.id});
+    // console.log({'2-id': user_id});
 
 
     const url = `${this.host}/api/v1/users/${user_id}/`;

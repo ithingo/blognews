@@ -103,7 +103,7 @@ export class UserProfileComponent implements OnInit {
 
   handleUserChanged(event) {
     if(event) {
-      location.reload();
+      // location.reload();
     }
   }
 

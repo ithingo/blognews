@@ -30,6 +30,8 @@ export class EditProfileWindowComponent implements OnInit {
   private _user: UserType;
   userDataCopy: any;
 
+  private _uploadedPhoto: any = null;
+
   @Output()
   userChanged: EventEmitter<boolean> = new EventEmitter();
 
@@ -63,17 +65,26 @@ export class EditProfileWindowComponent implements OnInit {
           'photo': this._user.photo,
       };
 
-
     this._modalService.open(content, { centered: true }).result
       .then(
         result => {
             this.closeResult = `Closed with: ${result}`;
+
+            if(this._uploadedPhoto) {
+              this.userDataCopy.photo = this._uploadedPhoto;
+            }
+
             this._userService.updateUserData(this._user, this.userDataCopy);
             this.userChanged.emit(true);
           },
             reason => this.closeResult = `Dismissed ${this.getDismissReason(reason)}`
 
       );
+  }
+
+  handleImageUploaded($event) {
+    console.log($event);
+    this._uploadedPhoto = $event;
   }
 
   private getDismissReason(reason: any): string {

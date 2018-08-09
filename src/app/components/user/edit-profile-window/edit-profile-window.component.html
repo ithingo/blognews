@@ -20,7 +20,7 @@
     </p>
 
     <p class="edit-profile_second-name">Photo:
-      <input type="text" [(ngModel)]="userDataCopy.photo">
+      <app-file-uploader allowedTypes="image/*" (imageUploaded)="handleImageUploaded($event)"></app-file-uploader>
     </p>
   </div>
 
