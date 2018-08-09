@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         .subscribe(data => {
           const token = data['token'];
           this._userService.setLoggedIn(token);
+          this._userService.setCurrentUser(data['user']);
           this._loginComponentRoute.navigate(["/"]);
         });
     } else {

@@ -30,8 +30,11 @@ export class NavigationComponent implements OnInit {
 
   goToUserProfile() {
   	let userId: any;
-    this._userService.getCurrentUser()
-    	.subscribe(data => userId = data.id);
+    // this._userService.getCurrentUser()
+    // 	.subscribe(data => userId = data.id);
+
+    // this.user = this._userService.getCurrentUserId()
+    userId = this._userService.getCurrentUserId();
 
     if(userId) {
       this._appRoute.navigate([`profile/${userId}`]);

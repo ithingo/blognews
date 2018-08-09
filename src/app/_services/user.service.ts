@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 import { UserType } from '../models/user-type';
+import {NewsType} from '../models/news-type';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class UserService {
   host = 'http://127.0.0.1:8000';
   coockieName  = 'curr_user_token';
 
+  private _currentUser: UserType;
   private _currentUserId: number;
 
   constructor(
@@ -35,16 +37,16 @@ export class UserService {
 
   }
 
-  setCurrentUserId(user_id: number) {
-    this._currentUserId = user_id;
-  }
+  // setCurrentUserId(user_id: number) {
+  //   this._currentUserId = user_id;
+  // }
 
   getCurrentUserId(): number {
-    return this._currentUserId;
+    return this._currentUser.id;
   }
 
   getUserById(user_id: number): Observable<UserType> {
-    console.log({'1-id': this._currentUserId});
+    console.log({'1-id': this._currentUser.id});
     console.log({'2-id': user_id});
 
 
@@ -61,24 +63,31 @@ export class UserService {
       .get<UserType>(url, { headers: headers });
   }
 
-  getCurrentUser(): Observable<any> {
-    const url = `${this.host}/api/v1/api-token-verify/`;
-    const token = this.getToken();
-  
-    console.log({'get-current-user': token});
-  
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', `JWT ${token}`);
+  setCurrentUser(user: UserType) {
+    this._currentUser = user;
+  }
 
-    return this.http
-      .post<UserType>(
-        url,
-      {
-        'token': token
-      },
-      { headers: headers }
-    );
+  getCurrentUser(): UserType {
+  // getCurrentUser(): Observable<any> {
+    // const url = `${this.host}/api/v1/api-token-verify/`;
+    // const url = `${this.host}/api/v1/api-token-auth/`;
+    // const token = this.getToken();
+    //
+    // console.log({'get-current-user': token});
+    //
+    // const headers = new HttpHeaders();
+    // headers.append('Content-Type', 'application/json');
+    // headers.append('Authorization', `JWT ${token}`);
+    //
+    // return this.http
+    //   .post<UserType>(
+    //     url,
+    //   {
+    //     'token': token
+    //   },
+    //   { headers: headers }
+    // );
+    return this._currentUser;
   }
 
   isLoggedIn(): boolean {
