@@ -53,24 +53,13 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.retrieveAllData()
-    //   .then(res => {
-    //     console.log(res);
-    //     return this.retrieveUser().toPromise();
-    //   })
-    //   .then(res =>{
-    //     this.retrieveAllData();
-    //   }, err => console.log(err))
+    let id = this._route.snapshot.paramMap.get('id');
+    this.retrieveAllData(id);
+  }
+
+  retrieveAllData(id) {
     this.retrieveUser();
-    this.retrieveUserPosts(this._userId);
-  }
-
-  ngOnChanges(changes: any) {
-    // this.retrieveUserPosts(this._userId);
-  }
-
-  retrieveAllData(): Promise<any> {
-    return Promise.resolve(1);
+    this.retrieveUserPosts(id);
   }
 
   retrieveUser() {
@@ -81,8 +70,6 @@ export class UserProfileComponent implements OnInit {
         )
       )
     );
-
-    let userId: any;
 
     user$
       .subscribe(
@@ -98,11 +85,6 @@ export class UserProfileComponent implements OnInit {
           console.log({"user$": this._userId});
         }
       );
-
-
-
-    console.log({'retr': userId});
-
     return user$;
 
     // this.retrieveUserPosts(this._userId);
