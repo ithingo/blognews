@@ -1,10 +1,10 @@
-<div class="auth-toolbar">
-  <button routerLink="/">Home</button>
-  <button *ngIf="!isCurrnetUserLogged()" routerLink="/register">Sign up</button>
-  <button *ngIf="!isCurrnetUserLogged()" routerLink="/login">Log in</button>
-  <button *ngIf="isCurrnetUserLogged()" (click)='logOut()'>Log out</button>
+<div class="auth-toolbar btn-group">
+  <button routerLink="/" class="btn btn-outline">Home</button>
+  <button *ngIf="!isCurrnetUserLogged()" routerLink="/register" class="btn btn-outline">Sign up</button>
+  <button *ngIf="!isCurrnetUserLogged()" routerLink="/login" class="btn btn-outline">Log in</button>
+  <button *ngIf="isCurrnetUserLogged()" (click)="logOut()" class="btn btn-outline">Log out</button>
 
-  <button class="user-profile-link" (click)="goToUserProfile()">
+  <button class="user-profile-link btn btn-outline" (click)="goToUserProfile()" *ngIf="isCurrnetUserLogged()" >
     <span class="user-icon-link fas fa-user"></span>
   </button>
 

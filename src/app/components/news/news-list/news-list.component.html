@@ -1,28 +1,18 @@
-<div class="row">
-  <h2 class="title-for-search">{{ titleForSearch }}</h2>
+<div class="newslist-component">
+  <form name="searchForm" class="news-search">
+    <app-search-selection (selection)="handleFilterOption($event)"></app-search-selection>
+    <input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">
+  </form>
 
-  <div class="row">
-    <form name="searchForm">
-      <app-search-selection (selection)="handleFilterOption($event)"></app-search-selection>
-      <input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">
-    </form>
-  </div>
-
-  <ul class="all-tags row" *ngFor="let tag of getTags(); let i = index">
+  <ul class="all-tags" *ngFor="let tag of getTags(); let i = index">
     <li class="single-tag" id="{{i}}">
       <button>{{tag}}</button>
     </li>
   </ul>
 </div>
 
-<div class="row">
-  <h2 class="title-before-mews">{{ textBeforeNews }}</h2>
-</div>
-
-<div class="row">
-  <ul class="news-list" *ngFor="let newsItem of getArray()">
-    <li class="news">
-      <app-news [iteratedNews]="newsItem"></app-news>
-    </li>
-  </ul>
-</div>
+<ul class="news-list" *ngFor="let newsItem of getArray()">
+  <li class="news">
+    <app-news [iteratedNews]="newsItem"></app-news>
+  </li>
+</ul>

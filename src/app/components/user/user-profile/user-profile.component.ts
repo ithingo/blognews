@@ -54,6 +54,11 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     let id = this._route.snapshot.paramMap.get('id');
+
+    if (+(id) == this._userService.getCurrentUserId()) {
+      this._router.navigate(['home']);
+    }
+
     this.retrieveAllData(id);
   }
 
