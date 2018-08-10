@@ -20,8 +20,26 @@ import { AuthModule } from './components/auth/auth.module';
 
 import { NavigationComponent } from './components/navigation/navigation.component';
 
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
+
 export function getToken() {
   return localStorage.getItem('access_token');
+}
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("1034509024901-65gd2i8fdlqqnik57dsia2e3in30gub6.apps.googleusercontent.com")
+  },
+  // {
+  //   id: FacebookLoginProvider.PROVIDER_ID,
+  //   provider: new FacebookLoginProvider("Facebook-App-Id")
+  // },
+]);
+
+export function provideConfig() {
+  return config;
 }
 
 @NgModule({
@@ -36,6 +54,8 @@ export function getToken() {
 
     BrowserModule,
     FormsModule,
+
+    SocialLoginModule,
 
     AuthModule,
     NewsModule,
@@ -52,7 +72,13 @@ export function getToken() {
 
     AppRoutingModule,
   ],
-  providers: [ CookieService ],
+  providers: [ 
+    CookieService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule { }

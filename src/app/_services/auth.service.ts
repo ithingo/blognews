@@ -35,6 +35,18 @@ export class AuthService {
     );
   }
 
+  socialLogin(user): Observable<any> {
+    const url = 'http://127.0.0.1:8000/api/v1/social-login-user/';
+
+    console.log('inside-login-in-auth');
+
+    return this.http.post(
+      url,
+      JSON.stringify(user),
+      { headers: this.headers }
+    );
+  }
+
   logout() {
     this._userService.clearCookies();
     this._authRoute.navigate(['login'])
