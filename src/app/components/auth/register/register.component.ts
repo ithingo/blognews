@@ -65,7 +65,6 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
 
       const user: any = {
         'email': this.registerForm.value['email'],

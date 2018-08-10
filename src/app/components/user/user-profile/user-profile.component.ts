@@ -82,26 +82,17 @@ export class UserProfileComponent implements OnInit {
           this.userNameFull = `${user.first_name} ${user.second_name}`;
           this.userPhoto = user.photo;
           this._userId = user.id;
-
-          // userId = th
-
-          // console.log(user.posts);
-
-          console.log({"user$": this._userId});
         }
       );
     return user$;
-
-    // this.retrieveUserPosts(this._userId);
   }
 
   retrieveUserPosts(id: any) {
     // if(id) {
       this._getNewsListService.getUserNews(id)
-        .subscribe(newsArray => {this.userPosts = newsArray; console.log(newsArray)});
+        .subscribe(newsArray => {this.userPosts = newsArray});
     // }
 
-    console.log(this.userPosts);
   }
 
 

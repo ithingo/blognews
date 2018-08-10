@@ -72,8 +72,6 @@ export class LoginComponent implements OnInit {
               this._userService.setLoggedIn(token);
               this._userService.setCurrentUser(data['user']);
 
-              console.log({here: data['user']});
-
               this._loginComponentRoute.navigate(["/"]);
             });        
         }       
@@ -107,8 +105,6 @@ export class LoginComponent implements OnInit {
           const token = data['token'];
           this._userService.setLoggedIn(token);
           this._userService.setCurrentUser(data['user']);
-
-          console.log(data);
 
           this._loginComponentRoute.navigate(["/"]);
         });

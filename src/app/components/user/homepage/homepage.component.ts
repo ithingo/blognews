@@ -90,10 +90,9 @@ export class HomepageComponent implements OnInit {
 
     const id = this._userService.getCurrentUserId();
     this._getNewsListService.getUserNews(id)
-      .subscribe(newsArray => {this.userPosts = newsArray; console.log(newsArray)});
+      .subscribe(newsArray => this.userPosts = newsArray);
     // }
 
-    console.log(this.userPosts);
   }
 
   gotoNewsList() {
@@ -111,7 +110,6 @@ export class HomepageComponent implements OnInit {
   }
 
   handleImageUploaded($event) {
-    console.log($event);
     this.addedPostPhoto = $event;
   }
 
@@ -177,7 +175,6 @@ export class HomepageComponent implements OnInit {
       }
 
       data.photo = this.addedPostPhoto;
-      console.log({'photo': data.photo});
 
       this._changeNewsService.save(data, creationFlag);  //second param is to determine - create new or update
 

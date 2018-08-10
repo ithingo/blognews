@@ -14,7 +14,7 @@ export class ChangeNewsService implements OnInit {
   public tags: any[] = [];
   private currentUserId: any;
 
-  host = 'http://127.0.0.1:8000';
+  host = 'http://192.168.1.97:8000';
 
   constructor(
     private http: HttpClient,
@@ -31,20 +31,15 @@ export class ChangeNewsService implements OnInit {
 
     const token = this._userService.getToken();
 
-    console.log({'edit-service-save': token});
-
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', `JWT ${token}`);
-
-    console.log(data);
 
     let url = '';
     let response$: Observable<NewsType>;
 
     if(isNew) {
       url = `${this.host}/api/v1/posts/`;
-      console.log('creation', this.currentUserId)
       response$ = this.http
         .post<any>(
           url,
@@ -59,7 +54,6 @@ export class ChangeNewsService implements OnInit {
         );
     } else {
       const post_id = data.id;
-      console.log({'id': post_id});
       url = `${this.host}/api/v1/posts/${post_id}/`;
       response$ = this.http
         .patch<any>(
@@ -92,8 +86,6 @@ export class ChangeNewsService implements OnInit {
     const post_id = data.id;
     const url = `${this.host}/api/v1/posts/${post_id}/`;
     const token = this._userService.getToken();
-
-    console.log({'edit-service-remove': token});
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

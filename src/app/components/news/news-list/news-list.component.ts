@@ -34,7 +34,6 @@ export class NewsListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any) {
-    // this.retrieveNews();
   }
 
   retrieveNews(): void {
@@ -55,7 +54,6 @@ export class NewsListComponent implements OnInit, OnChanges {
 
     this._postTagsSet = _.uniq(this._postTagsSet);
     this._changeNewsService.tags = this._postTagsSet;
-    console.log({'hello - > tags array': this._postTagsSet});
   }
 
   // Method invoked on 'oninput' event for input field
@@ -97,7 +95,6 @@ export class NewsListComponent implements OnInit, OnChanges {
         },
         'subject': () => {
           if (news.subject.includes(inputKey)) {
-            console.log(inputKey);
             return true;
           }
         },

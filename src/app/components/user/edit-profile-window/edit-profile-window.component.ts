@@ -44,18 +44,6 @@ export class EditProfileWindowComponent implements OnInit {
   }
 
   open(content) {
-    console.log(this._userService.getCurrentUserId());
-
-    // this._userService.getCurrentUser();
-      // .subscribe(data => {
-      //   this._user = data;
-      //   this.userDataCopy = {
-      //     'email': this._user.email,
-      //     'first_name': this._user.first_name,
-      //     'second_name': this._user.second_name,
-      //     'photo': this._user.photo,
-        // };
-    // });
 
     this._user = this._userService.getCurrentUser();
     this.userDataCopy = {
@@ -83,7 +71,6 @@ export class EditProfileWindowComponent implements OnInit {
   }
 
   handleImageUploaded($event) {
-    console.log($event);
     this._uploadedPhoto = $event;
   }
 

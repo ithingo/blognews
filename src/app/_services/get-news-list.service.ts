@@ -12,7 +12,7 @@ import { UserService } from './user.service';
 })
 export class GetNewsListService {
 
-  host: string = 'http://127.0.0.1:8000';
+  host: string = 'http://192.168.1.97:8000';
 
   constructor(
     private http: HttpClient,
@@ -22,8 +22,6 @@ export class GetNewsListService {
   getNews(): Observable<NewsType[]> {
     const apiRoot = `${this.host}/api/v1/posts/`;
     const token = this._userService.getToken();
-
-    console.log({'get-news': token});
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -36,10 +34,8 @@ export class GetNewsListService {
   getUserNews(id: any): Observable<any[]> {
     // if(id) {
       const apiRoot = `${this.host}/api/v1/users/${id}/posts/`;
-      console.log(apiRoot);
       const token = this._userService.getToken();
 
-      console.log({'get-news': token});
 
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');

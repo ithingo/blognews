@@ -14,7 +14,6 @@ export class RetirieveResolverService implements Resolve<any>{
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, rstate: RouterStateSnapshot): Observable<any> {
-    console.log('go to root for profile', route.params['id']);
     const id = route.params['id']
     return this._userService.getUserById(id);
   }

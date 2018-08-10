@@ -43,13 +43,9 @@ export class SearchSelectionComponent implements OnInit {
       key: 'all',
       value: 'Entire posts',
     };
-    // console.log(this.selectedOption);
   }
 
   printSelectedOption() {
-    // console.log(this.selectedOption);
-    // console.log(typeof this.selectedOption);
-
     this.selection.emit(this.selectedOption);
   }
 }

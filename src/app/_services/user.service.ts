@@ -10,7 +10,7 @@ import {NewsType} from '../models/news-type';
   providedIn: 'root'
 })
 export class UserService {
-  host = 'http://127.0.0.1:8000';
+  host = 'http://192.168.1.97:8000';
   coockieName  = 'curr_user_token';
 
   private _currentUser: UserType;
@@ -23,7 +23,6 @@ export class UserService {
 
   getToken(): string|void {
     const token = this.cookieservice.get(this.coockieName);
-    console.log({'get-token': token});
     return token;
   }
 
@@ -32,33 +31,18 @@ export class UserService {
       this.cookieservice.set(this.coockieName, token);
     }
 
-    console.log(document.cookie);
-    console.log({'set-logged-in': token});
-
   }
-
-  // setCurrentUserId(user_id: number) {
-  //   this._currentUserId = user_id;
-  // }
 
   getCurrentUserId(): number {
     const current_id = this.cookieservice.get('id');
-    console.log({'curr-id': current_id});
     this._currentUserId = +(current_id);
 
     return this._currentUserId;
   }
 
   getUserById(user_id: number): Observable<UserType> {
-    // console.log({'1-id': this._currentUser.id});
-    // console.log({'2-id': user_id});
-
-
     const url = `${this.host}/api/v1/users/${user_id}/`;
     const token = this.getToken();
-
-    console.log({'get-user-by-id': token});
-
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', `JWT ${token}`);
@@ -70,14 +54,10 @@ export class UserService {
   setCurrentUser(user: any) {
     // this._currentUser = user;
     const current_user_id = user['id'];
-    console.log(current_user_id);
 
     if(current_user_id) {
       this.cookieservice.set('id', current_user_id);
     }
-
-    console.log(document.cookie);
-    console.log({'curr_id': current_user_id});
 
     this._currentUserId = +(current_user_id);
 
@@ -125,8 +105,6 @@ export class UserService {
     const url = `${this.host}/api/v1/users/${user.id}/`;
     const token = this.getToken();
 
-    console.log({'update-user-data': token});
-
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', `JWT ${token}`);
@@ -142,9 +120,5 @@ export class UserService {
         },
         { headers: headers }
       ).subscribe(data => console.log(data));
-
-
-
-    // this.getUserById(user.id).subscribe(data => console.log(data))
   }
 }
