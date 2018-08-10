@@ -46,9 +46,11 @@ export class NavigationComponent implements OnInit {
     //   this._appRoute.navigate(['/']);
     // }
 
-    const user = this._userService.getCurrentUser()
-    if(user) {
+    // const user = this._userService.getCurrentUser()
+    // if(user) {
+      const id = this._userService.getCurrentUserId();
+      console.log(id);
       this._appRoute.navigate(['home']);
-    }
+    // }
   }
 }

@@ -69,7 +69,7 @@ export class UserService {
 
   setCurrentUser(user: any) {
     // this._currentUser = user;
-    const current_user_id = user.id;
+    const current_user_id = user['id'];
     console.log(current_user_id);
 
     if(current_user_id) {

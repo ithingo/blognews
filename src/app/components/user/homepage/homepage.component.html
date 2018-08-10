@@ -142,12 +142,3 @@
 <div class="edit-profile-wrapper" *ngIf="isCurrnetUserLogged()">
   <app-edit-profile-window (userChanged)="handleUserChanged($event)"></app-edit-profile-window>
 </div>
-
-
-<main class="user-profile">
-  <h3>{{ userNameFull }}</h3>
-
-  <div class="user-profile__photo-wrapper">
-    <img src="{{ userPhoto }}" alt="" class="user-profile__photo">
-  </div>
-</main>

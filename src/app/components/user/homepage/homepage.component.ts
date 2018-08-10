@@ -69,27 +69,31 @@ export class HomepageComponent implements OnInit {
   ngOnChanges(changes: any) {  }
 
   retrieveUser() {
-    // const user$ = this._userService.getUserById(this._userService.getCurrentUserId())
+    const user$ = this._userService.getUserById(this._userService.getCurrentUserId())
 
-    // user$
-    //   .subscribe(
-    //     user => {
-    //       this.userNameFull = `${user.first_name} ${user.second_name}`;
-    //       this.userPhoto = user.photo;
-    //       this._userId = user.id;
-    //     }
-    //   );
-
-    const user = this._userService.getCurrentUser();
-
-    this.userNameFull = `${user.first_name} ${user.second_name}`;
-    this.userPhoto = user.photo;
-    this._userId = user.id;
+    user$
+      .subscribe(
+        user => {
+          this.userNameFull = `${user.first_name} ${user.second_name}`;
+          this.userPhoto = user.photo;
+          this._userId = user.id;
+        }
+      );
   }
 
+  // retrieveUserPosts() {
+  //   this._getNewsListService.getNews()
+  //     .subscribe(newsArray => this.userPosts = newsArray);
+  // }
   retrieveUserPosts() {
-    this._getNewsListService.getNews()
-      .subscribe(newsArray => this.userPosts = newsArray);
+    // if(id) {
+
+    const id = this._userService.getCurrentUserId();
+    this._getNewsListService.getUserNews(id)
+      .subscribe(newsArray => {this.userPosts = newsArray; console.log(newsArray)});
+    // }
+
+    console.log(this.userPosts);
   }
 
   gotoNewsList() {

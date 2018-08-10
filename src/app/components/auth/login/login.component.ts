@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
               this._userService.setLoggedIn(token);
               this._userService.setCurrentUser(data['user']);
 
-              console.log(data['user']);
+              console.log({here: data['user']});
 
               this._loginComponentRoute.navigate(["/"]);
             });        
