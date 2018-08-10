@@ -34,6 +34,7 @@ export class NewsListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any) {
+    // this.retrieveNews();
   }
 
   retrieveNews(): void {
@@ -54,7 +55,7 @@ export class NewsListComponent implements OnInit, OnChanges {
 
     this._postTagsSet = _.uniq(this._postTagsSet);
     this._changeNewsService.tags = this._postTagsSet;
-    console.log({'hello': this._postTagsSet});
+    console.log({'hello - > tags array': this._postTagsSet});
   }
 
   // Method invoked on 'oninput' event for input field
@@ -63,6 +64,11 @@ export class NewsListComponent implements OnInit, OnChanges {
     this._filteredArray = [];
 
     const keyword: string = event.target.value;
+
+    if(!event.target.value) {
+      this.retrieveNews();
+      this._filteredArray = this._itemNewsArray;
+    }
     const keywords = keyword.split(' ');
 
     const selectedOptionKey = this._optionToFilter.key;
@@ -106,8 +112,11 @@ export class NewsListComponent implements OnInit, OnChanges {
           }
         },
         'tags':  () => {
-          if (news.tags && news.tags.includes(inputKey)) {
-            return true;
+          if (news.tags) {
+            const tags = news.tags.split("").join();
+            if(tags.includes(inputKey)) {
+              return true;
+            }
           }
         },
       };

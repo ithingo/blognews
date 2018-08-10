@@ -4,11 +4,9 @@
     <input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">
   </form>
 
-  <ul class="all-tags" *ngFor="let tag of getTags(); let i = index">
-    <li class="single-tag" id="{{i}}">
-      <button>{{tag}}</button>
-    </li>
-  </ul>
+  <!--<div class="" *ngFor="let tag of getTags(); let i = index">-->
+    <!--<div style="display: inline-block">{{tag}}</div>-->
+  <!--</div>-->
 </div>
 
 <ul class="news-list" *ngFor="let newsItem of getArray()">

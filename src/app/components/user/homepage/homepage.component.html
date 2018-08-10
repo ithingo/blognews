@@ -50,7 +50,7 @@
             <p class="header">Available tags</p>
             <ul class="all-tags row" *ngFor="let tag of getTags()">
               <li class="single-tag">
-                <button (click)="setTagToPost(tag)">{{tag}}</button>
+                <div>{{tag}}</div>
               </li>
             </ul>
           </div>
