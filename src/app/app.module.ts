@@ -21,7 +21,7 @@ import { AuthModule } from './components/auth/auth.module';
 import { NavigationComponent } from './components/navigation/navigation.component';
 
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider} from "angularx-social-login";
 
 export function getToken() {
   return localStorage.getItem('access_token');
@@ -47,7 +47,6 @@ export function provideConfig() {
     AppComponent,
     PageNotFoundComponent,
     NavigationComponent,
-
   ],
   imports: [
     NgbModule.forRoot(),
