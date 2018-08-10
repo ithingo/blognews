@@ -5,5 +5,5 @@ export class UserType {
   email: string;
   password: string;
   photo: string;
-  // posts: any[];
+  posts: any[];
 }

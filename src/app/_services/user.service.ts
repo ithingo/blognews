@@ -42,7 +42,11 @@ export class UserService {
   // }
 
   getCurrentUserId(): number {
-    return this._currentUser.id;
+    const current_id = this.cookieservice.get('id');
+    console.log({'curr-id': current_id});
+    this._currentUserId = +(current_id);
+
+    return this._currentUserId;
   }
 
   getUserById(user_id: number): Observable<UserType> {
@@ -63,8 +67,21 @@ export class UserService {
       .get<UserType>(url, { headers: headers });
   }
 
-  setCurrentUser(user: UserType) {
-    this._currentUser = user;
+  setCurrentUser(user: any) {
+    // this._currentUser = user;
+    const current_user_id = user.id;
+    console.log(current_user_id);
+
+    if(current_user_id) {
+      this.cookieservice.set('id', current_user_id);
+    }
+
+    console.log(document.cookie);
+    console.log({'curr_id': current_user_id});
+
+    this._currentUserId = +(current_user_id);
+
+    // this.getUserById(this._currentUserId)
   }
 
   getCurrentUser(): UserType {
@@ -87,6 +104,10 @@ export class UserService {
     //   },
     //   { headers: headers }
     // );
+    this.getUserById(this.getCurrentUserId())
+      .subscribe(user => {
+        this._currentUser = user;
+      })
     return this._currentUser;
   }
 

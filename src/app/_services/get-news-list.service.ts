@@ -32,4 +32,21 @@ export class GetNewsListService {
     return this.http
       .get<NewsType[]>(apiRoot, { headers: headers })
   }
+
+  getUserNews(id: any): Observable<any[]> {
+    // if(id) {
+      const apiRoot = `${this.host}/api/v1/users/${id}/posts/`;
+      console.log(apiRoot);
+      const token = this._userService.getToken();
+
+      console.log({'get-news': token});
+
+      const headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', `JWT ${token}`);
+
+      return this.http
+        .get<NewsType[]>(apiRoot, { headers: headers })
+    }
+  // }
 }

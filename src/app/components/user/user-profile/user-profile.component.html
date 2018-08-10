@@ -6,127 +6,21 @@
   </div>
 </main>
 
-<ngb-accordion #acc="ngbAccordion" >
-  <ngb-panel title="New post">
-    <ng-template ngbPanelContent>
-      <div [formGroup]="addForm" class="edit-post-form">
-        <div class="form-group">
-          <label>Subject</label>
-          <input type="text" formControlName="subject" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && add_form.subject.errors }" />
-          <div *ngIf="submitted && add_form.subject.errors" class="invalid-feedback">
-            <div *ngIf="add_form.subject.errors.required">Empty subject field</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Content</label>
-          <input type="text" formControlName="content" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && add_form.content.errors }" />
-          <div *ngIf="submitted && add_form.content.errors" class="invalid-feedback">
-            <div *ngIf="add_form.content.errors.required">Empty content field</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Photo</label>
-          <app-file-uploader allowedTypes="image/*" (imageUploaded)="handleImageUploaded($event)"
-                             [ngClass]="{ 'is-invalid': editSubmitted && edit_form.subject.errors }"></app-file-uploader>
-          <div *ngIf="editSubmitted && !addedPostPhoto" class="invalid-feedback">
-            Empty subject field
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Tags</label>
-          <input type="text" formControlName="tags" class="form-control" />
-        </div>
-
-        <div class="form-group" *ngIf="getTags()">
-          <p class="header">Available tags</p>
-          <ul class="all-tags row" *ngFor="let tag of getTags()">
-            <li class="single-tag">
-              <button (click)="setTagToPost(tag)">{{tag}}</button>
-            </li>
-          </ul>
-        </div>
-
-        <div class="buttons-wrapper" *ngIf="isCurrnetUserLogged()">
-          <button class="" (click)="createNewPost()">
-            <i title="Save" class="fas fa-check" aria-hidden="true"></i>
-          </button>
-          <button class="" (click)="cancelCreation()">
-            <i title="Save" class="fas fa-times" aria-hidden="true"></i>
-          </button>
-        </div>
-      </div>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
-
-<div class="user-profile-wrapper" *ngIf="userPosts">
+<!--<div class="user-profile-wrapper" *ngIf="userPosts">-->
   <ul class="user__posts list-group">
     <li class="user-post"
-                          [ngClass]="{'active': selectedItem == post}"
-                          *ngFor="let post of userPosts; let i = index" id="{{i}}">
+        [ngClass]="{'active': selectedItem == post}"
+        *ngFor="let post of userPosts; let i = index" id="{{i}}">
 
-      <div class="plain-post" *ngIf="!((selectedPostId == i) && isEdit)">
+      <div class="plain-post">
         <h4 class="user-post__subject">{{ post.subject }}</h4>
         <main class="user-post__content">{{ post.content }}</main>
 
         <img src="{{ post.photo }}" alt="Here should be image">
-
-        <div class="buttons-wrapper" *ngIf="isCurrnetUserLogged()">
-          <button class="" (click)="editPost(i, post)">
-            <i title="Edit" class="fas fa-edit" aria-hidden="true"></i>
-          </button>
-          <button class="" (click)="deletePost(post)">
-            <i title="Delete" class="fas fa-trash-alt" aria-hidden="true"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="edit-wrapper" *ngIf="selectedPostId == i && isEdit">
-        <div [formGroup]="editForm" class="edit-post-form">
-          <div class="form-group">
-            <label>Subject</label>
-            <input type="text" formControlName="subject" class="form-control"
-                    [(ngModel)]="postSubject"
-                    [ngClass]="{ 'is-invalid': editSubmitted && edit_form.subject.errors }" />
-            <div *ngIf="editSubmitted && edit_form.subject.errors" class="invalid-feedback">
-              <div *ngIf="edit_form.subject.errors.required">Empty subject field</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Content</label>
-            <input type="textarea" formControlName="content" class="form-control"
-                    [ngClass]="{ 'is-invalid': editSubmitted && edit_form.content.errors }"
-                    [(ngModel)]="postContent" />
-            <div *ngIf="editSubmitted && edit_form.content.errors" class="invalid-feedback">
-              <div *ngIf="edit_form.content.errors.required">Empty content field</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Photo</label>
-            <app-file-uploader allowedTypes="image/*" (imageUploaded)="handleImageUploaded($event)"
-                               [ngClass]="{ 'is-invalid': editSubmitted && edit_form.subject.errors }" [postPhoto]="postPhoto"></app-file-uploader>
-            <div *ngIf="editSubmitted && !postPhoto" class="invalid-feedback">
-              Empty subject field
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Tags</label>
-            <input type="text" formControlName="tags" class="form-control" />
-          </div>
-
-          <button class="" (click)="saveChangedPost()">
-            <i title="Save" class="fas fa-check" aria-hidden="true"></i>
-          </button>
-          <button class="" (click)="cancelEdition()">
-            <i title="Save" class="fas fa-times" aria-hidden="true"></i>
-          </button>
-        </div>
       </div>
     </li>
   </ul>
-</div>
+<!--</div>-->
 
 <nav class="navigation">
   <ul>
@@ -135,10 +29,3 @@
     </li>
   </ul>
 </nav>
-
-<div class="edit-posts-wrapper" *ngIf="isCurrnetUserLogged()">
-</div>
-
-<div class="edit-profile-wrapper" *ngIf="isCurrnetUserLogged()">
-  <app-edit-profile-window (userChanged)="handleUserChanged($event)"></app-edit-profile-window>
-</div>

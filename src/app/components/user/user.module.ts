@@ -9,6 +9,7 @@ import { EditProfileWindowComponent } from './edit-profile-window/edit-profile-w
 import { UserRoutingModule } from './user-routing.module';
 import { UserService } from '../../_services/user.service';
 import {FileUploaderComponent, FileUploadModule} from '../file-uploader/file-uploader.component';
+import {HomepageComponent} from './homepage/homepage.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {FileUploaderComponent, FileUploadModule} from '../file-uploader/file-upl
   ],
   declarations: [
     UserProfileComponent,
+    HomepageComponent,
     EditProfileWindowComponent,
   ],
   providers: [
