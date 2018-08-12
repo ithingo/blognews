@@ -21,7 +21,7 @@ export class AuthService {
   ) { }
 
   login(user): Observable<any> {
-    const url = 'http://192.168.1.97:8000/api/v1/api-login-user/';
+    const url = 'http://127.0.0.1:8000/api/v1/api-login-user/';
 
     return this.http.post(
       url,
@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   socialLogin(user): Observable<any> {
-    const url = 'http://192.168.1.97:8000/api/v1/social-login-user/';
+    const url = 'http://127.0.0.1:8000/api/v1/social-login-user/';
 
     return this.http.post(
       url,
@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   register(user): Observable<any> {
-    const url = 'http://192.168.1.97:8000/api/v1/api-register-user/';
+    const url = 'http://127.0.0.1:8000/api/v1/api-register-user/';
 
     return this.http.post(
       url,

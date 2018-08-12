@@ -24,7 +24,7 @@ import { OnlyLoggedInGuard } from '../../_guards/only-logged-in.guard';
     SearchSelectionComponent,
   ],
   providers: [
-    GetNewsListService,
+    // GetNewsListService,
 
     AlwaysAuthGuard,
     OnlyLoggedInGuard,

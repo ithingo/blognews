@@ -1,7 +1,8 @@
 <div class="newslist-component">
   <form name="searchForm" class="news-search">
     <app-search-selection (selection)="handleFilterOption($event)"></app-search-selection>
-    <input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">
+    <!--<input type="text" class="search-news-input" id="search-news" (input)="searchNews($event)" placeholder="search">-->
+    <input type="text" class="search-news-input" id="search-news" (input)="term.next($event.target.value)" placeholder="search">
   </form>
 
   <!--<div class="" *ngFor="let tag of getTags(); let i = index">-->

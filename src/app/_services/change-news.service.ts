@@ -14,7 +14,7 @@ export class ChangeNewsService implements OnInit {
   public tags: any[] = [];
   private currentUserId: any;
 
-  host = 'http://192.168.1.97:8000';
+  host = 'http://127.0.0.1:8000';
 
   constructor(
     private http: HttpClient,
