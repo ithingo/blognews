@@ -10,6 +10,18 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+	<script src="https://apis.google.com/js/platform.js?onload=start" async defer></script>
+
+  <script>
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.getAuthInstance({
+          client_id: '1034509024901-65gd2i8fdlqqnik57dsia2e3in30gub6.apps.googleusercontent.com',
+        });
+      });
+    }
+  </script>
+
 </head>
 <body>
   <app-root></app-root>

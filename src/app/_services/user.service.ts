@@ -52,43 +52,15 @@ export class UserService {
   }
 
   setCurrentUser(user: any) {
-    // this._currentUser = user;
     const current_user_id = user['id'];
-
     if(current_user_id) {
       this.cookieservice.set('id', current_user_id);
     }
-
     this._currentUserId = +(current_user_id);
-
-    // this.getUserById(this._currentUserId)
   }
 
-  getCurrentUser(): UserType {
-  // getCurrentUser(): Observable<any> {
-    // const url = `${this.host}/api/v1/api-token-verify/`;
-    // const url = `${this.host}/api/v1/api-token-auth/`;
-    // const token = this.getToken();
-    //
-    // console.log({'get-current-user': token});
-    //
-    // const headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('Authorization', `JWT ${token}`);
-    //
-    // return this.http
-    //   .post<UserType>(
-    //     url,
-    //   {
-    //     'token': token
-    //   },
-    //   { headers: headers }
-    // );
-    this.getUserById(this.getCurrentUserId())
-      .subscribe(user => {
-        this._currentUser = user;
-      })
-    return this._currentUser;
+  getCurrentUser(): Observable<UserType> {
+    return this.getUserById(this.getCurrentUserId());
   }
 
   isLoggedIn(): boolean {

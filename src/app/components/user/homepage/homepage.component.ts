@@ -81,18 +81,10 @@ export class HomepageComponent implements OnInit {
       );
   }
 
-  // retrieveUserPosts() {
-  //   this._getNewsListService.getNews()
-  //     .subscribe(newsArray => this.userPosts = newsArray);
-  // }
   retrieveUserPosts() {
-    // if(id) {
-
     const id = this._userService.getCurrentUserId();
     this._getNewsListService.getUserNews(id)
       .subscribe(newsArray => this.userPosts = newsArray);
-    // }
-
   }
 
   gotoNewsList() {
@@ -173,6 +165,8 @@ export class HomepageComponent implements OnInit {
         photo: "",
         tags: this.addForm.value['tags']
       }
+
+      console.log(this.addedPostPhoto);
 
       data.photo = this.addedPostPhoto;
 

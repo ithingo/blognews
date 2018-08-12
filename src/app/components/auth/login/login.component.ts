@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
 
   private user: SocialUser;
-  public authorized: boolean = false;
+  private loggedIn: boolean;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -42,20 +42,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
-   public socialSignIn(socialPlatform : string) {  
-
+  public socialSignIn(socialPlatform : string) { 
     let socialPlatformProvider;
-    if(socialPlatform == "facebook"){
+    if(socialPlatform == "facebook") {
       socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    }else if(socialPlatform == "google"){
+    } else if(socialPlatform == "google") {
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
     }
     
     this._socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
-        // console.log(socialPlatform+" sign in data : " , userData);
         if (userData != null) {
-           this.authorized = true;
+           this.loggedIn = true;
            this.user = userData;   
 
            const user: any = {
@@ -77,11 +75,12 @@ export class LoginComponent implements OnInit {
         }       
       }
     );
+
   }
 
   signOut(): void {
     this._socialAuthService.signOut();
-    this.authorized = false;
+    this.loggedIn = false;
   }
 
   ngOnInit() {

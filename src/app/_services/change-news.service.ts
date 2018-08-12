@@ -25,10 +25,7 @@ export class ChangeNewsService implements OnInit {
   }
 
   public save(data: any, isNew?: boolean) {
-    // this._userService.getCurrentUser()
-    //   .subscribe(data => this.currentUserId = data.id);
     this.currentUserId = this._userService.getCurrentUserId();
-
     const token = this._userService.getToken();
 
     const headers = new HttpHeaders();
@@ -47,7 +44,7 @@ export class ChangeNewsService implements OnInit {
             'subject': data.subject,
             'content': data.subject,
             'photo': data.photo,
-            // 'tags': data.tags,
+            'tags': data.tags,
             'user_id': this.currentUserId,
           },
           { headers: headers }
@@ -63,7 +60,7 @@ export class ChangeNewsService implements OnInit {
             'subject': data.subject,
             'content': data.content,
             'photo': data.photo,
-            // 'tags': data.tags,
+            'tags': data.tags,
             'user_id': this.currentUserId,
           },
           { headers: headers }
@@ -72,16 +69,12 @@ export class ChangeNewsService implements OnInit {
 
     response$
       .subscribe(
-        (data) => {console.log(data);},  //?
-        (err) => {console.log(err);}     //?
+        // (data) => {console.log(data);},
+        // (err) => {console.log(err);} 
       );
   }
 
-  public remove(data: any) {
-    // this._userService.getCurrentUser()
-    //   .subscribe(data => this.currentUserId = data.id);
-
-    this.currentUserId = this._userService.getCurrentUserId()
+  public remove(data: any) {this.currentUserId = this._userService.getCurrentUserId()
 
     const post_id = data.id;
     const url = `${this.host}/api/v1/posts/${post_id}/`;

@@ -20,51 +20,32 @@ export class GetNewsListService {
   optionToFilter: SelectionProperties;
 
   private checkBySelectedOption = (post: NewsType, keyWord: string, optionKey: string): any => {
-
-
-    console.log({post: post, keyWord: keyWord, optionKey:optionKey});
-
-
     const filters = {
       'all': () => {
         if (post.subject.includes(keyWord) || post.content.includes(keyWord) 
           || post.author.first_name.includes(keyWord) || post.author.second_name.includes(keyWord) 
           || (post.tags && post.tags.includes(keyWord)))
         {
-          console.log({post: post});
-
           return post;
         }
       },
       'subject': () => {
         if (post.subject.includes(keyWord)) {
-
-          console.log({post: post});
-
           return post;
         }
       },
       'content': () => {
         if (post.content.includes(keyWord)) {
-
-          console.log({post: post});
-
           return post;
         }
       },
       'author': () => {
         if (post.author.first_name.includes(keyWord) || post.author.second_name.includes(keyWord)) {
-
-          console.log({post: post});
-
           return post;
         }
       },
       'tags':  () => {
         if (post.tags && post.tags.includes(keyWord)) {
-
-          console.log({post: post});
-
           return post;
         }
       },
@@ -105,8 +86,6 @@ export class GetNewsListService {
       .then(data => {
         const keyWord = terms.trim();
 
-        console.log(this.optionToFilter);
-
         if(!this.optionToFilter) {
           this.optionToFilter = {
             key: 'all',
@@ -114,15 +93,9 @@ export class GetNewsListService {
           }
         }
 
-        console.log(this.optionToFilter);
-
         data = data.filter(post => {
-          console.log({hades: post});
-
           return this.checkBySelectedOption(post, keyWord, this.optionToFilter.key);
         });
-
-        console.log(data);
 
         return data;
       })

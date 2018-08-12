@@ -1,8 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, Output, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-
 import { EventEmitter } from '@angular/core';
-
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserType } from '../../../models/user-type';
@@ -41,11 +39,12 @@ export class EditProfileWindowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this._userService.getCurrentUser()
+      .subscribe(userData => this._user = userData);
   }
 
   open(content) {
 
-    this._user = this._userService.getCurrentUser();
     this.userDataCopy = {
           'email': this._user.email,
           'first_name': this._user.first_name,

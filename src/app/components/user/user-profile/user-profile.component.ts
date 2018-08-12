@@ -88,11 +88,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   retrieveUserPosts(id: any) {
-    // if(id) {
-      this._getNewsListService.getUserNews(id)
-        .subscribe(newsArray => {this.userPosts = newsArray});
-    // }
-
+    this._getNewsListService.getUserNews(id)
+      .subscribe(newsArray => {this.userPosts = newsArray});
   }
 
 
