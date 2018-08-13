@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
   }
 
   handleImageUploaded($event) {
-    console.log($event);
+    // console.log($event);
     this.userPhoto = $event;
   }
 
@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
       }
 
       this._authService.register(user)
-        .subscribe(data => console.log(data));
+        .subscribe(data => console.log(data['status']));
 
       this._registerComponentRoute.navigate(["login"]);
     } else {

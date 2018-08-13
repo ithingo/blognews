@@ -10,7 +10,8 @@ import {NewsType} from '../models/news-type';
   providedIn: 'root'
 })
 export class UserService {
-  host = 'http://127.0.0.1:8000';
+  // host = 'http://127.0.0.1:8000';
+  host = 'http://192.168.1.97:8000';
   coockieName  = 'curr_user_token';
 
   private _currentUser: UserType;
@@ -91,6 +92,6 @@ export class UserService {
           'photo': updatedData.photo,
         },
         { headers: headers }
-      ).subscribe(data => console.log(data));
+      ).subscribe(data => console.log(data['status']));
   }
 }

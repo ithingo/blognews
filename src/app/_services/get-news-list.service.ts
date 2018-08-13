@@ -15,42 +15,50 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class GetNewsListService {
-
-  host: string = 'http://127.0.0.1:8000';
+  // host: string = 'http://127.0.0.1:8000';
+  host: string = 'http://192.168.1.97:8000';
   optionToFilter: SelectionProperties;
 
   private checkBySelectedOption = (post: NewsType, keyWord: string, optionKey: string): any => {
+    const postSubject = post.subject.toLowerCase();
+    const postContent = post.content.toLowerCase();
+    const postAuthorFirstName = post.author.first_name.toLowerCase();
+    const postAuthorSecondName = post.author.second_name.toLowerCase();
+    const keyWordLowercased = keyWord.toLowerCase();
+    let postTags = '';
+    if(post.tags) {
+      postTags = post.tags.toLowerCase();
+    }
     const filters = {
       'all': () => {
-        if (post.subject.includes(keyWord) || post.content.includes(keyWord) 
-          || post.author.first_name.includes(keyWord) || post.author.second_name.includes(keyWord) 
-          || (post.tags && post.tags.includes(keyWord)))
+        if (postSubject.includes(keyWordLowercased) || postContent.includes(keyWordLowercased)
+          || postAuthorFirstName.includes(keyWordLowercased) || postAuthorSecondName.includes(keyWordLowercased)
+          || (postTags && postTags.includes(keyWordLowercased)))
         {
           return post;
         }
       },
       'subject': () => {
-        if (post.subject.includes(keyWord)) {
+        if (postSubject.includes(keyWordLowercased)) {
           return post;
         }
       },
       'content': () => {
-        if (post.content.includes(keyWord)) {
+        if (postContent.includes(keyWordLowercased)) {
           return post;
         }
       },
       'author': () => {
-        if (post.author.first_name.includes(keyWord) || post.author.second_name.includes(keyWord)) {
+        if (postAuthorFirstName.includes(keyWordLowercased) || postAuthorSecondName.includes(keyWordLowercased)) {
           return post;
         }
       },
       'tags':  () => {
-        if (post.tags && post.tags.includes(keyWord)) {
+        if (postTags && postTags.includes(keyWordLowercased)) {
           return post;
         }
       },
     };
-
     return filters[optionKey]();
   };
 
@@ -94,7 +102,8 @@ export class GetNewsListService {
         }
 
         data = data.filter(post => {
-          return this.checkBySelectedOption(post, keyWord, this.optionToFilter.key);
+          const result = this.checkBySelectedOption(post, keyWord, this.optionToFilter.key);
+          return result;
         });
 
         return data;
