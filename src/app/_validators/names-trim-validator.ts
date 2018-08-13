@@ -1,8 +1,13 @@
 import {AbstractControl, ValidatorFn } from '@angular/forms';
 
-export function forbiddenTrimmedValue(nameRe: RegExp): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} | null => {
-    const forbidden = nameRe.test(control.value);
-    return forbidden ? {'forbiddenTrimmedValue': {value: control.value}} : null;
+export function ValidateTrimmedNames(control: AbstractControl) {
+
+  console.log(control.value);
+  console.log(control.value.toString().trim());
+
+  if (control.value !== '' && control.value.toString().trim() === '') {
+    return { validateTrimmed: true }
   }
+  return null;
 }
+

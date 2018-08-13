@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../_services/auth.service';
-import { forbiddenTrimmedValue } from '../../../_validators/names-trim-validator';
+import { ValidateTrimmedNames } from '../../../_validators/names-trim-validator';
 
 @Component({
   selector: 'app-register',
@@ -25,13 +25,13 @@ export class RegisterComponent implements OnInit {
       {
         first_name: [
           '',
-          Validators.required,
-          forbiddenTrimmedValue(/\s\s+/),
+          [Validators.required,
+          ValidateTrimmedNames],
         ],
         second_name: [
           '',
-          Validators.required,
-          forbiddenTrimmedValue(/(\s\s+|\t\t+)/),
+          [Validators.required,
+          ValidateTrimmedNames],
         ],
         email: [
           '',
@@ -74,8 +74,8 @@ export class RegisterComponent implements OnInit {
         'password': this.registerForm.value['password'].trim(),
         'first_name': this.registerForm.value['first_name'].trim(),
         'second_name': this.registerForm.value['second_name'].trim(),
-        'photo': "",
-      }
+        'photo': '',
+      };
       if(this.userPhoto) {
         user.photo = this.userPhoto;
       }
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
       this._authService.register(user)
         .subscribe(data => console.log(data['status']));
 
-      this._registerComponentRoute.navigate(["login"]);
+      this._registerComponentRoute.navigate(['login']);
     } else {
       return;
     }
