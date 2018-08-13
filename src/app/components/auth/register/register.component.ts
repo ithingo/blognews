@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../_services/auth.service';
+import { forbiddenTrimmedValue } from '../../../_validators/names-trim-validator';
 
 @Component({
   selector: 'app-register',
@@ -25,10 +26,12 @@ export class RegisterComponent implements OnInit {
         first_name: [
           '',
           Validators.required,
+          forbiddenTrimmedValue(/\s\s+/),
         ],
         second_name: [
           '',
           Validators.required,
+          forbiddenTrimmedValue(/(\s\s+|\t\t+)/),
         ],
         email: [
           '',
