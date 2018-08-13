@@ -60,15 +60,12 @@ export class RegisterComponent implements OnInit {
   }
 
   handleImageUploaded($event) {
-    // console.log($event);
     this.userPhoto = $event;
   }
 
   register() {
     this.submitted = true;
-
     if (this.registerForm.valid) {
-
       const user: any = {
         'email': this.registerForm.value['email'].trim(),
         'password': this.registerForm.value['password'].trim(),
@@ -76,14 +73,14 @@ export class RegisterComponent implements OnInit {
         'second_name': this.registerForm.value['second_name'].trim(),
         'photo': '',
       };
-      if(this.userPhoto) {
+      if (this.userPhoto) {
         user.photo = this.userPhoto;
+        this._authService.register(user)
+          .subscribe(data => console.log(data['status']));
+        this._registerComponentRoute.navigate(['login']);
+      } else {
+        alert('You should load your profile photo!!');
       }
-
-      this._authService.register(user)
-        .subscribe(data => console.log(data['status']));
-
-      this._registerComponentRoute.navigate(['login']);
     } else {
       return;
     }

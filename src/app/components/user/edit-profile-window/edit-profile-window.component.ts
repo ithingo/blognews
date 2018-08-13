@@ -24,10 +24,8 @@ import { UserService } from '../../../_services/user.service';
 })
 export class EditProfileWindowComponent implements OnInit {
   closeResult: string;
-
-  private _user: UserType;
   userDataCopy: any;
-
+  private _user: UserType;
   private _uploadedPhoto: any = null;
 
   @Output()
@@ -44,29 +42,27 @@ export class EditProfileWindowComponent implements OnInit {
   }
 
   open(content) {
-
     this.userDataCopy = {
-          'email': this._user.email,
-          'first_name': this._user.first_name,
-          'second_name': this._user.second_name,
-          'photo': this._user.photo,
-      };
+      'email': this._user.email,
+      'first_name': this._user.first_name,
+      'second_name': this._user.second_name,
+      'photo': this._user.photo,
+    };
 
-    this._modalService.open(content, { centered: true }).result
-      .then(
-        result => {
-            this.closeResult = `Closed with: ${result}`;
-
-            if(this._uploadedPhoto) {
-              this.userDataCopy.photo = this._uploadedPhoto;
-            }
-
+  this._modalService.open(content, { centered: true }).result
+    .then(
+      result => {
+          this.closeResult = `Closed with: ${result}`;
+          if(this._uploadedPhoto) {
+            this.userDataCopy.photo = this._uploadedPhoto;
             this._userService.updateUserData(this._user, this.userDataCopy);
             this.userChanged.emit(true);
-          },
-            reason => this.closeResult = `Dismissed ${this.getDismissReason(reason)}`
-
-      );
+          } else {
+            alert('You should load your profile photo!!');
+          }
+        },
+      reason => this.closeResult = `Dismissed ${this.getDismissReason(reason)}`
+    );
   }
 
   handleImageUploaded($event) {
@@ -82,5 +78,4 @@ export class EditProfileWindowComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-
 }
