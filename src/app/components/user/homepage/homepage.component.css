@@ -1,6 +1,8 @@
 .user-profile {
   display: flex;
   flex-direction: column;
+
+  padding: 30px 0
 }
 
 .user-profile {
@@ -26,7 +28,6 @@ li {
 .user-profile__photo-wrapper {
   display: flex;
   justify-content: center;
-
 
   position: relative;
   overflow: hidden;

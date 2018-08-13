@@ -7,3 +7,10 @@
   justify-content: flex-end;
   padding-bottom: 20px;
 }
+
+
+.tags {
+	font-weight: bold;
+	font-style: italic;
+	color: red;
+}

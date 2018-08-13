@@ -78,6 +78,8 @@
           <h4 class="user-post__subject">{{ post.subject }}</h4>
           <main class="user-post__content">{{ post.content }}</main>
 
+          <div class=tags>{{ post.tags }}</div>
+
           <img src="{{ post.photo }}" alt="Here should be image">
 
           <div class="buttons-wrapper" *ngIf="isCurrnetUserLogged()">

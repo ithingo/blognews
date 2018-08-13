@@ -1,5 +1,7 @@
-<label for="optionsSelect"> Filter by: </label>
+<div class="select-wr">
+	<label for="optionsSelect"> Filter by: </label>
 
 <select  id="optionsSelect" name="optionsToFilter" class="selectpicker selectpickermy" [(ngModel)]="selectedOption" (ngModelChange)="printSelectedOption()">
   <option *ngFor="let selection of selectOptions" [ngValue]="selection">{{selection.value}}</option>
 </select>
+</div>

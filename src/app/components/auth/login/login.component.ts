@@ -95,8 +95,8 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       const user: any = {
-        'email': this.loginForm.value['email'],
-        'password': this.loginForm.value['password'],
+        'email': this.loginForm.value['email'].trim(),
+        'password': this.loginForm.value['password'].trim(),
       }
 
       this._authService.login(user)

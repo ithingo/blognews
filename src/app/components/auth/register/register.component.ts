@@ -67,10 +67,10 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
 
       const user: any = {
-        'email': this.registerForm.value['email'],
-        'password': this.registerForm.value['password'],
-        'first_name': this.registerForm.value['first_name'],
-        'second_name': this.registerForm.value['second_name'],
+        'email': this.registerForm.value['email'].trim(),
+        'password': this.registerForm.value['password'].trim(),
+        'first_name': this.registerForm.value['first_name'].trim(),
+        'second_name': this.registerForm.value['second_name'].trim(),
         'photo': "",
       }
       if(this.userPhoto) {
