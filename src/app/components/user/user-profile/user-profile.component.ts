@@ -1,8 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 
 import { GetNewsListService } from '../../../_services/get-news-list.service';
@@ -25,21 +23,16 @@ export class UserProfileComponent implements OnInit {
   private _userId: any;
 
   selectedItem: NewsType;
-
   addForm: FormGroup;
   editForm: FormGroup;
-
   editSubmitted = false;
   addSubmitted = false;
-
   isEdit: boolean = false;
   selectedPostId: number;
-
   postSubject: string;
   postContent: string;
   postPhoto: string;
   postTags: string;
-
   addedPostPhoto: string;
 
   constructor(
@@ -54,7 +47,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     let id = this._route.snapshot.paramMap.get('id');
-
     if (+(id) == this._userService.getCurrentUserId()) {
       this._router.navigate(['home']);
     }
@@ -91,8 +83,6 @@ export class UserProfileComponent implements OnInit {
     this._getNewsListService.getUserNews(id)
       .subscribe(newsArray => {this.userPosts = newsArray});
   }
-
-
   
   gotoNewsList() {
     this._router.navigate(['feeds']);

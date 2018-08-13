@@ -19,7 +19,7 @@ import { ChangeNewsService } from '../../../_services/change-news.service';
 })
 export class HomepageComponent implements OnInit {
   userNameFull: string;
-  userPosts: any[];
+  userPosts: NewsType[];
   userPhoto: string;
   private _userId: any;
 
@@ -116,7 +116,6 @@ export class HomepageComponent implements OnInit {
     this.postTags = this.selectedItem.tags;
 
     this.initEditForm();
-
     this.isEdit = true;
   }
 
@@ -139,15 +138,12 @@ export class HomepageComponent implements OnInit {
         subject: this.postSubject,
         content: this.postContent,
         photo: this.postPhoto,
-        tags: this.postTags
+        tags: this.postTags,
       }
-
       if(this.addedPostPhoto) {
         data.photo = this.addedPostPhoto;
       }
-
       this._changeNewsService.save(data, editionFlag);  //second param is to determine - create new or update
-
       this.isEdit = false;
 
       location.reload();
@@ -160,19 +156,21 @@ export class HomepageComponent implements OnInit {
 
     if(this.addForm.valid){
       const data = {
-        subject: this.addForm.value['subject'],
-        content: this.addForm.value['content'],
+        subject: this.addForm.value['subject'].trim(),
+        content: this.addForm.value['content'].trim(),
         photo: "",
-        tags: this.addForm.value['tags']
+        tags: this.addForm.value['tags'].trim(),
       }
 
-      console.log(this.addedPostPhoto);
+      if(this.addedPostPhoto) {
+        data.photo = this.addedPostPhoto;
+        this._changeNewsService.save(data, creationFlag);  //second param is to determine - create new or update
+        this.isEdit = false;
 
-      data.photo = this.addedPostPhoto;
-
-      this._changeNewsService.save(data, creationFlag);  //second param is to determine - create new or update
-
-      location.reload();
+        location.reload();
+      } else {
+        alert('You should load your profile photo!!');
+      }
     }
   }
 
@@ -231,5 +229,4 @@ export class HomepageComponent implements OnInit {
       },
     );
   }
-
 }
