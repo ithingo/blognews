@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -13,6 +13,13 @@
   "engines": {
     "node": "8.9.0",
     "npm": "5.5.1"
+  },
+  "proxy": {
+    "/api/v1/*": {
+        "target": "http://crieera.pythonanywhere.com",
+        "secure": false,
+        "pathRewrite": {"^/api/v1" : ""}
+      }
   },
   "private": true,
   "dependencies": {
