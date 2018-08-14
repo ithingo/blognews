@@ -46,7 +46,7 @@ export class UserService {
   }
 
   getUserById(user_id: number): Observable<UserType> {
-    const url = `${this.host}/api/v1/users/${user_id}/`;
+    const url = `${this.host}/users/${user_id}/`;
     const token = this.getToken();
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -83,7 +83,7 @@ export class UserService {
 
   updateUserData(user: UserType, updatedData: any) {
 
-    const url = `${this.host}/api/v1/users/${user.id}/`;
+    const url = `${this.host}/users/${user.id}/`;
     const token = this.getToken();
 
     const headers = new HttpHeaders();

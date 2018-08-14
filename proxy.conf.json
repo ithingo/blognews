@@ -1,0 +1,7 @@
+{
+  "/api/v1/*": {
+    "target": "http://crieera.pythonanywhere.com",
+    "secure": false,
+    "pathRewrite": {"^/api/v1" : ""}
+  }
+}

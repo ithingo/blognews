@@ -118,7 +118,7 @@ export class GetNewsListService {
   }
 
   getNews() {
-    const apiRoot = `${this.host}/api/v1/posts/`;
+    const apiRoot = `${this.host}/posts/`;
     const token = this._userService.getToken();
 
     const headers = new HttpHeaders();
@@ -130,7 +130,7 @@ export class GetNewsListService {
   }
 
   getUserNews(id: any): Observable<any[]> {
-      const apiRoot = `${this.host}/api/v1/users/${id}/posts/`;
+      const apiRoot = `${this.host}/users/${id}/posts/`;
       const token = this._userService.getToken();
 
       const headers = new HttpHeaders();

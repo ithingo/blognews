@@ -41,7 +41,7 @@ export class ChangeNewsService implements OnInit {
     let response$: Observable<NewsType>;
 
     if(isNew) {
-      url = `${this.host}/api/v1/posts/`;
+      url = `${this.host}/posts/`;
       response$ = this.http
         .post<any>(
           url,
@@ -56,7 +56,7 @@ export class ChangeNewsService implements OnInit {
         );
     } else {
       const post_id = data.id;
-      url = `${this.host}/api/v1/posts/${post_id}/`;
+      url = `${this.host}/posts/${post_id}/`;
       response$ = this.http
         .patch<any>(
           url,
@@ -82,7 +82,7 @@ export class ChangeNewsService implements OnInit {
   public remove(data: any) {this.currentUserId = this._userService.getCurrentUserId()
 
     const post_id = data.id;
-    const url = `${this.host}/api/v1/posts/${post_id}/`;
+    const url = `${this.host}/posts/${post_id}/`;
     const token = this._userService.getToken();
 
     const headers = new HttpHeaders();
