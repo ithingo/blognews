@@ -11,12 +11,18 @@ import { NewsType } from '../models/news-type';
 import { SelectionProperties } from '../components/news/search-selection/selection-properties';
 import { UserService } from './user.service';
 
+import { MY_HOST } from '../../../host-config';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class GetNewsListService {
   // host: string = 'http://127.0.0.1:8000';
-  host: string = 'http://192.168.1.97:8000';
+  // host: string = 'http://192.168.1.97:8000';
+
+  host = MY_HOST
+
   optionToFilter: SelectionProperties;
 
   private checkBySelectedOption = (post: NewsType, keyWord: string, optionKey: string): any => {

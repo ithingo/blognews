@@ -6,6 +6,8 @@ import { NewsType }  from '../models/news-type';
 import { UserType }  from '../models/user-type';
 import { Observable } from 'rxjs';
 
+import { MY_HOST } from '../../../host-config';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,9 @@ export class ChangeNewsService implements OnInit {
   private currentUserId: any;
 
   // host = 'http://127.0.0.1:8000';
-  host = 'http://192.168.1.97:8000';
+  // host = 'http://192.168.1.97:8000';
+
+  host = MY_HOST
 
   constructor(
     private http: HttpClient,

@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 
 import { UserType } from '../models/user-type';
 import {NewsType} from '../models/news-type';
+
+import { MY_HOST } from '../../../host-config';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   // host = 'http://127.0.0.1:8000';
-  host = 'http://192.168.1.97:8000';
+  // host = 'http://192.168.1.97:8000';
+
+  host = MY_HOST
+
   coockieName  = 'curr_user_token';
 
   private _currentUser: UserType;
@@ -19,23 +24,22 @@ export class UserService {
 
   constructor(
     public http: HttpClient,
-    private cookieservice: CookieService,
   ) { }
 
   getToken(): string|void {
-    const token = this.cookieservice.get(this.coockieName);
+    const token = localStorage.getItem(this.coockieName);
     return token;
   }
 
   setLoggedIn(token) {
     if(token) {
-      this.cookieservice.set(this.coockieName, token);
+      localStorage.setItem(this.coockieName, token);
     }
 
   }
 
   getCurrentUserId(): number {
-    const current_id = this.cookieservice.get('id');
+    const current_id = localStorage.getItem('id');
     this._currentUserId = +(current_id);
 
     return this._currentUserId;
@@ -55,7 +59,7 @@ export class UserService {
   setCurrentUser(user: any) {
     const current_user_id = user['id'];
     if(current_user_id) {
-      this.cookieservice.set('id', current_user_id);
+      localStorage.setItem('id', current_user_id);
     }
     this._currentUserId = +(current_user_id);
   }
@@ -65,12 +69,16 @@ export class UserService {
   }
 
   isLoggedIn(): boolean {
-    const cookieExists: boolean = this.cookieservice.check(this.coockieName);
-    return cookieExists;
+    const cookieExists = localStorage.getItem(this.coockieName);
+    if(cookieExists) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   clearCookies() {
-    this.cookieservice.deleteAll();
+    localStorage.clear();
   }
 
   updateUserData(user: UserType, updatedData: any) {

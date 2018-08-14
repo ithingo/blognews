@@ -4,7 +4,6 @@ import { FormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -49,7 +48,6 @@ export function getToken() {
     AppRoutingModule,
   ],
   providers: [ 
-    CookieService,
     {
       provide: AuthServiceConfig,
       useFactory: getSocialAuthServiceConfigs,

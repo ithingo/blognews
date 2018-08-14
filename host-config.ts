@@ -1,0 +1,1 @@
+export const MY_HOST = 'http://crieera.pythonanywhere.com/api/v1';
